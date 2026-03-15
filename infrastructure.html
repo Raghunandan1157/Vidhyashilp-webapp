@@ -254,7 +254,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(23,69,207,0.75) 0%, rgba(15,46,138,0.8) 50%, rgba(10,31,94,0.85) 100%), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(23,69,207,0.75) 0%, rgba(15,46,138,0.8) 50%, rgba(10,31,94,0.85) 100%), url('images/students_images/campus-outdoor-1.jpeg') center/cover no-repeat;
             overflow: hidden;
         }
 
@@ -682,6 +682,26 @@
                 font-size: 1.8rem;
             }
         }
+        /* ===== RESPONSIVE IMAGES ===== */
+        img { max-width: 100%; height: auto; }
+        .hero-section, .hero, .hero-banner, [class*="hero"] {
+            background-size: cover;
+            background-position: center;
+        }
+        @media(max-width:768px) {
+            .logo-img { height: 36px !important; }
+            .hero-section, .hero, .hero-banner, [class*="hero"] {
+                min-height: 300px !important;
+                padding: 60px 24px !important;
+            }
+        }
+        @media(max-width:480px) {
+            .logo-img { height: 30px !important; }
+            .hero-section, .hero, .hero-banner, [class*="hero"] {
+                min-height: 250px !important;
+                padding: 40px 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -689,14 +709,8 @@
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-                </div>
-                <div class="logo-text">
-                    <span class="brand">VIDYASHILP</span>
-                    <span class="sub">International School Haveri</span>
-                </div>
+            <a href="index.html" class="logo-link" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+                <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:48px;width:auto" class="logo-img">
             </a>
 
             <nav class="nav">
@@ -910,8 +924,7 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <div class="brand-name">VIDYASHILP</div>
-                <div class="brand-sub">International School Haveri</div>
+                <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:56px;width:auto;margin-bottom:16px">
                 <p>Empowering young minds with quality education, strong values, and a nurturing environment to build the leaders of tomorrow.</p>
             </div>
             <div class="footer-col">

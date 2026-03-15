@@ -300,7 +300,7 @@
             border-radius: 24px;
             overflow: hidden;
             min-height: 520px;
-            background: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover no-repeat;
+            background: url('images/students_images/classroom-teaching.jpeg') center/cover no-repeat;
             display: flex;
             align-items: center;
         }
@@ -920,6 +920,26 @@
                 font-size: 28px;
             }
         }
+        /* ===== RESPONSIVE IMAGES ===== */
+        img { max-width: 100%; height: auto; }
+        .hero-section, .hero, .hero-banner, [class*="hero"] {
+            background-size: cover;
+            background-position: center;
+        }
+        @media(max-width:768px) {
+            .logo-img { height: 36px !important; }
+            .hero-section, .hero, .hero-banner, [class*="hero"] {
+                min-height: 300px !important;
+                padding: 60px 24px !important;
+            }
+        }
+        @media(max-width:480px) {
+            .logo-img { height: 30px !important; }
+            .hero-section, .hero, .hero-banner, [class*="hero"] {
+                min-height: 250px !important;
+                padding: 40px 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -927,14 +947,8 @@
     <!-- ===== HEADER ===== -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="index.html" class="header-brand">
-                <div class="header-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-                </div>
-                <div class="header-brand-text">
-                    <span class="header-brand-name">VIDYASHILP</span>
-                    <span class="header-brand-sub">International School Haveri</span>
-                </div>
+            <a href="index.html" class="logo-link" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+                <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:48px;width:auto" class="logo-img">
             </a>
             <nav class="header-nav">
                 <a href="index.html" class="active">Home</a>
@@ -1015,7 +1029,7 @@
                     </div>
                 </div>
                 <div class="about-image fade-up fade-up-delay-2">
-                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800" alt="Students studying at Vidyashilp International School">
+                    <img src="images/students_images/robotics-lab.jpeg" alt="Students in robotics lab at Vidyashilp International School">
                 </div>
             </div>
         </div>
@@ -1093,12 +1107,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-                        </div>
-                        <span class="footer-brand-name">VIDYASHILP</span>
-                    </div>
+                    <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:56px;width:auto;margin-bottom:16px">
                     <p class="footer-desc">Vidyashilp International School Haveri — Leading international school committed to academic excellence and the holistic development of every child in a technologically advanced environment.</p>
                 </div>
                 <div>
