@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidhyashilp Academy — Admin Dashboard</title>
+    <title>Vidyashilp International School — Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ===== Reset & Base ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { font-size: 15px; scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-                         Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: #F5F6FA;
             color: #334155;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         a { text-decoration: none; color: inherit; }
         button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
@@ -45,9 +45,9 @@
             --transition: .25s cubic-bezier(.4,0,.2,1);
         }
 
-        /* ===== Top Navbar ===== */
+        /* ===== FIXED Top Navbar ===== */
         .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
             height: var(--navbar-h);
             background: var(--white);
             display: flex; align-items: center; justify-content: space-between;
@@ -70,19 +70,20 @@
             display: flex; align-items: center; justify-content: center;
             color: #fff; font-weight: 800; font-size: 1.1rem;
         }
-        .logo-text { font-size: 1.15rem; font-weight: 700; color: var(--dark); letter-spacing: -.02em; }
+        .logo-text { font-size: 1.05rem; font-weight: 700; color: var(--dark); letter-spacing: -.02em; white-space: nowrap; }
 
+        .navbar-center { flex: 1; display: flex; justify-content: center; padding: 0 24px; }
         .navbar-search {
             display: flex; align-items: center; gap: 8px;
             background: #F1F5F9; border-radius: 8px; padding: 0 14px;
-            margin-left: 24px;
+            width: 100%; max-width: 420px;
         }
         .navbar-search input {
             border: none; background: none; outline: none;
-            padding: 8px 0; width: 220px; font-size: .85rem; color: var(--dark);
+            padding: 8px 0; width: 100%; font-size: .85rem; color: var(--dark);
         }
         .navbar-search input::placeholder { color: var(--text-light); }
-        .search-icon { color: var(--text-light); font-size: .9rem; }
+        .search-icon { color: var(--text-light); font-size: .9rem; flex-shrink: 0; }
 
         .navbar-right { display: flex; align-items: center; gap: 8px; }
         .nav-btn {
@@ -90,7 +91,7 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 1.15rem; color: #64748B;
             transition: background var(--transition), color var(--transition);
-            position: relative;
+            position: relative; flex-shrink: 0;
         }
         .nav-btn:hover { background: #f1f5f9; color: var(--dark); }
         .notif-badge {
@@ -99,1704 +100,1123 @@
             background: var(--danger); color: #fff;
             font-size: .6rem; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
-            padding: 0 4px; border: 2px solid var(--white);
+            padding: 0 4px;
         }
-        .user-info { display: flex; align-items: center; gap: 10px; margin-left: 8px; }
-        .user-info span { font-size: .85rem; color: #64748B; white-space: nowrap; }
-        .user-info strong { color: var(--dark); }
-        .avatar {
-            width: 36px; height: 36px; border-radius: 50%;
+        .admin-profile {
+            display: flex; align-items: center; gap: 10px;
+            padding: 4px 12px 4px 6px; border-radius: 50px;
+            transition: background var(--transition); cursor: default;
+            white-space: nowrap;
+        }
+        .admin-profile:hover { background: #f1f5f9; }
+        .admin-avatar {
+            width: 34px; height: 34px; border-radius: 50%;
             background: linear-gradient(135deg, var(--accent), #6366F1);
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-weight: 700; font-size: .85rem;
+            color: #fff; font-weight: 700; font-size: .8rem;
         }
+        .admin-name { font-size: .82rem; font-weight: 600; color: var(--dark); }
+        .admin-role { font-size: .68rem; color: var(--text-light); }
+        .back-link {
+            font-size: .78rem; color: var(--accent); font-weight: 500;
+            margin-right: 8px; white-space: nowrap;
+            transition: color var(--transition);
+        }
+        .back-link:hover { color: #2563EB; }
         .logout-btn {
-            padding: 7px 16px; border-radius: 8px;
-            background: #FEE2E2; color: var(--danger);
-            font-size: .82rem; font-weight: 600;
+            display: flex; align-items: center; gap: 5px;
+            padding: 6px 14px; border-radius: 8px;
+            font-size: .8rem; font-weight: 500; color: var(--danger);
             transition: background var(--transition);
-            margin-left: 4px;
         }
-        .logout-btn:hover { background: #FECACA; }
+        .logout-btn:hover { background: #FEF2F2; }
 
         /* ===== Sidebar ===== */
         .sidebar {
             position: fixed; top: var(--navbar-h); left: 0; bottom: 0;
             width: var(--sidebar-w); background: var(--dark);
-            overflow-y: auto; overflow-x: hidden;
-            z-index: 900;
+            overflow-y: auto; z-index: 1000;
             transition: transform var(--transition);
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,.15) transparent;
+            padding: 16px 0;
         }
-        .sidebar::-webkit-scrollbar { width: 5px; }
-        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 10px; }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px; }
 
-        .sidebar-nav { padding: 12px 0; }
-        .nav-label {
-            padding: 18px 24px 8px;
-            font-size: .68rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .08em;
-            color: #64748B;
+        .sidebar-section { margin-bottom: 8px; }
+        .sidebar-label {
+            padding: 8px 20px 6px; font-size: .65rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: .08em; color: #64748B;
         }
-
-        .nav-item a, .nav-item button.nav-link {
+        .sidebar-item {
             display: flex; align-items: center; gap: 12px;
-            width: 100%;
-            padding: 11px 24px;
-            color: #CBD5E1;
-            font-size: .88rem; font-weight: 500;
-            transition: background var(--transition), color var(--transition), border-color var(--transition);
-            position: relative;
-            border-left: 3px solid transparent;
+            padding: 10px 20px; color: #CBD5E1; font-size: .85rem; font-weight: 500;
+            transition: all var(--transition); cursor: pointer; position: relative;
         }
-        .nav-item a:hover, .nav-item button.nav-link:hover { background: var(--dark-hover); color: #fff; }
-        .nav-item.active > a,
-        .nav-item.active > button.nav-link {
-            background: rgba(59,130,246,.12);
-            color: #fff;
-            border-left-color: var(--accent);
+        .sidebar-item:hover { background: var(--dark-hover); color: #fff; }
+        .sidebar-item.active {
+            background: rgba(59,130,246,.15); color: var(--accent-light);
+            border-right: 3px solid var(--accent);
         }
-        .nav-icon { width: 20px; text-align: center; font-size: 1rem; flex-shrink: 0; }
-        .nav-arrow {
-            margin-left: auto; font-size: .7rem;
+        .sidebar-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+        .sidebar-item .item-badge {
+            margin-left: auto; min-width: 22px; height: 20px; border-radius: 10px;
+            background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center; padding: 0 6px;
+        }
+        .sidebar-item .chevron {
+            margin-left: auto; width: 16px; height: 16px;
             transition: transform var(--transition);
         }
-        .nav-item.open > button .nav-arrow { transform: rotate(90deg); }
-
-        /* Sub-menu */
-        .sub-menu {
+        .sidebar-item.expanded .chevron { transform: rotate(90deg); }
+        .sidebar-submenu {
             max-height: 0; overflow: hidden;
-            transition: max-height .35s cubic-bezier(.4,0,.2,1);
-            background: rgba(0,0,0,.15);
+            transition: max-height .3s ease;
         }
-        .nav-item.open > .sub-menu { max-height: 300px; }
-        .sub-menu a {
-            padding: 9px 24px 9px 56px;
-            font-size: .82rem; color: #94A3B8;
-            border-left: 3px solid transparent;
+        .sidebar-submenu.open { max-height: 300px; }
+        .sidebar-sub-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 20px 8px 52px; color: #94A3B8; font-size: .8rem; font-weight: 400;
+            transition: all var(--transition); cursor: pointer;
         }
-        .sub-menu a:hover { color: #fff; background: rgba(255,255,255,.05); }
-        .sub-menu a.active { color: var(--accent-light); border-left-color: var(--accent-light); }
-
-        /* ===== Overlay (mobile) ===== */
-        .sidebar-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,.45); z-index: 899;
+        .sidebar-sub-item:hover { color: #fff; background: var(--dark-hover); }
+        .sidebar-sub-item.active { color: var(--accent-light); }
+        .sidebar-sub-item::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: currentColor; opacity: .5; flex-shrink: 0;
         }
-        .sidebar-overlay.show { display: block; }
 
         /* ===== Main Content ===== */
-        .main {
+        .main-content {
             margin-left: var(--sidebar-w);
             margin-top: var(--navbar-h);
-            padding: 28px 28px 40px;
+            padding: 28px;
             min-height: calc(100vh - var(--navbar-h));
-            transition: margin-left var(--transition);
         }
 
-        /* ===== Content Sections ===== */
         .content-section { display: none; }
-        .content-section.active { display: block; animation: fadeIn .3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section.active { display: block; }
 
-        .page-header { margin-bottom: 24px; }
-        .page-header h1 { font-size: 1.45rem; font-weight: 700; color: var(--dark); }
-        .page-header p { font-size: .88rem; color: var(--text-light); margin-top: 4px; }
+        /* ===== Dashboard Cards ===== */
+        .page-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+        }
+        .page-title { font-size: 1.5rem; font-weight: 700; color: var(--dark); }
+        .page-subtitle { font-size: .85rem; color: var(--text-light); margin-top: 2px; }
+        .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: .8rem; color: var(--text-light); }
+        .breadcrumb a { color: var(--accent); }
 
-        /* ===== Stat Cards ===== */
-        .stats-row {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; margin-bottom: 28px;
         }
-        .stats-row.three-col { grid-template-columns: repeat(3, 1fr); }
         .stat-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 22px 24px;
-            box-shadow: var(--shadow);
-            display: flex; align-items: flex-start; justify-content: space-between;
-            transition: box-shadow var(--transition), transform var(--transition);
+            background: var(--white); border-radius: var(--radius);
+            padding: 22px; box-shadow: var(--shadow);
+            display: flex; align-items: flex-start; gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
         }
-        .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .stat-label { font-size: .78rem; color: var(--text-light); font-weight: 500; margin-bottom: 6px; }
-        .stat-value { font-size: 1.65rem; font-weight: 800; color: var(--dark); line-height: 1.1; }
-        .stat-sub { font-size: .72rem; color: var(--text-light); margin-top: 6px; }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
         .stat-icon {
             width: 48px; height: 48px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.25rem; flex-shrink: 0;
+            font-size: 1.3rem; flex-shrink: 0;
         }
-        .stat-icon.blue   { background: #EFF6FF; color: var(--accent); }
-        .stat-icon.green  { background: #F0FDF4; color: var(--success); }
-        .stat-icon.amber  { background: #FFFBEB; color: var(--warning); }
+        .stat-icon.blue { background: #EFF6FF; color: var(--accent); }
+        .stat-icon.green { background: #F0FDF4; color: var(--success); }
         .stat-icon.orange { background: #FFF7ED; color: var(--orange); }
+        .stat-icon.red { background: #FEF2F2; color: var(--danger); }
         .stat-icon.purple { background: #F5F3FF; color: #8B5CF6; }
-        .stat-icon.red    { background: #FEF2F2; color: var(--danger); }
+        .stat-value { font-size: 1.6rem; font-weight: 800; color: var(--dark); line-height: 1.1; }
+        .stat-label { font-size: .78rem; color: var(--text-light); margin-top: 2px; }
+        .stat-change { font-size: .72rem; font-weight: 600; margin-top: 4px; }
+        .stat-change.up { color: var(--success); }
+        .stat-change.down { color: var(--danger); }
 
-        /* ===== Two-Column Section ===== */
-        .two-col {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 20px;
-            margin-bottom: 28px;
-        }
-
+        /* ===== Card / Panel ===== */
         .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            margin-bottom: 24px;
+            background: var(--white); border-radius: var(--radius);
+            box-shadow: var(--shadow); margin-bottom: 24px; overflow: hidden;
         }
         .card-header {
+            padding: 18px 22px; border-bottom: 1px solid #F1F5F9;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 18px 24px;
-            border-bottom: 1px solid #F1F5F9;
         }
-        .card-header h2 { font-size: 1rem; font-weight: 700; color: var(--dark); }
-        .card-header .badge {
-            font-size: .7rem; padding: 3px 10px; border-radius: 20px;
-            background: #EFF6FF; color: var(--accent); font-weight: 600;
-        }
-        .card-body { padding: 16px 24px 24px; }
+        .card-title { font-size: .95rem; font-weight: 700; color: var(--dark); }
+        .card-body { padding: 22px; }
 
         /* ===== Table ===== */
-        .table-wrapper { overflow-x: auto; }
-        .data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        .data-table th {
-            text-align: left; font-size: .72rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: .04em;
-            color: var(--text-light); padding: 10px 12px 10px 0;
-            border-bottom: 2px solid #F1F5F9;
-            cursor: pointer; white-space: nowrap;
-            user-select: none;
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left; padding: 12px 16px;
+            font-size: .72rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: .05em; color: var(--text-light);
+            background: #F8FAFC; border-bottom: 1px solid #E2E8F0;
         }
-        .data-table th:hover { color: var(--dark); }
-        .data-table td {
-            padding: 12px 12px 12px 0; font-size: .85rem;
-            border-bottom: 1px solid #F8FAFC;
-            vertical-align: middle;
+        td {
+            padding: 12px 16px; font-size: .83rem; color: var(--text);
+            border-bottom: 1px solid #F1F5F9;
         }
-        .data-table tbody tr:nth-child(even) { background: #FAFBFC; }
-        .data-table tbody tr:hover { background: #F1F5F9; }
-        .data-table tr:last-child td { border-bottom: none; }
-        .student-name { font-weight: 600; color: var(--dark); }
+        tr:hover td { background: #FAFBFD; }
+        .badge {
+            display: inline-block; padding: 3px 10px; border-radius: 50px;
+            font-size: .7rem; font-weight: 600;
+        }
+        .badge-green { background: #DCFCE7; color: #166534; }
+        .badge-yellow { background: #FEF9C3; color: #854D0E; }
+        .badge-red { background: #FEE2E2; color: #991B1B; }
+        .badge-blue { background: #DBEAFE; color: #1E40AF; }
 
-        /* ===== Badges ===== */
-        .status-badge {
-            display: inline-block; padding: 3px 10px;
-            border-radius: 20px; font-size: .72rem; font-weight: 600;
-            white-space: nowrap;
-        }
-        .status-badge.approved, .status-badge.active, .status-badge.paid, .status-badge.processed, .status-badge.sent { background: #F0FDF4; color: #16A34A; }
-        .status-badge.pending  { background: #FFFBEB; color: #D97706; }
-        .status-badge.review   { background: #EFF6FF; color: var(--accent); }
-        .status-badge.rejected, .status-badge.overdue, .status-badge.inactive { background: #FEF2F2; color: var(--danger); }
-        .status-badge.draft { background: #F1F5F9; color: #64748B; }
-        .status-badge.cash { background: #F0FDF4; color: #16A34A; }
-        .status-badge.online { background: #EFF6FF; color: var(--accent); }
-        .status-badge.cheque { background: #FFF7ED; color: var(--orange); }
-
-        /* ===== Bar Chart ===== */
-        .chart-container { padding: 8px 0; }
-        .chart-bar-group {
-            display: flex; align-items: flex-end; gap: 14px;
-            height: 180px; padding: 0 4px;
-            border-bottom: 1px solid #E2E8F0;
-        }
-        .chart-bar-wrap {
-            flex: 1; display: flex; flex-direction: column;
-            align-items: center; height: 100%; justify-content: flex-end;
-        }
-        .chart-bar {
-            width: 100%; max-width: 36px; border-radius: 6px 6px 0 0;
-            transition: height .6s cubic-bezier(.4,0,.2,1);
-            position: relative;
-        }
-        .chart-bar .tooltip {
-            position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
-            background: var(--dark); color: #fff;
-            font-size: .68rem; font-weight: 600;
-            padding: 3px 8px; border-radius: 5px;
-            white-space: nowrap;
-            opacity: 0; transition: opacity var(--transition);
-            pointer-events: none;
-        }
-        .chart-bar:hover .tooltip { opacity: 1; }
-        .chart-label { font-size: .68rem; color: var(--text-light); margin-top: 8px; font-weight: 500; }
-
-        /* ===== Staff on Leave ===== */
-        .leave-list { display: flex; flex-direction: column; gap: 12px; }
-        .leave-item {
-            display: flex; align-items: center; gap: 16px;
-            padding: 14px 18px; border-radius: 8px;
-            background: #F8FAFC;
-            transition: background var(--transition);
-        }
-        .leave-item:hover { background: #F1F5F9; }
-        .leave-avatar {
-            width: 42px; height: 42px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: .85rem; color: #fff; flex-shrink: 0;
-        }
-        .leave-info { flex: 1; }
-        .leave-name { font-weight: 600; color: var(--dark); font-size: .9rem; }
-        .leave-role { font-size: .78rem; color: var(--text-light); margin-top: 2px; }
-        .leave-type {
-            font-size: .75rem; font-weight: 600;
-            padding: 4px 12px; border-radius: 20px;
-        }
-        .leave-type.sick   { background: #FEF2F2; color: var(--danger); }
-        .leave-type.casual { background: #FFFBEB; color: #D97706; }
-        .leave-type.earned { background: #EFF6FF; color: var(--accent); }
-
-        /* ===== Quick Actions ===== */
-        .quick-actions {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-            margin-top: 24px;
-        }
-        .quick-action-btn {
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
-            padding: 24px 16px; border-radius: var(--radius);
-            background: var(--white); box-shadow: var(--shadow);
-            transition: box-shadow var(--transition), transform var(--transition);
-            font-size: .85rem; font-weight: 600; color: var(--dark);
-            text-align: center;
-        }
-        .quick-action-btn:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .quick-action-btn .qa-icon {
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        /* ===== Section toolbar ===== */
-        .section-toolbar {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .section-toolbar .search-input {
-            flex: 1; min-width: 200px; max-width: 350px;
-            padding: 9px 14px; border: 1px solid #E2E8F0; border-radius: 8px;
-            outline: none; font-size: .85rem; background: var(--white);
-            transition: border-color var(--transition);
-        }
-        .section-toolbar .search-input:focus { border-color: var(--accent); }
-        .section-toolbar select {
-            padding: 9px 14px; border: 1px solid #E2E8F0; border-radius: 8px;
-            outline: none; font-size: .85rem; background: var(--white); color: var(--text);
-            cursor: pointer;
-        }
+        /* ===== Buttons ===== */
         .btn {
-            padding: 9px 20px; border-radius: 8px;
-            font-size: .85rem; font-weight: 600;
-            transition: background var(--transition), transform var(--transition);
             display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px; border-radius: 8px;
+            font-size: .82rem; font-weight: 600;
+            transition: all var(--transition);
         }
         .btn-primary { background: var(--accent); color: #fff; }
         .btn-primary:hover { background: #2563EB; }
         .btn-success { background: var(--success); color: #fff; }
         .btn-success:hover { background: #16A34A; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-danger:hover { background: #DC2626; }
         .btn-outline {
-            background: var(--white); color: var(--accent);
-            border: 1px solid var(--accent);
+            border: 1px solid #E2E8F0; color: var(--text);
         }
-        .btn-outline:hover { background: #EFF6FF; }
-        .btn-sm { padding: 6px 14px; font-size: .78rem; }
+        .btn-outline:hover { background: #F8FAFC; }
 
-        /* ===== Pagination ===== */
-        .pagination {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-top: 16px; font-size: .82rem; color: var(--text-light);
-        }
-        .pagination-btns { display: flex; gap: 6px; }
-        .pagination-btns button {
-            padding: 6px 12px; border-radius: 6px;
-            border: 1px solid #E2E8F0; font-size: .8rem; color: var(--text);
-            background: var(--white); transition: all var(--transition);
-        }
-        .pagination-btns button:hover { border-color: var(--accent); color: var(--accent); }
-        .pagination-btns button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-        /* ===== Class Cards Grid ===== */
-        .class-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-        .class-card {
-            background: var(--white); border-radius: var(--radius);
-            padding: 22px; box-shadow: var(--shadow);
-            transition: box-shadow var(--transition), transform var(--transition);
-            border-top: 3px solid var(--accent);
-        }
-        .class-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .class-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
-        .class-card-info { font-size: .82rem; color: var(--text-light); margin-bottom: 6px; }
-        .class-card-info strong { color: var(--text); }
-        .sections-tags { display: flex; gap: 6px; margin-top: 10px; }
-        .section-tag {
-            padding: 3px 10px; border-radius: 6px;
-            font-size: .72rem; font-weight: 600;
-            background: #EFF6FF; color: var(--accent);
-        }
-
-        /* ===== Report Cards ===== */
-        .report-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .report-card {
-            background: var(--white); border-radius: var(--radius);
-            padding: 24px; box-shadow: var(--shadow);
-            transition: box-shadow var(--transition), transform var(--transition);
-        }
-        .report-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .report-card .report-icon {
-            width: 48px; height: 48px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; margin-bottom: 14px;
-        }
-        .report-card h3 { font-size: .95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-        .report-card p { font-size: .8rem; color: var(--text-light); margin-bottom: 16px; line-height: 1.5; }
-        .report-actions { display: flex; gap: 8px; }
-
-        /* ===== Circular Form ===== */
-        .circular-form {
-            background: var(--white); border-radius: var(--radius);
-            padding: 24px; box-shadow: var(--shadow); margin-top: 24px;
-        }
-        .circular-form h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        /* ===== Forms ===== */
         .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px 14px; border: 1px solid #E2E8F0; border-radius: 8px;
-            outline: none; font-size: .85rem; transition: border-color var(--transition);
+        .form-label { display: block; font-size: .8rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+        .form-input {
+            width: 100%; padding: 10px 14px; border: 1px solid #E2E8F0;
+            border-radius: 8px; font-size: .85rem; color: var(--dark);
+            transition: border-color var(--transition);
         }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
-        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-        /* ===== Media Cards ===== */
-        .media-tabs { display: flex; gap: 0; margin-bottom: 20px; }
+        /* ===== Media Gallery ===== */
+        .media-tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #E2E8F0; }
         .media-tab {
-            padding: 10px 24px; font-size: .88rem; font-weight: 600;
-            border-bottom: 2px solid transparent; color: var(--text-light);
-            transition: all var(--transition); cursor: pointer;
+            padding: 10px 24px; font-size: .85rem; font-weight: 600;
+            color: var(--text-light); cursor: pointer;
+            border-bottom: 2px solid transparent; margin-bottom: -2px;
+            transition: all var(--transition);
         }
-        .media-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
         .media-tab:hover { color: var(--dark); }
-
+        .media-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
         .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
         }
         .media-card {
-            background: var(--white); border-radius: var(--radius);
-            overflow: hidden; box-shadow: var(--shadow);
-            transition: box-shadow var(--transition), transform var(--transition);
+            border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); background: var(--white);
+            transition: transform var(--transition), box-shadow var(--transition);
         }
-        .media-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-        .media-thumb {
-            height: 160px; position: relative;
+        .media-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .media-card img {
+            width: 100%; height: 180px; object-fit: cover; display: block;
+        }
+        .media-card-body { padding: 12px 14px; }
+        .media-card-title { font-size: .82rem; font-weight: 600; color: var(--dark); }
+        .media-card-date { font-size: .7rem; color: var(--text-light); margin-top: 2px; }
+        .video-thumb {
+            position: relative; cursor: pointer;
+        }
+        .video-thumb .play-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            width: 56px; height: 56px; background: rgba(0,0,0,.6); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
+            transition: background var(--transition);
         }
-        .media-thumb .play-btn {
-            width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(255,255,255,.9); color: var(--dark);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,.15);
-            position: absolute; z-index: 2;
-        }
-        .media-card-body { padding: 14px 18px; }
-        .media-card-body h4 { font-size: .9rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
-        .media-card-body p { font-size: .78rem; color: var(--text-light); }
+        .video-thumb:hover .play-overlay { background: rgba(59,130,246,.85); }
+        .media-panel { display: none; }
+        .media-panel.active { display: block; }
 
-        /* ===== Settings ===== */
-        .settings-section {
-            background: var(--white); border-radius: var(--radius);
-            padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;
+        /* ===== Charts placeholder ===== */
+        .chart-placeholder {
+            height: 200px; background: linear-gradient(135deg, #EFF6FF, #F0FDF4);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            color: var(--text-light); font-size: .85rem;
         }
-        .settings-section h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
-        .settings-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-        }
-        .toggle-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 0; border-bottom: 1px solid #F8FAFC;
-        }
-        .toggle-row:last-child { border-bottom: none; }
-        .toggle-label { font-size: .88rem; font-weight: 500; color: var(--dark); }
-        .toggle-desc { font-size: .78rem; color: var(--text-light); margin-top: 2px; }
-        .toggle-switch {
-            position: relative; width: 46px; height: 24px; cursor: pointer;
-        }
-        .toggle-switch input { opacity: 0; width: 0; height: 0; }
-        .toggle-slider {
-            position: absolute; inset: 0; border-radius: 12px;
-            background: #CBD5E1; transition: background var(--transition);
-        }
-        .toggle-slider::before {
-            content: ''; position: absolute; left: 3px; top: 3px;
-            width: 18px; height: 18px; border-radius: 50%;
-            background: #fff; transition: transform var(--transition);
-        }
-        .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
-        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(22px); }
 
-        /* ===== Action Buttons in tables ===== */
-        .action-btns { display: flex; gap: 6px; }
-        .action-btn {
-            padding: 4px 10px; border-radius: 6px; font-size: .72rem; font-weight: 600;
-            transition: all var(--transition);
+        /* ===== Overlay for mobile ===== */
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0; z-index: 999;
+            background: rgba(0,0,0,.4);
         }
-        .action-btn.approve { background: #F0FDF4; color: #16A34A; }
-        .action-btn.approve:hover { background: #DCFCE7; }
-        .action-btn.reject { background: #FEF2F2; color: var(--danger); }
-        .action-btn.reject:hover { background: #FEE2E2; }
+        .sidebar-overlay.show { display: block; }
 
         /* ===== Responsive ===== */
         @media (max-width: 1024px) {
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .stats-row.three-col { grid-template-columns: repeat(2, 1fr); }
-            .two-col { grid-template-columns: 1fr; }
-            .quick-actions { grid-template-columns: repeat(2, 1fr); }
-            .settings-grid { grid-template-columns: 1fr; }
+            .navbar-search input { width: 160px; }
         }
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; padding: 20px 16px 32px; }
-            .navbar-search { display: none; }
-            .user-info span { display: none; }
-            .logout-btn span { display: none; }
-            .logout-btn { padding: 7px 10px; }
-            .stats-row { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .stat-card { padding: 16px; }
-            .stat-value { font-size: 1.3rem; }
-            .stat-icon { width: 40px; height: 40px; font-size: 1.05rem; }
-            .quick-actions { grid-template-columns: 1fr 1fr; }
-            .media-grid { grid-template-columns: 1fr; }
+            .main-content { margin-left: 0; }
+            .navbar-center { display: none; }
+            .admin-name, .admin-role { display: none; }
+            .back-link { display: none; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .form-row { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
-            .stats-row { grid-template-columns: 1fr; }
-            .stats-row.three-col { grid-template-columns: 1fr; }
-            .logo-text { font-size: 1rem; }
-            .quick-actions { grid-template-columns: 1fr; }
-            .class-grid { grid-template-columns: 1fr; }
-            .report-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .main-content { padding: 16px; }
+            .logo-text { font-size: .9rem; }
         }
+
+        /* ===== Misc ===== */
+        .quick-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .text-muted { color: var(--text-light); font-size: .82rem; }
+        .mt-16 { margin-top: 16px; }
+        .mb-16 { margin-bottom: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<!-- ===== Navbar ===== -->
-<nav class="navbar">
+<!-- ===== FIXED TOP NAVBAR - NEVER CHANGES ===== -->
+<nav class="navbar" id="topNavbar">
     <div class="navbar-left">
-        <button class="hamburger" id="hamburger" aria-label="Toggle sidebar">&#9776;</button>
-        <a href="#" class="logo">
-            <div class="logo-icon">VA</div>
-            <span class="logo-text">Vidhyashilp Academy</span>
+        <button class="hamburger" onclick="toggleSidebar()">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">V</div>
+            <span class="logo-text">Vidyashilp International School</span>
         </a>
+    </div>
+    <div class="navbar-center">
         <div class="navbar-search">
-            <span class="search-icon">&#128269;</span>
-            <input type="text" placeholder="Search students, staff, records...">
+            <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+            <input type="text" placeholder="Search students, staff, courses...">
         </div>
     </div>
     <div class="navbar-right">
+        <a href="index.html" class="back-link">Back to Website</a>
         <button class="nav-btn" title="Notifications">
-            &#128276;
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2a6 6 0 0 1 6 6c0 7 3 9 3 9H1s3-2 3-9a6 6 0 0 1 6-6zM8.5 19a1.5 1.5 0 0 0 3 0"/></svg>
             <span class="notif-badge">8</span>
         </button>
         <button class="nav-btn" title="Messages">
-            &#9993;
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 4l8 6 8-6"/></svg>
             <span class="notif-badge">3</span>
         </button>
-        <div class="user-info">
-            <span>Welcome, <strong>Admin</strong></span>
-            <div class="avatar">A</div>
+        <div class="admin-profile">
+            <div class="admin-avatar">A</div>
+            <div>
+                <div class="admin-name">Welcome, Admin</div>
+                <div class="admin-role">Super Administrator</div>
+            </div>
         </div>
-        <a href="index.html" class="logout-btn" title="Logout">&#x2716; <span>Logout</span></a>
+        <a href="index.html" class="logout-btn" title="Logout">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            Logout
+        </a>
     </div>
 </nav>
 
-<!-- ===== Sidebar Overlay ===== -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- ===== Sidebar Overlay (mobile) ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
 <!-- ===== Sidebar ===== -->
 <aside class="sidebar" id="sidebar">
-    <nav class="sidebar-nav">
-        <div class="nav-label">Main</div>
+    <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <div class="sidebar-item active" onclick="showSection('dashboard', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+        </div>
+    </div>
 
-        <!-- Dashboard -->
-        <div class="nav-item active" data-section="dashboard">
-            <a href="#" onclick="showSection('dashboard', this); return false;">
-                <span class="nav-icon">&#127968;</span> Dashboard
-            </a>
+    <div class="sidebar-section">
+        <div class="sidebar-label">Academics</div>
+        <!-- Student Management (expandable) -->
+        <div class="sidebar-item" onclick="toggleSubmenu('studentMenu', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Student Management
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="sidebar-submenu" id="studentMenu">
+            <div class="sidebar-sub-item" onclick="showSection('allStudents', this)">All Students</div>
+            <div class="sidebar-sub-item" onclick="showSection('admissions', this)">Admissions</div>
+            <div class="sidebar-sub-item" onclick="showSection('classAssignment', this)">Class Assignment</div>
         </div>
 
-        <!-- Student Management -->
-        <div class="nav-item has-sub">
-            <button class="nav-link" onclick="toggleSub(this)">
-                <span class="nav-icon">&#127891;</span> Student Management
-                <span class="nav-arrow">&#9654;</span>
-            </button>
-            <ul class="sub-menu">
-                <li><a href="#" onclick="showSection('all-students', this); return false;">All Students</a></li>
-                <li><a href="#" onclick="showSection('admissions', this); return false;">Admissions</a></li>
-                <li><a href="#" onclick="showSection('class-assignment', this); return false;">Class Assignment</a></li>
-            </ul>
+        <div class="sidebar-item" onclick="showSection('attendance', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Attendance
+        </div>
+        <div class="sidebar-item" onclick="showSection('examinations', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Examinations
+        </div>
+        <div class="sidebar-item" onclick="showSection('timetable', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Timetable
+        </div>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-label">Finance</div>
+        <!-- Accounting (expandable) -->
+        <div class="sidebar-item" onclick="toggleSubmenu('accountingMenu', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Accounting
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="sidebar-submenu" id="accountingMenu">
+            <div class="sidebar-sub-item" onclick="showSection('feeCollection', this)">Fee Collection</div>
+            <div class="sidebar-sub-item" onclick="showSection('expenses', this)">Expenses</div>
+            <div class="sidebar-sub-item" onclick="showSection('financeReports', this)">Reports</div>
+        </div>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-label">Administration</div>
+        <!-- HR Management (expandable) -->
+        <div class="sidebar-item" onclick="toggleSubmenu('hrMenu', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            HR Management
+            <svg class="chevron" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="sidebar-submenu" id="hrMenu">
+            <div class="sidebar-sub-item" onclick="showSection('staffDirectory', this)">Staff Directory</div>
+            <div class="sidebar-sub-item" onclick="showSection('payroll', this)">Payroll</div>
+            <div class="sidebar-sub-item" onclick="showSection('leaveManagement', this)">Leave Management</div>
         </div>
 
-        <!-- Accounting -->
-        <div class="nav-item has-sub">
-            <button class="nav-link" onclick="toggleSub(this)">
-                <span class="nav-icon">&#128176;</span> Accounting
-                <span class="nav-arrow">&#9654;</span>
-            </button>
-            <ul class="sub-menu">
-                <li><a href="#" onclick="showSection('fee-collection', this); return false;">Fee Collection</a></li>
-                <li><a href="#" onclick="showSection('expenses', this); return false;">Expenses</a></li>
-                <li><a href="#" onclick="showSection('reports', this); return false;">Reports</a></li>
-            </ul>
+        <div class="sidebar-item" onclick="showSection('media', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Media Gallery
         </div>
-
-        <!-- HR Management -->
-        <div class="nav-item has-sub">
-            <button class="nav-link" onclick="toggleSub(this)">
-                <span class="nav-icon">&#128101;</span> HR Management
-                <span class="nav-arrow">&#9654;</span>
-            </button>
-            <ul class="sub-menu">
-                <li><a href="#" onclick="showSection('staff-directory', this); return false;">Staff Directory</a></li>
-                <li><a href="#" onclick="showSection('payroll', this); return false;">Payroll</a></li>
-                <li><a href="#" onclick="showSection('leave-mgmt', this); return false;">Leave Management</a></li>
-            </ul>
+        <div class="sidebar-item" onclick="showSection('notices', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Notice Board
         </div>
-
-        <div class="nav-label">Communicate</div>
-
-        <!-- Circulars -->
-        <div class="nav-item" data-section="circulars">
-            <a href="#" onclick="showSection('circulars', this); return false;">
-                <span class="nav-icon">&#128227;</span> Circulars &amp; Announcements
-            </a>
+        <div class="sidebar-item" onclick="showSection('settings', this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
         </div>
-
-        <!-- Academic Management -->
-        <div class="nav-item" data-section="academics">
-            <a href="#" onclick="showSection('academics', this); return false;">
-                <span class="nav-icon">&#128218;</span> Academic Management
-            </a>
-        </div>
-
-        <!-- Media -->
-        <div class="nav-item" data-section="media">
-            <a href="#" onclick="showSection('media', this); return false;">
-                <span class="nav-icon">&#127909;</span> Media (Photos &amp; Videos)
-            </a>
-        </div>
-
-        <div class="nav-label">System</div>
-
-        <!-- Settings -->
-        <div class="nav-item" data-section="settings">
-            <a href="#" onclick="showSection('settings', this); return false;">
-                <span class="nav-icon">&#9881;</span> Settings
-            </a>
-        </div>
-    </nav>
+    </div>
 </aside>
 
-<!-- ===== Main Content ===== -->
-<main class="main">
+<!-- ===== MAIN CONTENT AREA ===== -->
+<main class="main-content">
 
-    <!-- ============================================ -->
-    <!-- SECTION: Dashboard -->
-    <!-- ============================================ -->
+    <!-- ===== Dashboard Section ===== -->
     <div class="content-section active" id="section-dashboard">
         <div class="page-header">
-            <h1>Dashboard</h1>
-            <p>Welcome back! Here is what is happening at Vidhyashilp Academy today.</p>
+            <div>
+                <div class="page-title">Dashboard</div>
+                <div class="page-subtitle">Welcome back! Here's what's happening at Vidyashilp International School.</div>
+            </div>
+            <div class="breadcrumb">
+                <a href="#">Home</a> / <span>Dashboard</span>
+            </div>
         </div>
 
-        <!-- Stat Cards -->
-        <div class="stats-row">
+        <div class="stats-grid">
             <div class="stat-card">
+                <div class="stat-icon blue">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </div>
                 <div>
+                    <div class="stat-value">2,847</div>
                     <div class="stat-label">Total Students</div>
-                    <div class="stat-value">1,247</div>
-                    <div class="stat-sub">+23 this month</div>
+                    <div class="stat-change up">+12% vs last year</div>
                 </div>
-                <div class="stat-icon blue">&#127891;</div>
             </div>
             <div class="stat-card">
-                <div>
-                    <div class="stat-label">Total Staff</div>
-                    <div class="stat-value">86</div>
-                    <div class="stat-sub">4 departments</div>
+                <div class="stat-icon green">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
                 </div>
-                <div class="stat-icon green">&#128101;</div>
+                <div>
+                    <div class="stat-value">186</div>
+                    <div class="stat-label">Teaching Staff</div>
+                    <div class="stat-change up">+5 new hires</div>
+                </div>
             </div>
             <div class="stat-card">
-                <div>
-                    <div class="stat-label">Fee Collection (This Month)</div>
-                    <div class="stat-value">&#8377;12,45,000</div>
-                    <div class="stat-sub">&#8593; 8.2% from last month</div>
+                <div class="stat-icon orange">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
-                <div class="stat-icon orange">&#128176;</div>
+                <div>
+                    <div class="stat-value">18.4L</div>
+                    <div class="stat-label">Fee Collected (This Month)</div>
+                    <div class="stat-change up">+8.2% vs last month</div>
+                </div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon purple">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                </div>
                 <div>
-                    <div class="stat-label">Attendance Today</div>
                     <div class="stat-value">94.2%</div>
-                    <div class="stat-sub">1,175 of 1,247 present</div>
+                    <div class="stat-label">Avg Attendance</div>
+                    <div class="stat-change up">+1.3% this week</div>
                 </div>
-                <div class="stat-icon purple">&#128203;</div>
             </div>
         </div>
 
-        <!-- Two Columns: Recent Admissions + Fee Chart -->
-        <div class="two-col">
-            <div class="card" style="margin-bottom:0">
+        <div class="grid-2">
+            <div class="card">
                 <div class="card-header">
-                    <h2>Recent Admissions</h2>
-                    <span class="badge">5 New</span>
+                    <span class="card-title">Revenue Overview</span>
+                    <button class="btn btn-outline">This Year</button>
                 </div>
                 <div class="card-body">
-                    <div class="table-wrapper">
-                    <table class="data-table">
+                    <div class="chart-placeholder">Revenue chart visualization</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Attendance Trend</span>
+                    <button class="btn btn-outline">This Month</button>
+                </div>
+                <div class="card-body">
+                    <div class="chart-placeholder">Attendance chart visualization</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Recent Admissions</span>
+                <button class="btn btn-primary">+ New Admission</button>
+            </div>
+            <div class="card-body">
+                <div class="table-wrap">
+                    <table>
                         <thead>
-                            <tr><th>Student Name</th><th>Class</th><th>Date</th><th>Status</th></tr>
+                            <tr><th>Student Name</th><th>Class</th><th>Parent</th><th>Date</th><th>Status</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td class="student-name">Aarav Sharma</td><td>Class 6 - A</td><td>12 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                            <tr><td class="student-name">Diya Patel</td><td>Class 3 - B</td><td>11 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                            <tr><td class="student-name">Vihaan Reddy</td><td>Class 8 - A</td><td>10 Mar 2026</td><td><span class="status-badge pending">Pending</span></td></tr>
-                            <tr><td class="student-name">Ananya Iyer</td><td>Class 1 - C</td><td>09 Mar 2026</td><td><span class="status-badge review">In Review</span></td></tr>
-                            <tr><td class="student-name">Kabir Malhotra</td><td>Class 10 - A</td><td>08 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
+                            <tr><td>Aarav Sharma</td><td>Grade 6-A</td><td>Rajesh Sharma</td><td>12 Mar 2026</td><td><span class="badge badge-green">Confirmed</span></td></tr>
+                            <tr><td>Priya Patel</td><td>Grade 4-B</td><td>Suresh Patel</td><td>11 Mar 2026</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+                            <tr><td>Rohan Gupta</td><td>Grade 8-A</td><td>Amit Gupta</td><td>10 Mar 2026</td><td><span class="badge badge-green">Confirmed</span></td></tr>
+                            <tr><td>Sneha Reddy</td><td>Grade 2-C</td><td>Vikram Reddy</td><td>09 Mar 2026</td><td><span class="badge badge-red">Cancelled</span></td></tr>
+                            <tr><td>Karthik Nair</td><td>Grade 5-A</td><td>Sunil Nair</td><td>08 Mar 2026</td><td><span class="badge badge-green">Confirmed</span></td></tr>
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
-
-            <div class="card" style="margin-bottom:0">
-                <div class="card-header">
-                    <h2>Fee Collection Overview</h2>
-                    <span class="badge">2025-26</span>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <div class="chart-bar-group" id="feeChart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Staff on Leave Today -->
-        <div class="card">
-            <div class="card-header">
-                <h2>Staff on Leave Today</h2>
-                <span class="badge">3 Members</span>
-            </div>
-            <div class="card-body">
-                <div class="leave-list">
-                    <div class="leave-item">
-                        <div class="leave-avatar" style="background:linear-gradient(135deg,#3B82F6,#6366F1)">RS</div>
-                        <div class="leave-info">
-                            <div class="leave-name">Rajesh Subramaniam</div>
-                            <div class="leave-role">Mathematics Teacher &mdash; Senior Secondary</div>
-                        </div>
-                        <span class="leave-type sick">Sick Leave</span>
-                    </div>
-                    <div class="leave-item">
-                        <div class="leave-avatar" style="background:linear-gradient(135deg,#F59E0B,#F97316)">PM</div>
-                        <div class="leave-info">
-                            <div class="leave-name">Priya Menon</div>
-                            <div class="leave-role">Librarian &mdash; Central Library</div>
-                        </div>
-                        <span class="leave-type casual">Casual Leave</span>
-                    </div>
-                    <div class="leave-item">
-                        <div class="leave-avatar" style="background:linear-gradient(135deg,#22C55E,#14B8A6)">AK</div>
-                        <div class="leave-info">
-                            <div class="leave-name">Amit Kumar</div>
-                            <div class="leave-role">Physical Education &mdash; Primary Section</div>
-                        </div>
-                        <span class="leave-type earned">Earned Leave</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <button class="quick-action-btn" onclick="showSection('admissions')">
-                <div class="qa-icon" style="background:#EFF6FF; color:#3B82F6;">&#128100;</div>
-                Add Student
-            </button>
-            <button class="quick-action-btn" onclick="showSection('circulars')">
-                <div class="qa-icon" style="background:#FFF7ED; color:#FF8400;">&#128227;</div>
-                Send Circular
-            </button>
-            <button class="quick-action-btn" onclick="showSection('fee-collection')">
-                <div class="qa-icon" style="background:#F0FDF4; color:#22C55E;">&#128176;</div>
-                Record Payment
-            </button>
-            <button class="quick-action-btn" onclick="showSection('reports')">
-                <div class="qa-icon" style="background:#F5F3FF; color:#8B5CF6;">&#128196;</div>
-                Generate Report
-            </button>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: All Students -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-all-students">
+    <!-- ===== All Students Section ===== -->
+    <div class="content-section" id="section-allStudents">
         <div class="page-header">
-            <h1>All Students</h1>
-            <p>Manage and view all enrolled students.</p>
+            <div>
+                <div class="page-title">All Students</div>
+                <div class="page-subtitle">Manage all enrolled students at Vidyashilp International School</div>
+            </div>
+            <button class="btn btn-primary">+ Add Student</button>
         </div>
-
-        <div class="section-toolbar">
-            <input type="text" class="search-input" placeholder="Search by name, admission no...">
-            <select>
-                <option value="">All Classes</option>
-                <option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option>
-                <option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option>
-            </select>
-            <select>
-                <option value="">All Sections</option>
-                <option>Section A</option><option>Section B</option><option>Section C</option>
-            </select>
-        </div>
-
         <div class="card">
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Sl No</th><th>Admission No</th><th>Student Name</th><th>Class</th><th>Section</th><th>Parent Name</th><th>Phone</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1</td><td>VA2024001</td><td class="student-name">Aarav Sharma</td><td>Class 6</td><td>A</td><td>Vikram Sharma</td><td>9876543210</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>2</td><td>VA2024002</td><td class="student-name">Diya Patel</td><td>Class 3</td><td>B</td><td>Rakesh Patel</td><td>9876543211</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>3</td><td>VA2024003</td><td class="student-name">Vihaan Reddy</td><td>Class 8</td><td>A</td><td>Suresh Reddy</td><td>9876543212</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>4</td><td>VA2024004</td><td class="student-name">Ananya Iyer</td><td>Class 1</td><td>C</td><td>Ramesh Iyer</td><td>9876543213</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>5</td><td>VA2024005</td><td class="student-name">Kabir Malhotra</td><td>Class 10</td><td>A</td><td>Sanjay Malhotra</td><td>9876543214</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>6</td><td>VA2024006</td><td class="student-name">Saanvi Gupta</td><td>Class 5</td><td>B</td><td>Arun Gupta</td><td>9876543215</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>7</td><td>VA2024007</td><td class="student-name">Arjun Nair</td><td>Class 7</td><td>A</td><td>Mohan Nair</td><td>9876543216</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>8</td><td>VA2024008</td><td class="student-name">Ishita Desai</td><td>Class 4</td><td>C</td><td>Kiran Desai</td><td>9876543217</td><td><span class="status-badge inactive">Inactive</span></td></tr>
-                        <tr><td>9</td><td>VA2024009</td><td class="student-name">Rohan Singh</td><td>Class 9</td><td>B</td><td>Harpreet Singh</td><td>9876543218</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>10</td><td>VA2024010</td><td class="student-name">Meera Joshi</td><td>Class 2</td><td>A</td><td>Prakash Joshi</td><td>9876543219</td><td><span class="status-badge active">Active</span></td></tr>
-                    </tbody>
-                </table>
-                </div>
-                <div class="pagination">
-                    <span>Showing 1-10 of 247 students</span>
-                    <div class="pagination-btns">
-                        <button>&laquo;</button>
-                        <button class="active">1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>...</button>
-                        <button>25</button>
-                        <button>&raquo;</button>
-                    </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>ID</th><th>Name</th><th>Class</th><th>Gender</th><th>Parent Contact</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>VIS-2401</td><td>Aarav Sharma</td><td>Grade 6-A</td><td>Male</td><td>+91 98765 43210</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>VIS-2402</td><td>Priya Patel</td><td>Grade 4-B</td><td>Female</td><td>+91 87654 32109</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>VIS-2403</td><td>Rohan Gupta</td><td>Grade 8-A</td><td>Male</td><td>+91 76543 21098</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>VIS-2404</td><td>Sneha Reddy</td><td>Grade 2-C</td><td>Female</td><td>+91 65432 10987</td><td><span class="badge badge-yellow">On Leave</span></td></tr>
+                            <tr><td>VIS-2405</td><td>Karthik Nair</td><td>Grade 5-A</td><td>Male</td><td>+91 54321 09876</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>VIS-2406</td><td>Ananya Iyer</td><td>Grade 7-B</td><td>Female</td><td>+91 43210 98765</td><td><span class="badge badge-green">Active</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Admissions -->
-    <!-- ============================================ -->
+    <!-- ===== Admissions Section ===== -->
     <div class="content-section" id="section-admissions">
         <div class="page-header">
-            <h1>Admissions</h1>
-            <p>Manage admission applications and approvals.</p>
+            <div>
+                <div class="page-title">Admissions</div>
+                <div class="page-subtitle">Process new student admissions</div>
+            </div>
+            <button class="btn btn-primary">+ New Application</button>
         </div>
-
-        <div class="stats-row">
-            <div class="stat-card">
-                <div><div class="stat-label">Total Applications</div><div class="stat-value">45</div></div>
-                <div class="stat-icon blue">&#128196;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Approved</div><div class="stat-value">32</div></div>
-                <div class="stat-icon green">&#9989;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Pending</div><div class="stat-value">8</div></div>
-                <div class="stat-icon amber">&#9203;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Rejected</div><div class="stat-value">5</div></div>
-                <div class="stat-icon red">&#10060;</div>
-            </div>
-        </div>
-
-        <div class="section-toolbar">
-            <span></span>
-            <button class="btn btn-primary">+ New Admission</button>
-        </div>
-
         <div class="card">
+            <div class="card-header"><span class="card-title">Admission Applications</span></div>
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Application No</th><th>Student Name</th><th>Class Applied</th><th>Parent</th><th>Date</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>APP-2026-001</td><td class="student-name">Aarav Sharma</td><td>Class 6</td><td>Vikram Sharma</td><td>12 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                        <tr><td>APP-2026-002</td><td class="student-name">Diya Patel</td><td>Class 3</td><td>Rakesh Patel</td><td>11 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                        <tr><td>APP-2026-003</td><td class="student-name">Vihaan Reddy</td><td>Class 8</td><td>Suresh Reddy</td><td>10 Mar 2026</td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td>APP-2026-004</td><td class="student-name">Ananya Iyer</td><td>Class 1</td><td>Ramesh Iyer</td><td>09 Mar 2026</td><td><span class="status-badge review">Under Review</span></td></tr>
-                        <tr><td>APP-2026-005</td><td class="student-name">Kabir Malhotra</td><td>Class 10</td><td>Sanjay Malhotra</td><td>08 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                        <tr><td>APP-2026-006</td><td class="student-name">Saanvi Gupta</td><td>Class 5</td><td>Arun Gupta</td><td>07 Mar 2026</td><td><span class="status-badge rejected">Rejected</span></td></tr>
-                        <tr><td>APP-2026-007</td><td class="student-name">Arjun Nair</td><td>Class 7</td><td>Mohan Nair</td><td>06 Mar 2026</td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td>APP-2026-008</td><td class="student-name">Ishita Desai</td><td>Class 4</td><td>Kiran Desai</td><td>05 Mar 2026</td><td><span class="status-badge approved">Approved</span></td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Application #</th><th>Student Name</th><th>Applied For</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+                        <tbody>
+                            <tr><td>APP-0051</td><td>Meera Krishnan</td><td>Grade 3</td><td>14 Mar 2026</td><td><span class="badge badge-yellow">Under Review</span></td><td><button class="btn btn-primary">Review</button></td></tr>
+                            <tr><td>APP-0050</td><td>Arjun Verma</td><td>Grade 6</td><td>13 Mar 2026</td><td><span class="badge badge-blue">Interview Scheduled</span></td><td><button class="btn btn-outline">View</button></td></tr>
+                            <tr><td>APP-0049</td><td>Diya Menon</td><td>Grade 1</td><td>12 Mar 2026</td><td><span class="badge badge-green">Accepted</span></td><td><button class="btn btn-success">Enroll</button></td></tr>
+                            <tr><td>APP-0048</td><td>Vivaan Joshi</td><td>Grade 9</td><td>11 Mar 2026</td><td><span class="badge badge-red">Rejected</span></td><td><button class="btn btn-outline">View</button></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Class Assignment -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-class-assignment">
+    <!-- ===== Class Assignment Section ===== -->
+    <div class="content-section" id="section-classAssignment">
         <div class="page-header">
-            <h1>Class Assignment</h1>
-            <p>View class-wise student distribution and teacher assignments.</p>
+            <div>
+                <div class="page-title">Class Assignment</div>
+                <div class="page-subtitle">Assign students to classes and sections</div>
+            </div>
+            <button class="btn btn-primary">Bulk Assign</button>
         </div>
-
-        <div class="class-grid">
-            <div class="class-card">
-                <h3>Class 1</h3>
-                <div class="class-card-info">Total Students: <strong>120</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Lakshmi Devi</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (40)</span><span class="section-tag">B (40)</span><span class="section-tag">C (40)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 2</h3>
-                <div class="class-card-info">Total Students: <strong>118</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Sunita Rao</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (39)</span><span class="section-tag">B (40)</span><span class="section-tag">C (39)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 3</h3>
-                <div class="class-card-info">Total Students: <strong>125</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mr. Anil Kumar</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (42)</span><span class="section-tag">B (42)</span><span class="section-tag">C (41)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 4</h3>
-                <div class="class-card-info">Total Students: <strong>130</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Kavitha Menon</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (44)</span><span class="section-tag">B (43)</span><span class="section-tag">C (43)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 5</h3>
-                <div class="class-card-info">Total Students: <strong>128</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mr. Deepak Shetty</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (43)</span><span class="section-tag">B (43)</span><span class="section-tag">C (42)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 6</h3>
-                <div class="class-card-info">Total Students: <strong>135</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Priya Nair</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (45)</span><span class="section-tag">B (45)</span><span class="section-tag">C (45)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 7</h3>
-                <div class="class-card-info">Total Students: <strong>122</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mr. Suresh Babu</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (41)</span><span class="section-tag">B (41)</span><span class="section-tag">C (40)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 8</h3>
-                <div class="class-card-info">Total Students: <strong>119</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Geeta Sharma</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (40)</span><span class="section-tag">B (40)</span><span class="section-tag">C (39)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 9</h3>
-                <div class="class-card-info">Total Students: <strong>115</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mr. Rajesh Kumar</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (39)</span><span class="section-tag">B (38)</span><span class="section-tag">C (38)</span></div>
-            </div>
-            <div class="class-card">
-                <h3>Class 10</h3>
-                <div class="class-card-info">Total Students: <strong>110</strong></div>
-                <div class="class-card-info">Class Teacher: <strong>Mrs. Anita Verma</strong></div>
-                <div class="sections-tags"><span class="section-tag">A (37)</span><span class="section-tag">B (37)</span><span class="section-tag">C (36)</span></div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Class Overview</span></div>
+            <div class="card-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Class</th><th>Section</th><th>Class Teacher</th><th>Students</th><th>Capacity</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>Grade 1</td><td>A</td><td>Mrs. Lakshmi S.</td><td>32</td><td>35</td><td><span class="badge badge-green">Available</span></td></tr>
+                            <tr><td>Grade 1</td><td>B</td><td>Mrs. Kavitha R.</td><td>35</td><td>35</td><td><span class="badge badge-red">Full</span></td></tr>
+                            <tr><td>Grade 2</td><td>A</td><td>Mr. Suresh K.</td><td>30</td><td>35</td><td><span class="badge badge-green">Available</span></td></tr>
+                            <tr><td>Grade 2</td><td>B</td><td>Mrs. Priya M.</td><td>33</td><td>35</td><td><span class="badge badge-green">Available</span></td></tr>
+                            <tr><td>Grade 3</td><td>A</td><td>Mr. Ramesh P.</td><td>34</td><td>35</td><td><span class="badge badge-yellow">Almost Full</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Fee Collection -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-fee-collection">
+    <!-- ===== Attendance Section ===== -->
+    <div class="content-section" id="section-attendance">
         <div class="page-header">
-            <h1>Fee Collection</h1>
-            <p>Track and manage student fee payments.</p>
+            <div>
+                <div class="page-title">Attendance</div>
+                <div class="page-subtitle">Track daily student and staff attendance</div>
+            </div>
+            <button class="btn btn-primary">Mark Attendance</button>
         </div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></div><div><div class="stat-value">2,680</div><div class="stat-label">Present Today</div></div></div>
+            <div class="stat-card"><div class="stat-icon red"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div><div class="stat-value">127</div><div class="stat-label">Absent Today</div></div></div>
+            <div class="stat-card"><div class="stat-icon orange"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="stat-value">40</div><div class="stat-label">Late Arrivals</div></div></div>
+        </div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Today's Attendance by Class</span></div>
+            <div class="card-body"><div class="chart-placeholder">Attendance bar chart by class</div></div>
+        </div>
+    </div>
 
-        <div class="stats-row three-col">
-            <div class="stat-card">
-                <div><div class="stat-label">Total Collected</div><div class="stat-value">&#8377;45,80,000</div></div>
-                <div class="stat-icon green">&#128176;</div>
+    <!-- ===== Examinations Section ===== -->
+    <div class="content-section" id="section-examinations">
+        <div class="page-header">
+            <div>
+                <div class="page-title">Examinations</div>
+                <div class="page-subtitle">Manage exams, results, and report cards</div>
             </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Pending</div><div class="stat-value">&#8377;8,20,000</div></div>
-                <div class="stat-icon amber">&#9203;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Overdue</div><div class="stat-value">&#8377;2,15,000</div></div>
-                <div class="stat-icon red">&#9888;</div>
+            <button class="btn btn-primary">+ Schedule Exam</button>
+        </div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Upcoming Exams</span></div>
+            <div class="card-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Exam</th><th>Class</th><th>Subject</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>Annual Exam</td><td>Grade 10</td><td>Mathematics</td><td>20 Mar 2026</td><td>09:00 AM</td><td><span class="badge badge-yellow">Upcoming</span></td></tr>
+                            <tr><td>Annual Exam</td><td>Grade 10</td><td>Science</td><td>22 Mar 2026</td><td>09:00 AM</td><td><span class="badge badge-yellow">Upcoming</span></td></tr>
+                            <tr><td>Unit Test 3</td><td>Grade 8</td><td>English</td><td>18 Mar 2026</td><td>10:30 AM</td><td><span class="badge badge-blue">Scheduled</span></td></tr>
+                            <tr><td>Mid-Term</td><td>Grade 5</td><td>Social Studies</td><td>15 Mar 2026</td><td>09:00 AM</td><td><span class="badge badge-green">In Progress</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="section-toolbar">
-            <input type="text" class="search-input" placeholder="Search by student name, receipt no...">
+    <!-- ===== Timetable Section ===== -->
+    <div class="content-section" id="section-timetable">
+        <div class="page-header">
+            <div>
+                <div class="page-title">Timetable</div>
+                <div class="page-subtitle">Manage class schedules and period allocations</div>
+            </div>
+            <button class="btn btn-primary">Edit Timetable</button>
+        </div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Grade 6-A - Weekly Schedule</span></div>
+            <div class="card-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Period</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead>
+                        <tbody>
+                            <tr><td>1 (8:30-9:15)</td><td>Mathematics</td><td>English</td><td>Science</td><td>Mathematics</td><td>Hindi</td></tr>
+                            <tr><td>2 (9:15-10:00)</td><td>English</td><td>Science</td><td>Mathematics</td><td>Social Studies</td><td>English</td></tr>
+                            <tr><td>3 (10:15-11:00)</td><td>Science</td><td>Hindi</td><td>English</td><td>Science</td><td>Mathematics</td></tr>
+                            <tr><td>4 (11:00-11:45)</td><td>Social Studies</td><td>Mathematics</td><td>Hindi</td><td>English</td><td>Art</td></tr>
+                            <tr><td>5 (12:30-1:15)</td><td>Hindi</td><td>PE</td><td>Computer</td><td>Hindi</td><td>Science</td></tr>
+                            <tr><td>6 (1:15-2:00)</td><td>PE</td><td>Art</td><td>Social Studies</td><td>Computer</td><td>Social Studies</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Fee Collection Section ===== -->
+    <div class="content-section" id="section-feeCollection">
+        <div class="page-header">
+            <div>
+                <div class="page-title">Fee Collection</div>
+                <div class="page-subtitle">Manage student fee payments and receipts</div>
+            </div>
             <button class="btn btn-primary">+ Record Payment</button>
         </div>
-
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="stat-value">42.8L</div><div class="stat-label">Total Collected</div></div></div>
+            <div class="stat-card"><div class="stat-icon red"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="stat-value">6.2L</div><div class="stat-label">Pending Dues</div></div></div>
+            <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stat-value">234</div><div class="stat-label">Defaulters</div></div></div>
+        </div>
         <div class="card">
+            <div class="card-header"><span class="card-title">Recent Payments</span></div>
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Receipt No</th><th>Student</th><th>Class</th><th>Amount</th><th>Date</th><th>Mode</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>REC-001</td><td class="student-name">Aarav Sharma</td><td>Class 6-A</td><td>&#8377;15,000</td><td>14 Mar 2026</td><td><span class="status-badge online">Online</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-002</td><td class="student-name">Diya Patel</td><td>Class 3-B</td><td>&#8377;12,000</td><td>13 Mar 2026</td><td><span class="status-badge cash">Cash</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-003</td><td class="student-name">Vihaan Reddy</td><td>Class 8-A</td><td>&#8377;18,000</td><td>12 Mar 2026</td><td><span class="status-badge cheque">Cheque</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-004</td><td class="student-name">Ananya Iyer</td><td>Class 1-C</td><td>&#8377;10,000</td><td>11 Mar 2026</td><td><span class="status-badge online">Online</span></td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td>REC-005</td><td class="student-name">Kabir Malhotra</td><td>Class 10-A</td><td>&#8377;20,000</td><td>10 Mar 2026</td><td><span class="status-badge cash">Cash</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-006</td><td class="student-name">Saanvi Gupta</td><td>Class 5-B</td><td>&#8377;14,000</td><td>09 Mar 2026</td><td><span class="status-badge online">Online</span></td><td><span class="status-badge overdue">Overdue</span></td></tr>
-                        <tr><td>REC-007</td><td class="student-name">Arjun Nair</td><td>Class 7-A</td><td>&#8377;16,000</td><td>08 Mar 2026</td><td><span class="status-badge cheque">Cheque</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-008</td><td class="student-name">Ishita Desai</td><td>Class 4-C</td><td>&#8377;11,500</td><td>07 Mar 2026</td><td><span class="status-badge cash">Cash</span></td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td>REC-009</td><td class="student-name">Rohan Singh</td><td>Class 9-B</td><td>&#8377;19,000</td><td>06 Mar 2026</td><td><span class="status-badge online">Online</span></td><td><span class="status-badge paid">Paid</span></td></tr>
-                        <tr><td>REC-010</td><td class="student-name">Meera Joshi</td><td>Class 2-A</td><td>&#8377;9,500</td><td>05 Mar 2026</td><td><span class="status-badge cheque">Cheque</span></td><td><span class="status-badge overdue">Overdue</span></td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Receipt #</th><th>Student</th><th>Class</th><th>Amount</th><th>Date</th><th>Mode</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>RCP-4521</td><td>Aarav Sharma</td><td>Grade 6-A</td><td>45,000</td><td>14 Mar 2026</td><td>Online</td><td><span class="badge badge-green">Paid</span></td></tr>
+                            <tr><td>RCP-4520</td><td>Priya Patel</td><td>Grade 4-B</td><td>42,000</td><td>13 Mar 2026</td><td>Cheque</td><td><span class="badge badge-green">Paid</span></td></tr>
+                            <tr><td>RCP-4519</td><td>Rohan Gupta</td><td>Grade 8-A</td><td>48,000</td><td>12 Mar 2026</td><td>Cash</td><td><span class="badge badge-green">Paid</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Expenses -->
-    <!-- ============================================ -->
+    <!-- ===== Expenses Section ===== -->
     <div class="content-section" id="section-expenses">
         <div class="page-header">
-            <h1>Expenses</h1>
-            <p>Track all school expenditures and budget allocation.</p>
+            <div>
+                <div class="page-title">Expenses</div>
+                <div class="page-subtitle">Track and manage school expenses</div>
+            </div>
+            <button class="btn btn-primary">+ Add Expense</button>
         </div>
-
-        <div class="stats-row">
-            <div class="stat-card">
-                <div><div class="stat-label">Total Expenses</div><div class="stat-value">&#8377;15,30,000</div></div>
-                <div class="stat-icon red">&#128181;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Salaries</div><div class="stat-value">&#8377;10,20,000</div></div>
-                <div class="stat-icon blue">&#128101;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Utilities</div><div class="stat-value">&#8377;2,50,000</div></div>
-                <div class="stat-icon amber">&#9889;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Others</div><div class="stat-value">&#8377;2,60,000</div></div>
-                <div class="stat-icon purple">&#128230;</div>
-            </div>
-        </div>
-
         <div class="card">
-            <div class="card-header">
-                <h2>Expense Records</h2>
-            </div>
+            <div class="card-header"><span class="card-title">Recent Expenses</span></div>
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>ID</th><th>Category</th><th>Description</th><th>Amount</th><th>Date</th><th>Approved By</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>EXP-001</td><td>Salaries</td><td>Teaching staff salaries - March</td><td>&#8377;6,50,000</td><td>01 Mar 2026</td><td>Principal</td></tr>
-                        <tr><td>EXP-002</td><td>Salaries</td><td>Non-teaching staff salaries - March</td><td>&#8377;3,70,000</td><td>01 Mar 2026</td><td>Principal</td></tr>
-                        <tr><td>EXP-003</td><td>Utilities</td><td>Electricity bill - February</td><td>&#8377;1,20,000</td><td>05 Mar 2026</td><td>Admin</td></tr>
-                        <tr><td>EXP-004</td><td>Utilities</td><td>Water supply charges</td><td>&#8377;45,000</td><td>06 Mar 2026</td><td>Admin</td></tr>
-                        <tr><td>EXP-005</td><td>Maintenance</td><td>Classroom furniture repair</td><td>&#8377;85,000</td><td>08 Mar 2026</td><td>Vice Principal</td></tr>
-                        <tr><td>EXP-006</td><td>Supplies</td><td>Lab equipment purchase</td><td>&#8377;1,20,000</td><td>10 Mar 2026</td><td>Principal</td></tr>
-                        <tr><td>EXP-007</td><td>Transport</td><td>School bus fuel - March</td><td>&#8377;65,000</td><td>12 Mar 2026</td><td>Admin</td></tr>
-                        <tr><td>EXP-008</td><td>Events</td><td>Annual Day celebration expenses</td><td>&#8377;75,000</td><td>14 Mar 2026</td><td>Principal</td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>ID</th><th>Category</th><th>Description</th><th>Amount</th><th>Date</th><th>Approved By</th></tr></thead>
+                        <tbody>
+                            <tr><td>EXP-301</td><td>Infrastructure</td><td>Lab Equipment - Chemistry</td><td>2,45,000</td><td>14 Mar 2026</td><td>Principal</td></tr>
+                            <tr><td>EXP-300</td><td>Utilities</td><td>Electricity Bill - March</td><td>1,82,000</td><td>12 Mar 2026</td><td>Finance Head</td></tr>
+                            <tr><td>EXP-299</td><td>Transport</td><td>Bus Maintenance</td><td>67,500</td><td>10 Mar 2026</td><td>Admin</td></tr>
+                            <tr><td>EXP-298</td><td>Stationery</td><td>Office Supplies Q1</td><td>23,400</td><td>08 Mar 2026</td><td>Finance Head</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Reports -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-reports">
+    <!-- ===== Finance Reports Section ===== -->
+    <div class="content-section" id="section-financeReports">
         <div class="page-header">
-            <h1>Reports</h1>
-            <p>Generate and download various school reports.</p>
+            <div>
+                <div class="page-title">Finance Reports</div>
+                <div class="page-subtitle">Financial summaries and analytical reports</div>
+            </div>
+            <button class="btn btn-outline">Export PDF</button>
         </div>
-
-        <div class="report-grid">
-            <div class="report-card">
-                <div class="report-icon" style="background:#EFF6FF; color:#3B82F6;">&#128176;</div>
-                <h3>Fee Summary Report</h3>
-                <p>Complete fee collection summary with pending and overdue details.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
-            <div class="report-card">
-                <div class="report-icon" style="background:#FEF2F2; color:#EF4444;">&#128181;</div>
-                <h3>Expense Report</h3>
-                <p>Detailed breakdown of all expenditures by category and period.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
-            <div class="report-card">
-                <div class="report-icon" style="background:#F0FDF4; color:#22C55E;">&#128101;</div>
-                <h3>Student Strength Report</h3>
-                <p>Class-wise and section-wise student enrollment statistics.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
-            <div class="report-card">
-                <div class="report-icon" style="background:#F5F3FF; color:#8B5CF6;">&#128203;</div>
-                <h3>Attendance Report</h3>
-                <p>Daily, weekly, and monthly attendance records for all classes.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
-            <div class="report-card">
-                <div class="report-icon" style="background:#FFFBEB; color:#F59E0B;">&#128188;</div>
-                <h3>Staff Report</h3>
-                <p>Staff attendance, performance, and payroll summary report.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
-            <div class="report-card">
-                <div class="report-icon" style="background:#FFF7ED; color:#FF8400;">&#127891;</div>
-                <h3>Academic Report</h3>
-                <p>Exam results, class performance, and academic progress overview.</p>
-                <div class="report-actions">
-                    <button class="btn btn-primary btn-sm">Generate</button>
-                    <button class="btn btn-outline btn-sm">Download</button>
-                </div>
-            </div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><div><div class="stat-value">1.24 Cr</div><div class="stat-label">Total Revenue (FY)</div></div></div>
+            <div class="stat-card"><div class="stat-icon red"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg></div><div><div class="stat-value">87.6L</div><div class="stat-label">Total Expenses (FY)</div></div></div>
+            <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="22" height="18" rx="2"/><line x1="1" y1="9" x2="23" y2="9"/></svg></div><div><div class="stat-value">36.4L</div><div class="stat-label">Net Surplus</div></div></div>
+        </div>
+        <div class="grid-2">
+            <div class="card"><div class="card-header"><span class="card-title">Monthly Revenue vs Expenses</span></div><div class="card-body"><div class="chart-placeholder">Revenue vs Expenses chart</div></div></div>
+            <div class="card"><div class="card-header"><span class="card-title">Fee Collection Rate</span></div><div class="card-body"><div class="chart-placeholder">Collection rate pie chart</div></div></div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Staff Directory -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-staff-directory">
+    <!-- ===== Staff Directory Section ===== -->
+    <div class="content-section" id="section-staffDirectory">
         <div class="page-header">
-            <h1>Staff Directory</h1>
-            <p>View and manage all school staff members.</p>
+            <div>
+                <div class="page-title">Staff Directory</div>
+                <div class="page-subtitle">All teaching and non-teaching staff</div>
+            </div>
+            <button class="btn btn-primary">+ Add Staff</button>
         </div>
-
-        <div class="section-toolbar">
-            <input type="text" class="search-input" placeholder="Search by name, ID, department...">
-            <select>
-                <option value="">All Departments</option>
-                <option>Mathematics</option><option>Science</option><option>English</option>
-                <option>Social Studies</option><option>Physical Education</option><option>Administration</option>
-            </select>
-        </div>
-
         <div class="card">
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>ID</th><th>Name</th><th>Department</th><th>Designation</th><th>Phone</th><th>Email</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>STF-001</td><td class="student-name">Rajesh Subramaniam</td><td>Mathematics</td><td>Senior Teacher</td><td>9845123456</td><td>rajesh.s@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-002</td><td class="student-name">Priya Menon</td><td>Library</td><td>Librarian</td><td>9845123457</td><td>priya.m@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-003</td><td class="student-name">Amit Kumar</td><td>Physical Education</td><td>PT Instructor</td><td>9845123458</td><td>amit.k@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-004</td><td class="student-name">Lakshmi Devi</td><td>English</td><td>HOD</td><td>9845123459</td><td>lakshmi.d@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-005</td><td class="student-name">Suresh Babu</td><td>Science</td><td>Senior Teacher</td><td>9845123460</td><td>suresh.b@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-006</td><td class="student-name">Kavitha Menon</td><td>Social Studies</td><td>Teacher</td><td>9845123461</td><td>kavitha.m@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-007</td><td class="student-name">Deepak Shetty</td><td>Mathematics</td><td>Teacher</td><td>9845123462</td><td>deepak.s@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-008</td><td class="student-name">Sunita Rao</td><td>English</td><td>Teacher</td><td>9845123463</td><td>sunita.r@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-009</td><td class="student-name">Anil Kumar</td><td>Science</td><td>Lab Assistant</td><td>9845123464</td><td>anil.k@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                        <tr><td>STF-010</td><td class="student-name">Geeta Sharma</td><td>Administration</td><td>Office Manager</td><td>9845123465</td><td>geeta.s@vidhyashilp.edu</td><td><span class="status-badge active">Active</span></td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Staff ID</th><th>Name</th><th>Department</th><th>Designation</th><th>Phone</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>STF-001</td><td>Dr. Anand Kumar</td><td>Mathematics</td><td>HOD</td><td>+91 98765 11111</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>STF-002</td><td>Mrs. Sunita Rao</td><td>English</td><td>Senior Teacher</td><td>+91 98765 22222</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>STF-003</td><td>Mr. Venkatesh B.</td><td>Science</td><td>Lab Coordinator</td><td>+91 98765 33333</td><td><span class="badge badge-green">Active</span></td></tr>
+                            <tr><td>STF-004</td><td>Mrs. Deepa Nair</td><td>Administration</td><td>Office Manager</td><td>+91 98765 44444</td><td><span class="badge badge-yellow">On Leave</span></td></tr>
+                            <tr><td>STF-005</td><td>Mr. Rajesh Pillai</td><td>Sports</td><td>PE Instructor</td><td>+91 98765 55555</td><td><span class="badge badge-green">Active</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Payroll -->
-    <!-- ============================================ -->
+    <!-- ===== Payroll Section ===== -->
     <div class="content-section" id="section-payroll">
         <div class="page-header">
-            <h1>Payroll</h1>
-            <p>Manage staff salary processing and payments.</p>
+            <div>
+                <div class="page-title">Payroll</div>
+                <div class="page-subtitle">Manage staff salaries and compensation</div>
+            </div>
+            <button class="btn btn-primary">Process Payroll</button>
         </div>
-
-        <div class="stats-row three-col">
-            <div class="stat-card">
-                <div><div class="stat-label">Total Payroll</div><div class="stat-value">&#8377;8,50,000</div></div>
-                <div class="stat-icon blue">&#128176;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Processed</div><div class="stat-value">82</div></div>
-                <div class="stat-icon green">&#9989;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Pending</div><div class="stat-value">4</div></div>
-                <div class="stat-icon amber">&#9203;</div>
-            </div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="stat-value">28.5L</div><div class="stat-label">Monthly Payroll</div></div></div>
+            <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></div><div><div class="stat-value">182</div><div class="stat-label">Processed</div></div></div>
+            <div class="stat-card"><div class="stat-icon orange"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="stat-value">4</div><div class="stat-label">Pending</div></div></div>
         </div>
-
         <div class="card">
-            <div class="card-header">
-                <h2>Payroll Records - March 2026</h2>
-            </div>
+            <div class="card-header"><span class="card-title">March 2026 Payroll</span></div>
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Employee</th><th>Department</th><th>Basic Salary</th><th>Allowances</th><th>Deductions</th><th>Net Salary</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="student-name">Rajesh Subramaniam</td><td>Mathematics</td><td>&#8377;45,000</td><td>&#8377;12,000</td><td>&#8377;5,400</td><td>&#8377;51,600</td><td><span class="status-badge processed">Processed</span></td></tr>
-                        <tr><td class="student-name">Priya Menon</td><td>Library</td><td>&#8377;32,000</td><td>&#8377;8,000</td><td>&#8377;3,600</td><td>&#8377;36,400</td><td><span class="status-badge processed">Processed</span></td></tr>
-                        <tr><td class="student-name">Amit Kumar</td><td>Physical Education</td><td>&#8377;35,000</td><td>&#8377;9,000</td><td>&#8377;4,200</td><td>&#8377;39,800</td><td><span class="status-badge processed">Processed</span></td></tr>
-                        <tr><td class="student-name">Lakshmi Devi</td><td>English</td><td>&#8377;50,000</td><td>&#8377;15,000</td><td>&#8377;6,500</td><td>&#8377;58,500</td><td><span class="status-badge processed">Processed</span></td></tr>
-                        <tr><td class="student-name">Suresh Babu</td><td>Science</td><td>&#8377;42,000</td><td>&#8377;11,000</td><td>&#8377;5,100</td><td>&#8377;47,900</td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td class="student-name">Kavitha Menon</td><td>Social Studies</td><td>&#8377;38,000</td><td>&#8377;9,500</td><td>&#8377;4,500</td><td>&#8377;43,000</td><td><span class="status-badge processed">Processed</span></td></tr>
-                        <tr><td class="student-name">Deepak Shetty</td><td>Mathematics</td><td>&#8377;36,000</td><td>&#8377;9,000</td><td>&#8377;4,300</td><td>&#8377;40,700</td><td><span class="status-badge pending">Pending</span></td></tr>
-                        <tr><td class="student-name">Sunita Rao</td><td>English</td><td>&#8377;34,000</td><td>&#8377;8,500</td><td>&#8377;4,100</td><td>&#8377;38,400</td><td><span class="status-badge processed">Processed</span></td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Staff ID</th><th>Name</th><th>Department</th><th>Basic</th><th>Deductions</th><th>Net Pay</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>STF-001</td><td>Dr. Anand Kumar</td><td>Mathematics</td><td>85,000</td><td>12,400</td><td>72,600</td><td><span class="badge badge-green">Paid</span></td></tr>
+                            <tr><td>STF-002</td><td>Mrs. Sunita Rao</td><td>English</td><td>72,000</td><td>10,800</td><td>61,200</td><td><span class="badge badge-green">Paid</span></td></tr>
+                            <tr><td>STF-003</td><td>Mr. Venkatesh B.</td><td>Science</td><td>65,000</td><td>9,750</td><td>55,250</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Leave Management -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-leave-mgmt">
+    <!-- ===== Leave Management Section ===== -->
+    <div class="content-section" id="section-leaveManagement">
         <div class="page-header">
-            <h1>Leave Management</h1>
-            <p>Review and manage staff leave requests.</p>
+            <div>
+                <div class="page-title">Leave Management</div>
+                <div class="page-subtitle">Staff leave applications and approvals</div>
+            </div>
+            <button class="btn btn-primary">+ Apply Leave</button>
         </div>
-
-        <div class="stats-row three-col">
-            <div class="stat-card">
-                <div><div class="stat-label">Pending Requests</div><div class="stat-value">6</div></div>
-                <div class="stat-icon amber">&#9203;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">Approved Today</div><div class="stat-value">3</div></div>
-                <div class="stat-icon green">&#9989;</div>
-            </div>
-            <div class="stat-card">
-                <div><div class="stat-label">On Leave Today</div><div class="stat-value">5</div></div>
-                <div class="stat-icon blue">&#128197;</div>
-            </div>
-        </div>
-
         <div class="card">
-            <div class="card-header">
-                <h2>Leave Requests</h2>
-            </div>
+            <div class="card-header"><span class="card-title">Recent Leave Applications</span></div>
             <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Employee</th><th>Department</th><th>Leave Type</th><th>From</th><th>To</th><th>Days</th><th>Status</th><th>Action</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="student-name">Rajesh Subramaniam</td><td>Mathematics</td><td>Sick Leave</td><td>15 Mar 2026</td><td>16 Mar 2026</td><td>2</td><td><span class="status-badge approved">Approved</span></td><td>-</td></tr>
-                        <tr><td class="student-name">Priya Menon</td><td>Library</td><td>Casual Leave</td><td>15 Mar 2026</td><td>15 Mar 2026</td><td>1</td><td><span class="status-badge approved">Approved</span></td><td>-</td></tr>
-                        <tr><td class="student-name">Amit Kumar</td><td>Physical Education</td><td>Earned Leave</td><td>15 Mar 2026</td><td>18 Mar 2026</td><td>4</td><td><span class="status-badge approved">Approved</span></td><td>-</td></tr>
-                        <tr><td class="student-name">Deepak Shetty</td><td>Mathematics</td><td>Casual Leave</td><td>17 Mar 2026</td><td>18 Mar 2026</td><td>2</td><td><span class="status-badge pending">Pending</span></td><td><div class="action-btns"><button class="action-btn approve">Approve</button><button class="action-btn reject">Reject</button></div></td></tr>
-                        <tr><td class="student-name">Sunita Rao</td><td>English</td><td>Sick Leave</td><td>18 Mar 2026</td><td>20 Mar 2026</td><td>3</td><td><span class="status-badge pending">Pending</span></td><td><div class="action-btns"><button class="action-btn approve">Approve</button><button class="action-btn reject">Reject</button></div></td></tr>
-                        <tr><td class="student-name">Anil Kumar</td><td>Science</td><td>Casual Leave</td><td>19 Mar 2026</td><td>19 Mar 2026</td><td>1</td><td><span class="status-badge pending">Pending</span></td><td><div class="action-btns"><button class="action-btn approve">Approve</button><button class="action-btn reject">Reject</button></div></td></tr>
-                        <tr><td class="student-name">Kavitha Menon</td><td>Social Studies</td><td>Earned Leave</td><td>20 Mar 2026</td><td>24 Mar 2026</td><td>5</td><td><span class="status-badge pending">Pending</span></td><td><div class="action-btns"><button class="action-btn approve">Approve</button><button class="action-btn reject">Reject</button></div></td></tr>
-                        <tr><td class="student-name">Geeta Sharma</td><td>Administration</td><td>Casual Leave</td><td>16 Mar 2026</td><td>16 Mar 2026</td><td>1</td><td><span class="status-badge rejected">Rejected</span></td><td>-</td></tr>
-                    </tbody>
-                </table>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Staff</th><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Reason</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>Mrs. Deepa Nair</td><td>Casual Leave</td><td>15 Mar</td><td>17 Mar</td><td>3</td><td>Personal</td><td><span class="badge badge-green">Approved</span></td></tr>
+                            <tr><td>Mr. Suresh K.</td><td>Sick Leave</td><td>14 Mar</td><td>14 Mar</td><td>1</td><td>Medical</td><td><span class="badge badge-green">Approved</span></td></tr>
+                            <tr><td>Mrs. Kavitha R.</td><td>Casual Leave</td><td>18 Mar</td><td>19 Mar</td><td>2</td><td>Family function</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+                            <tr><td>Mr. Rajesh P.</td><td>Earned Leave</td><td>20 Mar</td><td>25 Mar</td><td>5</td><td>Vacation</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Circulars & Announcements -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-circulars">
-        <div class="page-header">
-            <h1>Circulars &amp; Announcements</h1>
-            <p>Create and manage school circulars and announcements.</p>
-        </div>
-
-        <div class="section-toolbar">
-            <span></span>
-            <button class="btn btn-primary">+ Create New Circular</button>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Sent Circulars</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Date</th><th>Title</th><th>Category</th><th>Recipients</th><th>Status</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>14 Mar 2026</td><td class="student-name">Annual Day Celebration - Schedule</td><td>Event</td><td>1,247 Students</td><td><span class="status-badge sent">Sent</span></td></tr>
-                        <tr><td>12 Mar 2026</td><td class="student-name">Parent-Teacher Meeting Notice</td><td>Academic</td><td>1,247 Students</td><td><span class="status-badge sent">Sent</span></td></tr>
-                        <tr><td>10 Mar 2026</td><td class="student-name">Summer Vacation Schedule</td><td>General</td><td>1,333 (All)</td><td><span class="status-badge sent">Sent</span></td></tr>
-                        <tr><td>08 Mar 2026</td><td class="student-name">Sports Day Registration</td><td>Event</td><td>650 (Class 5-10)</td><td><span class="status-badge sent">Sent</span></td></tr>
-                        <tr><td>05 Mar 2026</td><td class="student-name">Fee Payment Reminder - March</td><td>Finance</td><td>320 (Pending)</td><td><span class="status-badge draft">Draft</span></td></tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- New Circular Form -->
-        <div class="circular-form">
-            <h3>Create New Circular</h3>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" placeholder="Enter circular title...">
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select>
-                    <option value="">Select category</option>
-                    <option>Academic</option>
-                    <option>Event</option>
-                    <option>General</option>
-                    <option>Finance</option>
-                    <option>Emergency</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea placeholder="Type your circular message here..."></textarea>
-            </div>
-            <button class="btn btn-primary">Send Circular</button>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- SECTION: Academic Management -->
-    <!-- ============================================ -->
-    <div class="content-section" id="section-academics">
-        <div class="page-header">
-            <h1>Academic Management</h1>
-            <p>Overview of class performance and exam schedules.</p>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Class-wise Performance Overview</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Class</th><th>Students</th><th>Avg Attendance %</th><th>Avg Marks %</th><th>Top Performer</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Class 1</td><td>120</td><td>96.5%</td><td>88.2%</td><td class="student-name">Riya Sharma</td></tr>
-                        <tr><td>Class 2</td><td>118</td><td>95.8%</td><td>86.5%</td><td class="student-name">Aryan Patel</td></tr>
-                        <tr><td>Class 3</td><td>125</td><td>94.2%</td><td>84.8%</td><td class="student-name">Diya Patel</td></tr>
-                        <tr><td>Class 4</td><td>130</td><td>93.7%</td><td>82.3%</td><td class="student-name">Ishita Desai</td></tr>
-                        <tr><td>Class 5</td><td>128</td><td>94.5%</td><td>85.1%</td><td class="student-name">Saanvi Gupta</td></tr>
-                        <tr><td>Class 6</td><td>135</td><td>93.1%</td><td>81.7%</td><td class="student-name">Aarav Sharma</td></tr>
-                        <tr><td>Class 7</td><td>122</td><td>92.8%</td><td>79.4%</td><td class="student-name">Arjun Nair</td></tr>
-                        <tr><td>Class 8</td><td>119</td><td>91.5%</td><td>78.6%</td><td class="student-name">Vihaan Reddy</td></tr>
-                        <tr><td>Class 9</td><td>115</td><td>90.2%</td><td>76.8%</td><td class="student-name">Rohan Singh</td></tr>
-                        <tr><td>Class 10</td><td>110</td><td>92.0%</td><td>80.5%</td><td class="student-name">Kabir Malhotra</td></tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Upcoming Exam Schedule</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Exam</th><th>Class</th><th>Date</th><th>Subject</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Mid-Term Exam</td><td>Class 10</td><td>20 Mar 2026</td><td>Mathematics</td></tr>
-                        <tr><td>Mid-Term Exam</td><td>Class 10</td><td>22 Mar 2026</td><td>Science</td></tr>
-                        <tr><td>Mid-Term Exam</td><td>Class 9</td><td>20 Mar 2026</td><td>English</td></tr>
-                        <tr><td>Unit Test 3</td><td>Class 6-8</td><td>25 Mar 2026</td><td>All Subjects</td></tr>
-                        <tr><td>Unit Test 3</td><td>Class 1-5</td><td>27 Mar 2026</td><td>All Subjects</td></tr>
-                        <tr><td>Pre-Board Exam</td><td>Class 10</td><td>01 Apr 2026</td><td>All Subjects</td></tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- SECTION: Media -->
-    <!-- ============================================ -->
+    <!-- ===== Media Gallery Section ===== -->
     <div class="content-section" id="section-media">
         <div class="page-header">
-            <h1>Media (Photos &amp; Videos)</h1>
-            <p>Manage school event photos and videos.</p>
-        </div>
-
-        <div class="media-tabs">
-            <button class="media-tab active" onclick="switchMediaTab('photos', this)">Photos</button>
-            <button class="media-tab" onclick="switchMediaTab('videos', this)">Videos</button>
-        </div>
-
-        <!-- Photos Tab -->
-        <div class="media-tab-content" id="media-photos">
-            <div class="section-toolbar">
-                <span></span>
-                <button class="btn btn-primary">+ Upload Photos</button>
+            <div>
+                <div class="page-title">Media Gallery</div>
+                <div class="page-subtitle">Photos and videos from Vidyashilp International School events</div>
             </div>
-            <div class="media-grid">
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #3B82F6, #6366F1);"></div>
-                    <div class="media-card-body">
-                        <h4>Annual Day 2026</h4>
-                        <p>12 Mar 2026 &bull; 48 photos</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #22C55E, #14B8A6);"></div>
-                    <div class="media-card-body">
-                        <h4>Science Exhibition</h4>
-                        <p>05 Mar 2026 &bull; 32 photos</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #F59E0B, #F97316);"></div>
-                    <div class="media-card-body">
-                        <h4>Sports Day</h4>
-                        <p>28 Feb 2026 &bull; 65 photos</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #EF4444, #EC4899);"></div>
-                    <div class="media-card-body">
-                        <h4>Republic Day Celebration</h4>
-                        <p>26 Jan 2026 &bull; 28 photos</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #8B5CF6, #A855F7);"></div>
-                    <div class="media-card-body">
-                        <h4>Art Competition</h4>
-                        <p>15 Jan 2026 &bull; 40 photos</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #06B6D4, #3B82F6);"></div>
-                    <div class="media-card-body">
-                        <h4>Christmas Celebrations</h4>
-                        <p>24 Dec 2025 &bull; 55 photos</p>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-primary">+ Upload Media</button>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="media-tabs">
+                    <div class="media-tab active" onclick="switchMediaTab('photos', this)">Photos</div>
+                    <div class="media-tab" onclick="switchMediaTab('videos', this)">Videos</div>
+                </div>
 
-        <!-- Videos Tab -->
-        <div class="media-tab-content" id="media-videos" style="display: none;">
-            <div class="section-toolbar">
-                <span></span>
-                <button class="btn btn-primary">+ Upload Video</button>
-            </div>
-            <div class="media-grid">
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #1E293B, #334155);">
-                        <div class="play-btn">&#9654;</div>
-                    </div>
-                    <div class="media-card-body">
-                        <h4>Annual Day Highlights</h4>
-                        <p>12 Mar 2026 &bull; 8:24 min</p>
+                <!-- Photos Panel -->
+                <div class="media-panel active" id="media-photos">
+                    <div class="media-grid">
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Annual Day">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Annual Day Celebrations</div>
+                                <div class="media-card-date">15 Jan 2026</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="Science Fair">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Science Fair 2026</div>
+                                <div class="media-card-date">20 Feb 2026</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=400" alt="Sports Day">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Sports Day</div>
+                                <div class="media-card-date">05 Dec 2025</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400" alt="Classroom">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Classroom Activities</div>
+                                <div class="media-card-date">10 Mar 2026</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Field Trip">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Field Trip - Nandi Hills</div>
+                                <div class="media-card-date">28 Feb 2026</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400" alt="Republic Day">
+                            <div class="media-card-body">
+                                <div class="media-card-title">Republic Day Parade</div>
+                                <div class="media-card-date">26 Jan 2026</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #1E293B, #334155);">
-                        <div class="play-btn">&#9654;</div>
-                    </div>
-                    <div class="media-card-body">
-                        <h4>Science Exhibition Walkthrough</h4>
-                        <p>05 Mar 2026 &bull; 12:15 min</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #1E293B, #334155);">
-                        <div class="play-btn">&#9654;</div>
-                    </div>
-                    <div class="media-card-body">
-                        <h4>Sports Day Ceremony</h4>
-                        <p>28 Feb 2026 &bull; 15:30 min</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-thumb" style="background: linear-gradient(135deg, #1E293B, #334155);">
-                        <div class="play-btn">&#9654;</div>
-                    </div>
-                    <div class="media-card-body">
-                        <h4>School Campus Tour</h4>
-                        <p>10 Jan 2026 &bull; 6:45 min</p>
+
+                <!-- Videos Panel -->
+                <div class="media-panel" id="media-videos">
+                    <div class="media-grid">
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Annual Day Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">Annual Day - Full Show</div>
+                                <div class="media-card-date">15 Jan 2026 - 45:30</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="Science Fair Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">Science Fair Highlights</div>
+                                <div class="media-card-date">20 Feb 2026 - 12:15</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=400" alt="Sports Day Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">Sports Day Recap</div>
+                                <div class="media-card-date">05 Dec 2025 - 22:40</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400" alt="Classroom Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">A Day in the Classroom</div>
+                                <div class="media-card-date">10 Mar 2026 - 08:22</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Field Trip Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">Field Trip Adventures</div>
+                                <div class="media-card-date">28 Feb 2026 - 15:10</div>
+                            </div>
+                        </div>
+                        <div class="media-card">
+                            <div class="video-thumb">
+                                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400" alt="Republic Day Video">
+                                <div class="play-overlay">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                </div>
+                            </div>
+                            <div class="media-card-body">
+                                <div class="media-card-title">Republic Day Ceremony</div>
+                                <div class="media-card-date">26 Jan 2026 - 30:05</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECTION: Settings -->
-    <!-- ============================================ -->
+    <!-- ===== Notice Board Section ===== -->
+    <div class="content-section" id="section-notices">
+        <div class="page-header">
+            <div>
+                <div class="page-title">Notice Board</div>
+                <div class="page-subtitle">Announcements and circulars</div>
+            </div>
+            <button class="btn btn-primary">+ Post Notice</button>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Posted By</th><th>Priority</th></tr></thead>
+                        <tbody>
+                            <tr><td>15 Mar 2026</td><td>Annual Day Rehearsal Schedule</td><td>Event</td><td>Principal</td><td><span class="badge badge-red">Urgent</span></td></tr>
+                            <tr><td>14 Mar 2026</td><td>PTM - Grade 6 to 10</td><td>Academic</td><td>Vice Principal</td><td><span class="badge badge-yellow">Important</span></td></tr>
+                            <tr><td>12 Mar 2026</td><td>Holiday Notice - Holi</td><td>Holiday</td><td>Admin</td><td><span class="badge badge-blue">Info</span></td></tr>
+                            <tr><td>10 Mar 2026</td><td>Science Lab Safety Guidelines</td><td>Circular</td><td>HOD Science</td><td><span class="badge badge-blue">Info</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Settings Section ===== -->
     <div class="content-section" id="section-settings">
         <div class="page-header">
-            <h1>Settings</h1>
-            <p>Manage your profile, school settings, and notification preferences.</p>
-        </div>
-
-        <!-- Profile Settings -->
-        <div class="settings-section">
-            <h3>Profile Settings</h3>
-            <div class="settings-grid">
-                <div class="form-group">
-                    <label>Admin Name</label>
-                    <input type="text" value="Raghunandan Mali">
-                </div>
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" value="admin@vidhyashilp.edu">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" value="+91 98765 43210">
-                </div>
+            <div>
+                <div class="page-title">Settings</div>
+                <div class="page-subtitle">System configuration and preferences</div>
             </div>
         </div>
-
-        <!-- School Settings -->
-        <div class="settings-section">
-            <h3>School Settings</h3>
-            <div class="settings-grid">
-                <div class="form-group">
-                    <label>School Name</label>
-                    <input type="text" value="Vidhyashilp Academy">
+        <div class="card">
+            <div class="card-header"><span class="card-title">School Information</span></div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">School Name</label>
+                        <input class="form-input" type="text" value="Vidyashilp International School">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Affiliation</label>
+                        <input class="form-input" type="text" value="CBSE - 830456">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input class="form-input" type="email" value="admin@vidyashilp.edu.in">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input class="form-input" type="tel" value="+91 80 2345 6789">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>School Address</label>
-                    <input type="text" value="No. 42, MG Road, Bangalore - 560001">
+                    <label class="form-label">Address</label>
+                    <input class="form-input" type="text" value="No. 42, Vidyashilp Nagar, Yelahanka, Bangalore - 560064">
                 </div>
-                <div class="form-group">
-                    <label>School Phone</label>
-                    <input type="tel" value="+91 80 2345 6789">
-                </div>
-                <div class="form-group">
-                    <label>School Email</label>
-                    <input type="email" value="info@vidhyashilp.edu">
+                <div class="mt-16">
+                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-outline" style="margin-left: 8px;">Reset</button>
                 </div>
             </div>
         </div>
-
-        <!-- Notification Preferences -->
-        <div class="settings-section">
-            <h3>Notification Preferences</h3>
-            <div class="toggle-row">
-                <div>
-                    <div class="toggle-label">Email Notifications</div>
-                    <div class="toggle-desc">Receive important updates via email</div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Academic Year Settings</span></div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Current Academic Year</label>
+                        <input class="form-input" type="text" value="2025-2026">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Term</label>
+                        <select class="form-input">
+                            <option>Term 1 (June - October)</option>
+                            <option selected>Term 2 (November - March)</option>
+                        </select>
+                    </div>
                 </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-            <div class="toggle-row">
-                <div>
-                    <div class="toggle-label">SMS Notifications</div>
-                    <div class="toggle-desc">Get SMS alerts for critical actions</div>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-            <div class="toggle-row">
-                <div>
-                    <div class="toggle-label">Push Notifications</div>
-                    <div class="toggle-desc">Browser push notifications for real-time updates</div>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox">
-                    <span class="toggle-slider"></span>
-                </label>
             </div>
         </div>
-
-        <button class="btn btn-primary" style="margin-top: 4px;">Save Changes</button>
     </div>
 
 </main>
 
 <script>
-    /* ===== Sidebar Toggle (mobile) ===== */
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const hamburger = document.getElementById('hamburger');
-
-    hamburger.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('show');
-    });
-    overlay.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-        overlay.classList.remove('show');
-    });
-
-    /* ===== Collapsible Sub-menus ===== */
-    function toggleSub(btn) {
-        const item = btn.closest('.nav-item');
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.nav-item.has-sub.open').forEach(el => {
-            if (el !== item) el.classList.remove('open');
-        });
-        item.classList.toggle('open', !wasOpen);
+    // ===== Sidebar Toggle (mobile) =====
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('show');
     }
 
-    /* ===== Section Navigation ===== */
-    function showSection(sectionId, clickedLink) {
+    // ===== Show Content Section =====
+    // This ONLY changes the main content area. The navbar is NEVER touched.
+    function showSection(sectionId, clickedItem) {
         // Hide all sections
         document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-
         // Show target section
         const target = document.getElementById('section-' + sectionId);
         if (target) target.classList.add('active');
 
-        // Update sidebar active state
-        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-        document.querySelectorAll('.sub-menu a').forEach(a => a.classList.remove('active'));
-
-        if (clickedLink) {
-            // Check if it's a sub-menu link
-            const subMenu = clickedLink.closest('.sub-menu');
-            if (subMenu) {
-                clickedLink.classList.add('active');
-                subMenu.closest('.nav-item').classList.add('active');
-            } else {
-                clickedLink.closest('.nav-item').classList.add('active');
-            }
-        }
+        // Update sidebar active states
+        document.querySelectorAll('.sidebar-item, .sidebar-sub-item').forEach(i => i.classList.remove('active'));
+        if (clickedItem) clickedItem.classList.add('active');
 
         // Close sidebar on mobile
         if (window.innerWidth <= 768) {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('show');
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
         }
-
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ===== Media Tab Switching ===== */
-    function switchMediaTab(tab, btn) {
+    // ===== Toggle Submenu =====
+    function toggleSubmenu(menuId, parentItem) {
+        const menu = document.getElementById(menuId);
+        const isOpen = menu.classList.contains('open');
+
+        // Close all submenus first
+        document.querySelectorAll('.sidebar-submenu').forEach(m => m.classList.remove('open'));
+        document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('expanded'));
+
+        if (!isOpen) {
+            menu.classList.add('open');
+            parentItem.classList.add('expanded');
+        }
+    }
+
+    // ===== Media Tab Switching =====
+    function switchMediaTab(tabId, clickedTab) {
         document.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('media-photos').style.display = tab === 'photos' ? 'block' : 'none';
-        document.getElementById('media-videos').style.display = tab === 'videos' ? 'block' : 'none';
+        document.querySelectorAll('.media-panel').forEach(p => p.classList.remove('active'));
+        clickedTab.classList.add('active');
+        document.getElementById('media-' + tabId).classList.add('active');
     }
-
-    /* ===== Fee Collection Bar Chart ===== */
-    const feeData = [
-        { month: 'Jan', value: 1340000 },
-        { month: 'Feb', value: 1150000 },
-        { month: 'Mar', value: 1245000 },
-        { month: 'Apr', value: 980000 },
-        { month: 'May', value: 1120000 },
-        { month: 'Jun', value: 870000 },
-    ];
-
-    const maxVal = Math.max(...feeData.map(d => d.value));
-    const chart = document.getElementById('feeChart');
-
-    feeData.forEach((d, i) => {
-        const pct = (d.value / maxVal) * 100;
-        const wrap = document.createElement('div');
-        wrap.className = 'chart-bar-wrap';
-
-        const bar = document.createElement('div');
-        bar.className = 'chart-bar';
-        bar.style.height = '0%';
-        bar.style.background = i === 0
-            ? 'linear-gradient(180deg, #3B82F6, #6366F1)'
-            : 'linear-gradient(180deg, #93C5FD, #BFDBFE)';
-
-        const tooltip = document.createElement('span');
-        tooltip.className = 'tooltip';
-        tooltip.textContent = '\u20B9' + (d.value / 100000).toFixed(1) + 'L';
-        bar.appendChild(tooltip);
-
-        const label = document.createElement('div');
-        label.className = 'chart-label';
-        label.textContent = d.month;
-
-        wrap.appendChild(bar);
-        wrap.appendChild(label);
-        chart.appendChild(wrap);
-
-        requestAnimationFrame(() => {
-            setTimeout(() => { bar.style.height = pct + '%'; }, 80 * i);
-        });
-    });
 </script>
 </body>
 </html>

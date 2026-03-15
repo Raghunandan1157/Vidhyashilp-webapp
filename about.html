@@ -26,153 +26,255 @@
             background: #fff;
         }
 
-        /* ---- Navbar ---- */
-        .navbar {
+        /* ===== HEADER ===== */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 48px;
-            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+            padding: 12px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .navbar.scrolled {
-            background: rgba(23, 69, 207, 0.97);
-            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .navbar__logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .navbar__right {
+        .header-brand {
             display: flex;
             align-items: center;
-            gap: 28px;
-        }
-
-        .navbar__links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
-
-        .navbar__links a {
-            color: rgba(255,255,255,0.9);
+            gap: 12px;
             text-decoration: none;
-            font-size: 0.95rem;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .header-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1745cf;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .header-brand-sub {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header-nav a {
+            font-size: 15px;
+            color: #475569;
+            text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
+            position: relative;
         }
 
-        .navbar__links a:hover,
-        .navbar__links a.active {
-            color: #fff;
+        .header-nav a:hover,
+        .header-nav a.active {
+            color: #1745cf;
         }
 
-        .navbar__links a.active {
-            border-bottom: 2px solid #fff;
-            padding-bottom: 2px;
+        .header-nav a.active {
+            font-weight: 700;
         }
 
-        .navbar__cta {
+        .header-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #1745cf;
+            border-radius: 2px;
+        }
+
+        .header-buttons {
             display: flex;
-            gap: 12px;
+            align-items: center;
+            gap: 10px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 0.9rem;
+        .btn-portal {
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
+            cursor: pointer;
             text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-            font-family: 'Inter', sans-serif;
+            transition: background 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            background: #fff;
         }
 
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        .btn-portal:hover {
+            border-color: #1745cf;
+            color: #1745cf;
         }
 
-        .btn--outline {
+        .btn-portal-primary {
+            background: #1745cf;
             color: #fff;
-            border: 2px solid #fff;
-            background: transparent;
+            border: 1px solid #1745cf;
         }
 
-        .btn--outline:hover {
-            background: rgba(255,255,255,0.12);
+        .btn-portal-primary:hover {
+            background: #1335a8;
+            box-shadow: 0 2px 8px rgba(23, 69, 207, 0.25);
         }
 
-        .btn--orange {
-            background: #FF8400;
-            color: #fff;
-        }
-
-        .btn--orange:hover {
-            background: #e67700;
-        }
-
-        /* Mobile menu toggle */
-        .navbar__toggle {
+        /* Hamburger */
+        .hamburger {
             display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
             flex-direction: column;
             gap: 5px;
-            z-index: 1001;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+            z-index: 1100;
         }
 
-        .navbar__toggle span {
+        .hamburger span {
             display: block;
-            width: 26px;
-            height: 3px;
-            background: #fff;
+            width: 24px;
+            height: 2px;
+            background: #0f172a;
             border-radius: 2px;
             transition: transform 0.3s, opacity 0.3s;
         }
 
-        .navbar__toggle.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        .navbar__toggle.active span:nth-child(2) {
+        .hamburger.open span:nth-child(2) {
             opacity: 0;
         }
 
-        .navbar__toggle.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* Overlay for mobile menu */
-        .navbar__overlay {
+        /* Mobile overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.show {
+            opacity: 1;
+        }
+
+        .mobile-menu {
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 998;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: #fff;
+            z-index: 1050;
+            padding: 80px 24px 32px;
+            flex-direction: column;
+            gap: 8px;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar__overlay.active {
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu a {
             display: block;
+            padding: 12px 16px;
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            background: #1745cf19;
+            color: #1745cf;
+        }
+
+        .mobile-menu a.active {
+            font-weight: 700;
+        }
+
+        .mobile-menu .mobile-portal-btn {
+            margin-top: 8px;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+        }
+
+        .mobile-menu .mobile-portal-btn.outline {
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            background: #fff;
+        }
+
+        .mobile-menu .mobile-portal-btn.primary {
+            background: #1745cf;
+            color: #fff;
         }
 
         /* ---- Hero Banner ---- */
@@ -184,20 +286,15 @@
             justify-content: center;
             text-align: center;
             padding: 140px 48px 80px;
-            background: linear-gradient(135deg, #1745cf 0%, #0f2e8a 50%, #0a1f5c 100%);
+            background: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover no-repeat;
             overflow: hidden;
         }
 
         .hero-banner::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400"><circle cx="200" cy="100" r="300" fill="rgba(255,255,255,0.03)"/><circle cx="1200" cy="300" r="250" fill="rgba(255,255,255,0.02)"/><circle cx="700" cy="50" r="150" fill="rgba(255,255,255,0.04)"/></svg>');
-            background-size: cover;
-            pointer-events: none;
+            inset: 0;
+            background: rgba(23, 69, 207, 0.75);
         }
 
         .hero-banner__content {
@@ -258,10 +355,6 @@
             line-height: 1.7;
         }
 
-        .section-title-left {
-            text-align: left;
-        }
-
         /* ---- Our Story ---- */
         .story-grid {
             display: grid;
@@ -282,29 +375,14 @@
             width: 100%;
             height: 400px;
             border-radius: 16px;
-            background: linear-gradient(135deg, #1745cf 0%, #6366f1 50%, #818cf8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             overflow: hidden;
         }
 
-        .story-image::after {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border: 3px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .story-image-icon {
-            font-size: 48px;
-            color: rgba(255,255,255,0.6);
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
         }
 
         .stats-row {
@@ -499,65 +577,125 @@
             line-height: 1.7;
         }
 
-        /* ---- Footer ---- */
+        /* ===== FOOTER ===== */
         .footer {
             background: #0f172a;
             color: #cbd5e1;
-            padding: 64px 48px 0;
+            padding: 64px 0 0;
         }
 
-        .footer__inner {
+        .footer .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
             gap: 48px;
+            padding-bottom: 40px;
         }
 
-        .footer__brand h4 {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-        }
-
-        .footer__brand p {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #94a3b8;
-        }
-
-        .footer__links h5 {
-            color: #fff;
-            font-size: 1rem;
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 16px;
         }
 
-        .footer__links ul {
-            list-style: none;
+        .footer-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .footer__links a {
+        .footer-brand-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .footer-brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #94a3b8;
+        }
+
+        .footer h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
             color: #94a3b8;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 14px;
             transition: color 0.2s;
         }
 
-        .footer__links a:hover {
+        .footer-links a:hover {
             color: #fff;
         }
 
-        .footer__bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 0;
-            margin-top: 48px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        .footer-contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: #94a3b8;
+            align-items: flex-start;
+        }
+
+        .footer-contact-item svg {
+            width: 18px;
+            height: 18px;
+            fill: #64748b;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .footer-contact-item a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-contact-item a:hover {
+            color: #fff;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-bottom {
             text-align: center;
-            font-size: 0.85rem;
+            padding: 20px 0;
+            font-size: 13px;
             color: #64748b;
         }
 
@@ -580,52 +718,32 @@
         .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
 
         /* ---- Responsive ---- */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 14px 20px;
+        @media (max-width: 1024px) {
+            .header-nav,
+            .header-buttons {
+                display: none;
             }
 
-            .navbar__toggle {
+            .hamburger {
                 display: flex;
             }
 
-            .navbar__right {
-                position: fixed;
-                top: 0;
-                right: -300px;
-                width: 280px;
-                height: 100vh;
-                background: #1745cf;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 80px 28px 28px;
-                gap: 32px;
-                z-index: 999;
-                transition: right 0.35s ease;
+            .mobile-menu,
+            .mobile-overlay {
+                display: block;
             }
 
-            .navbar__right.open {
-                right: 0;
+            .mobile-menu {
+                display: flex;
             }
 
-            .navbar__links {
-                flex-direction: column;
-                gap: 16px;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
             }
+        }
 
-            .navbar__links a {
-                font-size: 1.1rem;
-            }
-
-            .navbar__cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .navbar__cta .btn {
-                text-align: center;
-            }
-
+        @media (max-width: 768px) {
             .hero-banner {
                 padding: 120px 20px 60px;
                 min-height: auto;
@@ -676,13 +794,8 @@
                 gap: 16px;
             }
 
-            .footer {
-                padding: 48px 20px 0;
-            }
-
-            .footer__inner {
-                grid-template-columns: 1fr;
-                gap: 28px;
+            .header-inner {
+                padding: 10px 16px;
             }
         }
 
@@ -697,11 +810,6 @@
 
             .values-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-
-            .footer__inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 32px;
             }
         }
 
@@ -726,32 +834,63 @@
                 padding: 32px 24px;
             }
         }
+
+        @media (max-width: 380px) {
+            .header-brand-name {
+                font-size: 15px;
+            }
+
+            .header-brand-sub {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <a href="index.html" class="navbar__logo">Vidyashilp International School</a>
-        <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="navbar__right" id="navMenu">
-            <ul class="navbar__links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="index.html#parents">For Parents</a></li>
-                <li><a href="index.html#staff">For Staff</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <div class="navbar__cta">
-                <a href="parent-login.html" class="btn btn--outline">Parent Login</a>
-                <a href="staff-login.html" class="btn btn--orange">Staff Login</a>
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="header-brand">
+                <div class="header-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                </div>
+                <div class="header-brand-text">
+                    <span class="header-brand-name">VIDYASHILP</span>
+                    <span class="header-brand-sub">International School Haveri</span>
+                </div>
+            </a>
+            <nav class="header-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header-buttons">
+                <a href="parent-login.html" class="btn-portal">Parent Portal</a>
+                <a href="staff-login.html" class="btn-portal btn-portal-primary">Staff Portal</a>
             </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <div class="navbar__overlay" id="navOverlay"></div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="contact.html">Contact</a>
+        <a href="parent-login.html" class="mobile-portal-btn outline">Parent Portal</a>
+        <a href="staff-login.html" class="mobile-portal-btn primary">Staff Portal</a>
     </nav>
 
     <!-- Hero Banner -->
@@ -772,7 +911,7 @@
                     <p>In 2024, we proudly rebranded as Vidyashilp International School, reflecting our expanded vision of preparing students for the global stage. This transformation was guided by the Navachetana Foundation, which continues to invest in educational innovation, teacher training, and infrastructure development.</p>
                 </div>
                 <div class="story-image">
-                    <svg class="story-image-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=800" alt="Vidyashilp International School Campus">
                 </div>
             </div>
             <div class="stats-row">
@@ -826,10 +965,10 @@
             <h2 class="section-title" style="margin-bottom: 48px;">Leadership</h2>
             <div class="leaders-grid">
                 <div class="leader-card animate-on-scroll">
-                    <div class="leader-avatar leader-avatar--blue">RK</div>
-                    <div class="leader-name">Dr. Rajesh Kulkarni</div>
+                    <div class="leader-avatar leader-avatar--blue">NM</div>
+                    <div class="leader-name">Nagendra V Mali</div>
                     <div class="leader-role">Chairman, Navachetana Foundation</div>
-                    <p class="leader-bio">Visionary leader with 25+ years in education, driving the mission to transform learning across North Karnataka.</p>
+                    <p class="leader-bio">Visionary leader and founder of Navachetana Foundation, dedicated to transforming education in North Karnataka through innovation and community empowerment.</p>
                 </div>
                 <div class="leader-card animate-on-scroll delay-2">
                     <div class="leader-avatar leader-avatar--purple">SH</div>
@@ -899,89 +1038,92 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <h4>Vidyashilp International School</h4>
-                <p>Empowering education through innovation. A premier educational institution in Haveri committed to nurturing young minds through academic excellence and holistic development.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-brand-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        </div>
+                        <span class="footer-brand-name">VIDYASHILP</span>
+                    </div>
+                    <p class="footer-desc">Vidyashilp International School Haveri — Leading international school committed to academic excellence and the holistic development of every child in a technologically advanced environment.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="infrastructure.html">Infrastructure</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Portals</h4>
+                    <ul class="footer-links">
+                        <li><a href="parent-login.html">Parent Login</a></li>
+                        <li><a href="staff-login.html">Staff Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Us</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <a href="tel:+919876543210">+91 98765 43210</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer__links">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="index.html#parents">For Parents</a></li>
-                    <li><a href="index.html#staff">For Staff</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                &copy; 2025 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
             </div>
-            <div class="footer__links">
-                <h5>Portals</h5>
-                <ul>
-                    <li><a href="parent-login.html">Parent Login</a></li>
-                    <li><a href="staff-login.html">Staff Login</a></li>
-                </ul>
-            </div>
-            <div class="footer__links">
-                <h5>Contact</h5>
-                <ul>
-                    <li><a href="mailto:info@vidyashilp.edu">info@vidyashilp.edu</a></li>
-                    <li><a href="tel:+918012345678">+91 80 1234 5678</a></li>
-                    <li><a href="index.html#contact">Haveri, Karnataka</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            &copy; 2026 Vidyashilp International School. All rights reserved.
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
+        // Sticky header
+        const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
-        });
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-
-        // Mobile menu toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        const navOverlay = document.getElementById('navOverlay');
-
-        function openMenu() {
-            navMenu.classList.add('open');
-            navToggle.classList.add('active');
-            navOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu() {
-            navMenu.classList.remove('open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        navToggle.addEventListener('click', () => {
-            if (navMenu.classList.contains('open')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+            header.classList.toggle('scrolled', window.scrollY > 20);
         });
 
-        navOverlay.addEventListener('click', closeMenu);
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
 
-        // Close menu when a link is clicked
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
+        function toggleMenu() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            mobileOverlay.classList.toggle('show');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) toggleMenu();
+            });
         });
 
         // Close menu on Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeMenu();
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) toggleMenu();
         });
 
         // Scroll animations via IntersectionObserver

@@ -42,129 +42,169 @@
             background: #fff;
         }
 
-        /* Header */
+        /* ===== HEADER ===== */
         .header {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
             background: #fff;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
         }
 
         .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 72px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 12px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .brand {
+        .header-brand {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .brand-icon {
-            width: 42px;
-            height: 42px;
-            background: var(--primary);
-            border-radius: var(--radius-icon);
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
 
-        .brand-icon svg {
+        .header-icon svg {
             width: 22px;
             height: 22px;
             fill: #fff;
         }
 
-        .brand-text {
+        .header-brand-text {
             display: flex;
             flex-direction: column;
+        }
+
+        .header-brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1745cf;
+            letter-spacing: 1px;
             line-height: 1.2;
         }
 
-        .brand-name {
-            font-weight: 800;
-            font-size: 16px;
-            color: var(--primary);
-            letter-spacing: 0.5px;
-        }
-
-        .brand-sub {
+        .header-brand-sub {
             font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
+            color: #64748b;
+            line-height: 1.3;
         }
 
-        .nav {
+        .header-nav {
             display: flex;
             align-items: center;
             gap: 32px;
         }
 
-        .nav a {
+        .header-nav a {
+            font-size: 15px;
+            color: #475569;
             text-decoration: none;
-            font-size: 14px;
             font-weight: 500;
-            color: var(--text-body);
             transition: color 0.2s;
+            position: relative;
         }
 
-        .nav a:hover,
-        .nav a.active {
-            color: var(--primary);
+        .header-nav a:hover,
+        .header-nav a.active {
+            color: #1745cf;
+        }
+
+        .header-nav a.active {
             font-weight: 700;
         }
 
-        .btn-enquire {
-            display: inline-flex;
+        .header-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #1745cf;
+            border-radius: 2px;
+        }
+
+        .header-buttons {
+            display: flex;
             align-items: center;
-            padding: 10px 24px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 14px;
+            gap: 10px;
+        }
+
+        .btn-portal {
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
-            border: none;
-            border-radius: var(--radius-btn);
             cursor: pointer;
             text-decoration: none;
-            transition: opacity 0.2s;
+            transition: background 0.2s, box-shadow 0.2s;
             white-space: nowrap;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            background: #fff;
         }
 
-        .btn-enquire:hover {
-            opacity: 0.9;
+        .btn-portal:hover {
+            border-color: #1745cf;
+            color: #1745cf;
         }
 
+        .btn-portal-primary {
+            background: #1745cf;
+            color: #fff;
+            border: 1px solid #1745cf;
+        }
+
+        .btn-portal-primary:hover {
+            background: #1335a8;
+            box-shadow: 0 2px 8px rgba(23, 69, 207, 0.25);
+        }
+
+        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 5px;
-            background: none;
-            border: none;
             cursor: pointer;
             padding: 4px;
+            background: none;
+            border: none;
+            z-index: 1100;
         }
 
         .hamburger span {
             display: block;
             width: 24px;
             height: 2px;
-            background: var(--text-dark);
+            background: #0f172a;
             border-radius: 2px;
             transition: transform 0.3s, opacity 0.3s;
         }
 
         .hamburger.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .hamburger.open span:nth-child(2) {
@@ -172,48 +212,85 @@
         }
 
         .hamburger.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.show {
+            opacity: 1;
         }
 
         .mobile-menu {
             display: none;
-            position: absolute;
-            top: 72px;
-            left: 0;
-            right: 0;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
             background: #fff;
-            border-bottom: 1px solid var(--border-light);
-            padding: 16px 24px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            z-index: 1050;
+            padding: 80px 24px 32px;
+            flex-direction: column;
+            gap: 8px;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
         }
 
         .mobile-menu.open {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            right: 0;
         }
 
         .mobile-menu a {
+            display: block;
+            padding: 12px 16px;
+            color: #0f172a;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
-            color: var(--text-body);
-            padding: 10px 12px;
-            border-radius: var(--radius-btn);
+            border-radius: 8px;
             transition: background 0.2s;
         }
 
         .mobile-menu a:hover,
         .mobile-menu a.active {
-            color: var(--primary);
-            background: var(--primary-light);
+            background: #1745cf19;
+            color: #1745cf;
+        }
+
+        .mobile-menu a.active {
             font-weight: 700;
         }
 
-        .mobile-menu .btn-enquire {
+        .mobile-menu .mobile-portal-btn {
             margin-top: 8px;
             text-align: center;
-            justify-content: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+        }
+
+        .mobile-menu .mobile-portal-btn.outline {
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            background: #fff;
+        }
+
+        .mobile-menu .mobile-portal-btn.primary {
+            background: #1745cf;
+            color: #fff;
         }
 
         /* Hero */
@@ -224,15 +301,16 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #e8ecfa 0%, #dce3f9 50%, #cedafc 100%);
+            background: url('https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=800') center/cover no-repeat;
             overflow: hidden;
+            margin-top: 65px;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.75);
         }
 
         .hero-content {
@@ -344,17 +422,12 @@
             border-radius: var(--radius-card);
             overflow: hidden;
             aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #dce3f9 0%, #c4d0f7 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .curriculum-image svg {
-            width: 80px;
-            height: 80px;
-            opacity: 0.3;
-            fill: var(--primary);
+        .curriculum-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Grade Levels */
@@ -531,63 +604,80 @@
             fill: var(--primary);
         }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         .footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 64px 24px 32px;
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 64px 0 0;
         }
 
-        .footer-inner {
+        .footer .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1.5fr;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
             gap: 48px;
-            margin-bottom: 48px;
+            padding-bottom: 40px;
         }
 
-        .footer-brand .brand-name {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .footer-brand .brand-sub {
-            color: var(--footer-text);
-            font-size: 13px;
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 16px;
-            display: block;
         }
 
-        .footer-brand p {
+        .footer-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .footer-brand-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .footer-brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
             font-size: 14px;
-            line-height: 1.7;
-            color: var(--footer-text);
+            line-height: 1.8;
+            color: #94a3b8;
         }
 
         .footer h4 {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 20px;
         }
 
         .footer-links {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
         }
 
         .footer-links a {
-            color: var(--footer-text);
+            color: #94a3b8;
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
@@ -597,56 +687,79 @@
             color: #fff;
         }
 
-        .footer-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
         .footer-contact-item {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 14px;
             font-size: 14px;
+            color: #94a3b8;
+            align-items: flex-start;
         }
 
         .footer-contact-item svg {
             width: 18px;
             height: 18px;
-            fill: var(--footer-text);
-            margin-top: 2px;
+            fill: #64748b;
             flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .footer-contact-item a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-contact-item a:hover {
+            color: #fff;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #1e293b;
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 24px;
             text-align: center;
+            padding: 20px 0;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #64748b;
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .header-nav,
+            .header-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu,
+            .mobile-overlay {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
             .grades-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .methodology-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-            .btn-enquire.desktop {
-                display: none;
-            }
-            .hamburger {
-                display: flex;
-            }
-
             .hero h1 {
                 font-size: 36px;
             }
@@ -688,15 +801,14 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
+            .header-inner {
+                padding: 10px 16px;
             }
         }
 
         @media (max-width: 480px) {
             .header-inner {
-                padding: 0 16px;
+                padding: 10px 16px;
             }
 
             .hero h1 {
@@ -715,24 +827,33 @@
                 padding: 24px 20px;
             }
         }
+
+        @media (max-width: 380px) {
+            .header-brand-name {
+                font-size: 15px;
+            }
+
+            .header-brand-sub {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header">
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
         <div class="header-inner">
-            <a href="index.html" class="brand">
-                <div class="brand-icon">
+            <a href="index.html" class="header-brand">
+                <div class="header-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
                 </div>
-                <div class="brand-text">
-                    <span class="brand-name">VIDYASHILP</span>
-                    <span class="brand-sub">International School Haveri</span>
+                <div class="header-brand-text">
+                    <span class="header-brand-name">VIDYASHILP</span>
+                    <span class="header-brand-sub">International School Haveri</span>
                 </div>
             </a>
-
-            <nav class="nav">
+            <nav class="header-nav">
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="academics.html" class="active">Academics</a>
@@ -740,26 +861,30 @@
                 <a href="infrastructure.html">Infrastructure</a>
                 <a href="contact.html">Contact</a>
             </nav>
-
-            <a href="contact.html" class="btn-enquire desktop">Enquire Now</a>
-
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <div class="header-buttons">
+                <a href="parent-login.html" class="btn-portal">Parent Portal</a>
+                <a href="staff-login.html" class="btn-portal btn-portal-primary">Staff Portal</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
         </div>
-
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="academics.html" class="active">Academics</a>
-            <a href="admissions.html">Admissions</a>
-            <a href="infrastructure.html">Infrastructure</a>
-            <a href="contact.html">Contact</a>
-            <a href="contact.html" class="btn-enquire">Enquire Now</a>
-        </div>
     </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="academics.html" class="active">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="contact.html">Contact</a>
+        <a href="parent-login.html" class="mobile-portal-btn outline">Parent Portal</a>
+        <a href="staff-login.html" class="mobile-portal-btn primary">Staff Portal</a>
+    </nav>
 
     <!-- Hero -->
     <section class="hero">
@@ -780,7 +905,7 @@
                     <p>Our curriculum emphasizes conceptual clarity, interdisciplinary connections, and practical application of knowledge, ensuring that our students are prepared for the challenges of the 21st century.</p>
                 </div>
                 <div class="curriculum-image">
-                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=800" alt="Classroom at Vidyashilp International School">
                 </div>
             </div>
         </div>
@@ -923,14 +1048,18 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <div class="footer-inner">
+        <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="brand-name">VIDYASHILP</div>
-                    <span class="brand-sub">International School Haveri</span>
-                    <p>Nurturing young minds with a blend of academic excellence, holistic development, and value-based education in a world-class learning environment.</p>
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-brand-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        </div>
+                        <span class="footer-brand-name">VIDYASHILP</span>
+                    </div>
+                    <p class="footer-desc">Vidyashilp International School Haveri — Leading international school committed to academic excellence and the holistic development of every child in a technologically advanced environment.</p>
                 </div>
                 <div>
                     <h4>Quick Links</h4>
@@ -940,53 +1069,71 @@
                         <li><a href="academics.html">Academics</a></li>
                         <li><a href="admissions.html">Admissions</a></li>
                         <li><a href="infrastructure.html">Infrastructure</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Portals</h4>
+                    <ul class="footer-links">
+                        <li><a href="parent-login.html">Parent Login</a></li>
+                        <li><a href="staff-login.html">Staff Login</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4>Contact Us</h4>
-                    <div class="footer-contact">
-                        <div class="footer-contact-item">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                            <span>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka, India</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                            <span>+91 98765 43210</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                            <span>info@vidyashilphaveri.edu.in</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
-                            <span>vidyashilphaveri.in</span>
-                        </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <a href="tel:+919876543210">+91 98765 43210</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a>
                     </div>
                 </div>
             </div>
+            <hr class="footer-divider">
             <div class="footer-bottom">
-                &copy; 2024 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
+                &copy; 2025 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
             </div>
         </div>
     </footer>
 
     <script>
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
+        // Sticky header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
         });
 
-        // Close mobile menu on link click
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            mobileOverlay.classList.toggle('show');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu on link click
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mobileMenu.classList.remove('open');
+                if (mobileMenu.classList.contains('open')) toggleMenu();
             });
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) toggleMenu();
         });
 
         // Scroll animations with IntersectionObserver

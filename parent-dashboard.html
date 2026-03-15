@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent Dashboard - Vidhyashilp Academy</title>
+    <title>Parent Dashboard - Vidyashilp International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -12,8 +15,8 @@
         }
 
         :root {
-            --primary: #1B4D8E;
-            --primary-light: #2563a8;
+            --primary: #1745cf;
+            --primary-light: #3b6de8;
             --accent: #FF8400;
             --success: #22C55E;
             --warning: #F59E0B;
@@ -31,13 +34,13 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
         }
 
-        /* ---- Navbar ---- */
+        /* ---- Navbar (FIXED - never changes) ---- */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -76,18 +79,51 @@
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--primary);
             letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .logo span { color: var(--accent); }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
 
         .navbar-right {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
+        }
+
+        .back-to-website {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .back-to-website:hover {
+            background: var(--bg);
+            color: var(--primary);
         }
 
         .notification-btn {
@@ -171,6 +207,7 @@
             align-items: center;
             gap: 6px;
             text-decoration: none;
+            font-family: inherit;
         }
 
         .logout-btn:hover {
@@ -263,7 +300,7 @@
         }
 
         .nav-item.active {
-            background: #EBF2FC;
+            background: #e8eefb;
             color: var(--primary);
             border-left-color: var(--primary);
             font-weight: 600;
@@ -300,7 +337,7 @@
 
         /* ---- Welcome Banner ---- */
         .welcome-banner {
-            background: linear-gradient(135deg, var(--primary) 0%, #2563a8 60%, #3b82f6 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #3b6de8 60%, #5b8ef5 100%);
             border-radius: var(--radius);
             padding: 28px 32px;
             color: var(--white);
@@ -308,7 +345,7 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 24px;
-            box-shadow: 0 4px 16px rgba(27,77,142,0.25);
+            box-shadow: 0 4px 16px rgba(23,69,207,0.25);
             position: relative;
             overflow: hidden;
         }
@@ -656,7 +693,7 @@
 
         .custom-select:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(27,77,142,0.1);
+            box-shadow: 0 0 0 3px rgba(23,69,207,0.1);
         }
 
         /* ---- Two Column Layout ---- */
@@ -822,6 +859,7 @@
             cursor: pointer;
             padding: 4px 0;
             margin-top: 4px;
+            font-family: inherit;
         }
 
         .read-more-btn:hover {
@@ -901,13 +939,11 @@
             box-shadow: var(--shadow-md);
         }
 
-        .photo-placeholder {
+        .photo-card img {
+            width: 100%;
             height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.7);
-            font-size: 40px;
+            object-fit: cover;
+            display: block;
         }
 
         .photo-info {
@@ -948,12 +984,31 @@
             box-shadow: var(--shadow-md);
         }
 
-        .video-placeholder {
+        .video-thumbnail {
+            position: relative;
             height: 200px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .play-btn-overlay {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            background: rgba(0,0,0,0.25);
+            transition: background 0.2s;
+        }
+
+        .video-card:hover .play-btn-overlay {
+            background: rgba(0,0,0,0.4);
         }
 
         .play-btn {
@@ -1080,8 +1135,20 @@
                 display: none;
             }
 
+            .back-to-website span {
+                display: none;
+            }
+
             .logo {
-                font-size: 17px;
+                font-size: 15px;
+            }
+
+            .logo .logo-full {
+                display: none;
+            }
+
+            .logo .logo-short {
+                display: inline;
             }
 
             .summary-grid, .att-summary-grid {
@@ -1096,6 +1163,12 @@
 
             .video-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .logo .logo-short {
+                display: none;
             }
         }
 
@@ -1126,6 +1199,7 @@
             font-weight: 500;
             color: var(--text-light);
             transition: all 0.2s;
+            font-family: inherit;
         }
 
         .day-tab:hover {
@@ -1202,15 +1276,23 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar">
+<!-- ========== NAVBAR (FIXED - NEVER CHANGES) ========== -->
+<nav class="navbar" id="staticNavbar">
     <div class="navbar-left">
         <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
             <span></span><span></span><span></span>
         </button>
-        <div class="logo">Vidhyashilp <span>Academy</span></div>
+        <div class="logo">
+            <div class="logo-icon">V</div>
+            <span class="logo-full">Vidyashilp International School</span>
+            <span class="logo-short">VIS</span>
+        </div>
     </div>
     <div class="navbar-right">
+        <a href="index.html" class="back-to-website" title="Back to Website">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Back to Website</span>
+        </a>
         <button class="notification-btn" title="Notifications">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             <span class="notification-badge">5</span>
@@ -1229,14 +1311,14 @@
 <!-- Sidebar Overlay -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- Sidebar -->
+<!-- ========== SIDEBAR (only changes main content, NOT navbar) ========== -->
 <aside class="sidebar" id="sidebar">
     <div class="student-info-header">
         <div class="student-avatar-sidebar">AS</div>
         <h4>Aarav Sharma</h4>
         <div class="student-details">
             Class: 8-A | Roll No: 15<br>
-            Admission No: VSA2024015
+            Admission No: VIS2024015
         </div>
     </div>
 
@@ -1276,7 +1358,7 @@
     </div>
 </aside>
 
-<!-- Main Content -->
+<!-- ========== MAIN CONTENT (only this area changes with sidebar clicks) ========== -->
 <main class="main-content">
 
     <!-- ===== TAB 1: DASHBOARD ===== -->
@@ -1750,7 +1832,7 @@
             <div class="circular-item">
                 <div class="circular-header">
                     <div>
-                        <div class="circular-title">Winter Break Notice</div>
+                        <div class="circular-title">Spring Break Notice</div>
                         <span class="badge badge-holiday" style="margin-top:6px;">Holiday</span>
                     </div>
                     <div class="circular-date">28 Feb 2026</div>
@@ -1919,7 +2001,7 @@
         </div>
     </section>
 
-    <!-- ===== TAB 7: PHOTOS ===== -->
+    <!-- ===== TAB 7: PHOTOS (with Unsplash demo images) ===== -->
     <section class="content-section" id="section-photos">
         <div class="section-card" style="background:transparent;box-shadow:none;padding:0;">
             <h3 style="margin-bottom:20px;">
@@ -1929,81 +2011,65 @@
         </div>
         <div class="photo-grid">
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#1B4D8E,#3b82f6);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Annual Day 2025" loading="lazy">
                 <div class="photo-info">
                     <h4>Annual Day 2025</h4>
                     <div class="photo-meta"><span>15 Dec 2025</span><span>24 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#16a34a,#22C55E);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="Science Fair" loading="lazy">
                 <div class="photo-info">
                     <h4>Science Fair</h4>
-                    <div class="photo-meta"><span>20 Nov 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>20 Nov 2025</span><span>18 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#dc2626,#f97316);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=400" alt="Sports Day" loading="lazy">
                 <div class="photo-info">
                     <h4>Sports Day</h4>
-                    <div class="photo-meta"><span>05 Nov 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>05 Nov 2025</span><span>32 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400" alt="Classroom Activities" loading="lazy">
                 <div class="photo-info">
                     <h4>Classroom Activities</h4>
-                    <div class="photo-meta"><span>18 Oct 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>18 Oct 2025</span><span>15 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Field Trip" loading="lazy">
                 <div class="photo-info">
                     <h4>Field Trip</h4>
-                    <div class="photo-meta"><span>01 Oct 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>01 Oct 2025</span><span>28 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#0d9488,#14b8a6);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400" alt="Independence Day" loading="lazy">
                 <div class="photo-info">
                     <h4>Independence Day</h4>
-                    <div class="photo-meta"><span>15 Aug 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>15 Aug 2025</span><span>20 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#be185d,#ec4899);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400" alt="Art Exhibition" loading="lazy">
                 <div class="photo-info">
                     <h4>Art Exhibition</h4>
-                    <div class="photo-meta"><span>28 Jul 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>28 Jul 2025</span><span>22 Photos</span></div>
                 </div>
             </div>
             <div class="photo-card">
-                <div class="photo-placeholder" style="background:linear-gradient(135deg,#0284c7,#38bdf8);">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </div>
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400" alt="Library Week" loading="lazy">
                 <div class="photo-info">
                     <h4>Library Week</h4>
-                    <div class="photo-meta"><span>10 Jul 2025</span><span>24 Photos</span></div>
+                    <div class="photo-meta"><span>10 Jul 2025</span><span>16 Photos</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== TAB 8: VIDEOS ===== -->
+    <!-- ===== TAB 8: VIDEOS (with Unsplash thumbnails + play overlay) ===== -->
     <section class="content-section" id="section-videos">
         <div class="section-card" style="background:transparent;box-shadow:none;padding:0;">
             <h3 style="margin-bottom:20px;">
@@ -2013,9 +2079,12 @@
         </div>
         <div class="video-grid">
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#1B4D8E,#3b82f6);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Annual Day Performance" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
@@ -2024,9 +2093,12 @@
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#16a34a,#4ade80);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="Science Project Demos" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
@@ -2035,9 +2107,12 @@
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#dc2626,#f97316);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=400" alt="Sports Day Highlights" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
@@ -2046,20 +2121,26 @@
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400" alt="Classroom Sessions" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
-                    <h4>Morning Assembly</h4>
+                    <h4>Classroom Sessions</h4>
                     <div class="video-meta"><span>10 Oct 2025</span><span>06:15</span></div>
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400" alt="Cultural Program" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
@@ -2068,9 +2149,12 @@
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder" style="background:linear-gradient(135deg,#0d9488,#2dd4bf);">
-                    <div class="play-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <div class="video-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400" alt="School Tour" loading="lazy">
+                    <div class="play-btn-overlay">
+                        <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="video-info">
@@ -2084,7 +2168,7 @@
 </main>
 
 <script>
-    // ===== Sidebar Navigation =====
+    // ===== Sidebar Navigation (ONLY changes main content, navbar stays static) =====
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
     const sidebar = document.getElementById('sidebar');
@@ -2095,15 +2179,19 @@
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const target = this.getAttribute('data-section');
+            // Update sidebar active state
             navItems.forEach(n => n.classList.remove('active'));
             this.classList.add('active');
+            // Switch ONLY main content sections - navbar is untouched
             sections.forEach(s => s.classList.remove('active'));
             document.getElementById('section-' + target).classList.add('active');
+            // Close mobile sidebar
             closeSidebar();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 
+    // Hamburger toggle for mobile
     hamburger.addEventListener('click', function() {
         sidebar.classList.toggle('open');
         overlay.classList.toggle('open');

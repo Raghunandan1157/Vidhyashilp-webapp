@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us – Vidyashilp International School Haveri</title>
+    <title>Contact Us - Vidyashilp International School Haveri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,207 +26,237 @@
             background: #fff;
         }
 
-        /* ---- Navbar ---- */
-        .navbar {
+        /* ---- Header ---- */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            transition: box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 48px;
-            background: transparent;
-            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+            height: 72px;
         }
 
-        .navbar.scrolled {
-            background: rgba(23, 69, 207, 0.97);
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
-            padding-top: 12px;
-            padding-bottom: 12px;
-        }
-
-        .navbar__logo {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-
-        .navbar__right {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 28px;
-        }
-
-        .navbar__links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
-
-        .navbar__links a {
-            color: rgba(255, 255, 255, 0.85);
+            gap: 10px;
             text-decoration: none;
-            font-size: 0.95rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1745cf;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .sub {
+            font-size: 0.7rem;
+            color: #64748b;
             font-weight: 500;
-            transition: color 0.2s;
-            padding: 4px 0;
         }
 
-        .navbar__links a:hover,
-        .navbar__links a.active {
-            color: #fff;
-        }
-
-        .navbar__links a.active {
-            border-bottom: 2px solid #fff;
-        }
-
-        .navbar__cta {
+        .nav {
             display: flex;
-            gap: 12px;
+            align-items: center;
+            gap: 4px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .nav a {
             text-decoration: none;
-            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav a:hover {
+            color: #1745cf;
+            background: #1745cf19;
+        }
+
+        .nav a.active {
+            color: #1745cf;
+            background: #1745cf19;
+            font-weight: 600;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-portal {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
             border: none;
-            font-family: 'Inter', sans-serif;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn:hover {
+        .btn-portal:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.2);
         }
 
-        .btn--primary {
+        .btn-parent {
             background: #1745cf;
             color: #fff;
         }
 
-        .btn--primary:hover {
-            background: #1339b0;
+        .btn-parent:hover {
+            background: #1338a8;
         }
 
-        .btn--outline-nav {
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            background: transparent;
+        .btn-staff {
+            background: #e2e8f0;
+            color: #0f172a;
         }
 
-        .btn--outline-nav:hover {
-            background: rgba(255, 255, 255, 0.12);
+        .btn-staff:hover {
+            background: #cbd5e1;
         }
 
-        .btn--outline {
-            color: #1745cf;
-            border: 2px solid #1745cf;
-            background: transparent;
-        }
-
-        .btn--outline:hover {
-            background: #1745cf19;
-        }
-
-        .btn--white {
-            background: #fff;
-            color: #1745cf;
-        }
-
-        .btn--white:hover {
-            background: #f0f4fa;
-        }
-
-        /* Mobile menu toggle */
-        .navbar__toggle {
+        .hamburger {
             display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
             flex-direction: column;
             gap: 5px;
-            z-index: 1001;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
         }
 
-        .navbar__toggle span {
+        .hamburger span {
             display: block;
-            width: 26px;
-            height: 3px;
-            background: #fff;
+            width: 24px;
+            height: 2.5px;
+            background: #0f172a;
             border-radius: 2px;
             transition: transform 0.3s, opacity 0.3s;
         }
 
-        .navbar__toggle.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        .navbar__toggle.active span:nth-child(2) {
+        .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
 
-        .navbar__toggle.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        .navbar__overlay {
+        /* ---- Mobile Nav Overlay ---- */
+        .mobile-nav {
             display: none;
             position: fixed;
-            top: 0;
+            top: 72px;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 998;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 16px 24px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            pointer-events: none;
         }
 
-        .navbar__overlay.active {
+        .mobile-nav.open {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
             display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            color: #1745cf;
+            background: #1745cf19;
+        }
+
+        .mobile-nav .btn-portal {
+            margin-top: 8px;
+            text-align: center;
+            justify-content: center;
         }
 
         /* ---- Hero Banner ---- */
         .hero {
+            margin-top: 72px;
             min-height: 420px;
-            background: linear-gradient(135deg, #1745cf 0%, #2b5fd9 50%, #1745cf 100%);
+            background: linear-gradient(135deg, rgba(23,69,207,0.75) 0%, rgba(43,95,217,0.8) 50%, rgba(23,69,207,0.75) 100%), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 140px 24px 80px;
+            padding: 80px 24px;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
-            top: -200px;
-            right: -150px;
-            border-radius: 50%;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
-            bottom: -100px;
-            left: -100px;
-            border-radius: 50%;
         }
 
         .hero__content {
@@ -449,6 +479,43 @@
             padding-right: 40px;
         }
 
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn--primary {
+            background: #1745cf;
+            color: #fff;
+        }
+
+        .btn--primary:hover {
+            background: #1339b0;
+        }
+
+        .btn--outline {
+            color: #1745cf;
+            border: 2px solid #1745cf;
+            background: transparent;
+        }
+
+        .btn--outline:hover {
+            background: #1745cf19;
+        }
+
         .btn--submit {
             width: 100%;
             padding: 14px 24px;
@@ -572,63 +639,72 @@
         /* ---- Footer ---- */
         .footer {
             background: #0f172a;
-            padding: 60px 24px 24px;
+            color: #cbd5e1;
+            padding: 64px 24px 32px;
         }
 
-        .footer__inner {
+        .footer-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 48px;
         }
 
-        .footer__brand h4 {
-            color: #fff;
+        .footer-brand .brand-name {
             font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
         }
 
-        .footer__brand p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
+        .footer-brand .brand-sub {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            color: #94a3b8;
             line-height: 1.7;
         }
 
-        .footer__links h5 {
+        .footer-col h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
             color: #fff;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .footer__links ul {
-            list-style: none;
-        }
-
-        .footer__links li {
-            margin-bottom: 8px;
-        }
-
-        .footer__links a {
-            color: #cbd5e1;
+        .footer-col a {
+            display: block;
+            font-size: 0.88rem;
+            color: #94a3b8;
             text-decoration: none;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
             transition: color 0.2s;
         }
 
-        .footer__links a:hover {
+        .footer-col a:hover {
             color: #fff;
         }
 
-        .footer__bottom {
-            text-align: center;
+        .footer-col p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
             padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            font-size: 0.82rem;
             color: #64748b;
-            font-size: 0.85rem;
         }
 
         /* ---- Animations ---- */
@@ -657,63 +733,23 @@
                 min-height: 400px;
             }
 
-            .footer__inner {
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 14px 20px;
+            .nav,
+            .header-buttons {
+                display: none;
             }
 
-            .navbar__toggle {
+            .hamburger {
                 display: flex;
             }
 
-            .navbar__right {
-                position: fixed;
-                top: 0;
-                right: -300px;
-                width: 280px;
-                height: 100vh;
-                background: #1745cf;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 80px 24px 24px;
-                gap: 24px;
-                transition: right 0.3s ease;
-                z-index: 999;
-                overflow-y: auto;
-            }
-
-            .navbar__right.open {
-                right: 0;
-            }
-
-            .navbar__links {
-                flex-direction: column;
-                gap: 4px;
-                width: 100%;
-            }
-
-            .navbar__links a {
-                display: block;
-                padding: 10px 0;
-                font-size: 1.05rem;
-            }
-
-            .navbar__cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .navbar__cta .btn {
-                text-align: center;
-            }
-
             .hero {
-                padding: 120px 20px 60px;
+                padding: 60px 20px;
                 min-height: 340px;
             }
 
@@ -749,38 +785,66 @@
                 font-size: 1.4rem;
             }
 
-            .footer__inner {
+            .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 28px;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner {
+                padding: 0 16px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <a href="index.html" class="navbar__logo">Vidyashilp International School</a>
-        <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="navbar__right" id="navMenu">
-            <ul class="navbar__links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#parents">For Parents</a></li>
-                <li><a href="index.html#staff">For Staff</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-            <div class="navbar__cta">
-                <a href="parent-login.html" class="btn btn--outline-nav">Parent Login</a>
-                <a href="staff-login.html" class="btn btn--white">Staff Login</a>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand">VIDYASHILP</span>
+                    <span class="sub">International School Haveri</span>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+
+            <div class="header-buttons">
+                <a href="parent-login.html" class="btn-portal btn-parent">Parent Portal</a>
+                <a href="staff-login.html" class="btn-portal btn-staff">Staff Portal</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <div class="navbar__overlay" id="navOverlay"></div>
-    </nav>
+
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="academics.html">Academics</a>
+            <a href="admissions.html">Admissions</a>
+            <a href="infrastructure.html">Infrastructure</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="parent-login.html" class="btn-portal btn-parent">Parent Portal</a>
+            <a href="staff-login.html" class="btn-portal btn-staff">Staff Portal</a>
+        </div>
+    </header>
 
     <!-- Hero Banner -->
     <section class="hero">
@@ -929,86 +993,63 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <h4>Vidyashilp International School Haveri</h4>
-                <p>Nurturing young minds with excellence in education, values, and holistic development. Shaping future leaders in the heart of Haveri.</p>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-name">VIDYASHILP</div>
+                <div class="brand-sub">International School Haveri</div>
+                <p>Empowering young minds with quality education, strong values, and a nurturing environment to build the leaders of tomorrow.</p>
             </div>
-            <div class="footer__links">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#parents">For Parents</a></li>
-                    <li><a href="index.html#staff">For Staff</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html">Contact Us</a>
             </div>
-            <div class="footer__links">
-                <h5>Portals</h5>
-                <ul>
-                    <li><a href="parent-login.html">Parent Login</a></li>
-                    <li><a href="staff-login.html">Staff Login</a></li>
-                    <li><a href="admissions.html">Admissions</a></li>
-                </ul>
+            <div class="footer-col">
+                <h4>Portals</h4>
+                <a href="parent-login.html">Parent Login</a>
+                <a href="staff-login.html">Staff Login</a>
             </div>
-            <div class="footer__links">
-                <h5>Contact</h5>
-                <ul>
-                    <li><a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a></li>
-                    <li><a href="tel:+919876543210">+91 98765 43210</a></li>
-                    <li><a href="#">Haveri, Karnataka</a></li>
-                </ul>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka</p>
+                <p>Phone: +91 98765 43210</p>
+                <p>Email: info@vidyashilphaveri.edu.in</p>
             </div>
         </div>
-        <div class="footer__bottom">
-            &copy; 2026 Vidyashilp International School Haveri. All rights reserved.
+        <div class="footer-bottom">
+            &copy; 2025 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
         </div>
     </footer>
 
     <script>
-        // ---- Navbar scroll effect ----
-        const navbar = document.getElementById('navbar');
-        function checkScroll() {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
-        }
-        window.addEventListener('scroll', checkScroll);
-        checkScroll();
-
-        // ---- Mobile menu toggle ----
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        const navOverlay = document.getElementById('navOverlay');
-
-        function openMenu() {
-            navMenu.classList.add('open');
-            navToggle.classList.add('active');
-            navOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu() {
-            navMenu.classList.remove('open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        navToggle.addEventListener('click', function() {
-            if (navMenu.classList.contains('open')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+        // Sticky header shadow
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 10);
         });
 
-        navOverlay.addEventListener('click', closeMenu);
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
 
-        navMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', closeMenu);
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('open');
         });
 
-        // ---- Scroll animations ----
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // Scroll animations
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
@@ -1024,7 +1065,7 @@
             observer.observe(el);
         });
 
-        // ---- Form validation ----
+        // Form validation
         const contactForm = document.getElementById('contactForm');
         const formContent = document.getElementById('formContent');
         const formSuccess = document.getElementById('formSuccess');
@@ -1112,7 +1153,6 @@
             }
 
             if (isValid) {
-                // Simulate form submission
                 var btn = contactForm.querySelector('.btn--submit');
                 btn.textContent = 'Sending...';
                 btn.disabled = true;

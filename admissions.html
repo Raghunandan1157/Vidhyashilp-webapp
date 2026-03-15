@@ -121,26 +121,47 @@
             font-weight: 600;
         }
 
-        .btn-enquire {
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-portal {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 10px 24px;
-            background: #1745cf;
-            color: #fff;
-            font-size: 0.9rem;
+            padding: 8px 18px;
+            font-size: 0.85rem;
             font-weight: 600;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn-enquire:hover {
-            background: #1338a8;
+        .btn-portal:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.3);
+            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.2);
+        }
+
+        .btn-parent {
+            background: #1745cf;
+            color: #fff;
+        }
+
+        .btn-parent:hover {
+            background: #1338a8;
+        }
+
+        .btn-staff {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .btn-staff:hover {
+            background: #cbd5e1;
         }
 
         .hamburger {
@@ -183,16 +204,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1745cf 100%);
+            background: linear-gradient(135deg, rgba(15,23,42,0.7) 0%, rgba(23,69,207,0.7) 100%), url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200') center/cover no-repeat;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400"><circle cx="200" cy="100" r="300" fill="rgba(255,255,255,0.03)"/><circle cx="1200" cy="300" r="250" fill="rgba(255,255,255,0.04)"/><circle cx="700" cy="50" r="150" fill="rgba(255,255,255,0.02)"/></svg>');
-            background-size: cover;
         }
 
         .hero-content {
@@ -707,7 +720,7 @@
             background: #1745cf19;
         }
 
-        .mobile-nav .btn-enquire {
+        .mobile-nav .btn-portal {
             margin-top: 8px;
             text-align: center;
             justify-content: center;
@@ -726,7 +739,7 @@
 
         @media (max-width: 768px) {
             .nav,
-            .header-inner > .btn-enquire {
+            .header-buttons {
                 display: none;
             }
 
@@ -815,7 +828,10 @@
                 <a href="contact.html">Contact</a>
             </nav>
 
-            <a href="#enquiry-form" class="btn-enquire">Enquire Now</a>
+            <div class="header-buttons">
+                <a href="parent-login.html" class="btn-portal btn-parent">Parent Portal</a>
+                <a href="staff-login.html" class="btn-portal btn-staff">Staff Portal</a>
+            </div>
 
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
@@ -831,7 +847,8 @@
             <a href="admissions.html" class="active">Admissions</a>
             <a href="infrastructure.html">Infrastructure</a>
             <a href="contact.html">Contact</a>
-            <a href="#enquiry-form" class="btn-enquire">Enquire Now</a>
+            <a href="parent-login.html" class="btn-portal btn-parent">Parent Portal</a>
+            <a href="staff-login.html" class="btn-portal btn-staff">Staff Portal</a>
         </div>
     </header>
 
@@ -880,7 +897,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Fee Structure</h2>
-                <p>Transparent and competitive fee structure for the academic year 2026–27.</p>
+                <p>Transparent and competitive fee structure for the academic year 2026-27.</p>
             </div>
             <div class="fee-table-wrap animate-on-scroll">
                 <table class="fee-table">
@@ -1077,23 +1094,22 @@
                 <a href="academics.html">Academics</a>
                 <a href="admissions.html">Admissions</a>
                 <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html">Contact Us</a>
             </div>
             <div class="footer-col">
                 <h4>Portals</h4>
                 <a href="parent-login.html">Parent Login</a>
                 <a href="staff-login.html">Staff Login</a>
-                <a href="admin-dashboard.html">Admin Portal</a>
-                <a href="contact.html">Contact Us</a>
             </div>
             <div class="footer-col">
                 <h4>Contact Info</h4>
-                <p>Vidyashilp International School, Haveri, Karnataka 581110</p>
-                <p>Phone: +91 8362 250123</p>
+                <p>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka</p>
+                <p>Phone: +91 98765 43210</p>
                 <p>Email: info@vidyashilphaveri.edu.in</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 Vidyashilp International School Haveri. All rights reserved.
+            &copy; 2025 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
         </div>
     </footer>
 
@@ -1126,7 +1142,6 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    // Stagger delay for sibling elements
                     const parent = entry.target.parentElement;
                     const siblings = parent.querySelectorAll('.animate-on-scroll');
                     let delay = 0;
@@ -1153,11 +1168,9 @@
             e.preventDefault();
             let isValid = true;
 
-            // Reset errors
             form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
             form.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
 
-            // Validate required fields
             const parentName = form.querySelector('[name="parentName"]');
             if (!parentName.value.trim()) {
                 showError(parentName);
@@ -1202,7 +1215,6 @@
             if (errorMsg) errorMsg.style.display = 'block';
         }
 
-        // Remove error on input
         form.querySelectorAll('input, select, textarea').forEach(input => {
             input.addEventListener('input', () => {
                 input.classList.remove('error');

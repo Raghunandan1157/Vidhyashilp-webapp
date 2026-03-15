@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent Login | Vidhyashilp Academy</title>
+    <title>Parent Login | Vidyashilp International School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -27,7 +30,8 @@
         /* ── Left Brand Panel ── */
         .brand-panel {
             flex: 1;
-            background: linear-gradient(135deg, #1B4D8E 0%, #2D7DD2 100%);
+            background: linear-gradient(135deg, rgba(23, 69, 207, 0.88) 0%, rgba(10, 38, 120, 0.92) 100%),
+                        url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200') center/cover no-repeat;
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -39,26 +43,33 @@
             animation: slideInLeft 0.8s ease-out;
         }
 
-        .brand-panel::before {
-            content: '';
+        .back-to-website {
             position: absolute;
-            top: -120px;
-            right: -120px;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
+            top: 24px;
+            left: 28px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+            transition: color 0.2s;
         }
 
-        .brand-panel::after {
-            content: '';
-            position: absolute;
-            bottom: -80px;
-            left: -80px;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.04);
+        .back-to-website:hover {
+            color: #fff;
+        }
+
+        .back-to-website svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .brand-content {
@@ -71,7 +82,7 @@
             width: 72px;
             height: 72px;
             background: rgba(255, 255, 255, 0.15);
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,8 +241,8 @@
         }
 
         .form-input:focus {
-            border-color: #2D7DD2;
-            box-shadow: 0 0 0 3px rgba(45, 125, 210, 0.12);
+            border-color: #1745cf;
+            box-shadow: 0 0 0 3px rgba(23, 69, 207, 0.12);
             background: #fff;
         }
 
@@ -279,28 +290,28 @@
         .remember-me input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            accent-color: #2D7DD2;
+            accent-color: #1745cf;
             cursor: pointer;
             border-radius: 4px;
         }
 
         .forgot-link {
             font-size: 13px;
-            color: #2D7DD2;
+            color: #1745cf;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
 
         .forgot-link:hover {
-            color: #1B4D8E;
+            color: #0f2f8a;
             text-decoration: underline;
         }
 
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: #FF8400;
+            background: #1745cf;
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -309,7 +320,7 @@
             font-family: inherit;
             cursor: pointer;
             transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-            box-shadow: 0 4px 14px rgba(255, 132, 0, 0.3);
+            box-shadow: 0 4px 14px rgba(23, 69, 207, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -320,9 +331,9 @@
         }
 
         .login-btn:hover:not(:disabled) {
-            background: #e67700;
+            background: #1239a8;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(255, 132, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(23, 69, 207, 0.4);
         }
 
         .login-btn:active:not(:disabled) {
@@ -359,14 +370,14 @@
         }
 
         .switch-link-wrapper a {
-            color: #2D7DD2;
+            color: #1745cf;
             font-weight: 600;
             text-decoration: none;
             transition: color 0.2s;
         }
 
         .switch-link-wrapper a:hover {
-            color: #1B4D8E;
+            color: #0f2f8a;
             text-decoration: underline;
         }
 
@@ -431,6 +442,11 @@
                 animation: fadeInUp 0.6s ease-out;
             }
 
+            .back-to-website {
+                top: 16px;
+                left: 20px;
+            }
+
             .school-name {
                 font-size: 26px;
             }
@@ -484,6 +500,13 @@
     <div class="container">
         <!-- Left Brand Panel -->
         <div class="brand-panel">
+            <a href="index.html" class="back-to-website">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back to Website
+            </a>
             <div class="brand-content">
                 <div class="school-logo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -491,7 +514,7 @@
                         <path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/>
                     </svg>
                 </div>
-                <h1 class="school-name">Vidhyashilp Academy</h1>
+                <h1 class="school-name">Vidyashilp International School</h1>
                 <p class="school-tagline">Empowering Education, Enriching Lives</p>
 
                 <ul class="features">
