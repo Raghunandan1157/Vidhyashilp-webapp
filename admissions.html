@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions - Vidyashilp International School Haveri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #f6f6f8;
+        }
+
+        /* ---- Header ---- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            transition: box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1745cf;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .sub {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav a:hover {
+            color: #1745cf;
+            background: #1745cf19;
+        }
+
+        .nav a.active {
+            color: #1745cf;
+            background: #1745cf19;
+            font-weight: 600;
+        }
+
+        .btn-enquire {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 24px;
+            background: #1745cf;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-enquire:hover {
+            background: #1338a8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: #0f172a;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            margin-top: 72px;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1745cf 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400"><circle cx="200" cy="100" r="300" fill="rgba(255,255,255,0.03)"/><circle cx="1200" cy="300" r="250" fill="rgba(255,255,255,0.04)"/><circle cx="700" cy="50" r="150" fill="rgba(255,255,255,0.02)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 80px 24px;
+            max-width: 720px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        /* ---- Section Shared ---- */
+        .section {
+            padding: 80px 24px;
+        }
+
+        .section-white {
+            background: #fff;
+        }
+
+        .section-pillars {
+            background: #EEF0F8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- Admission Process Steps ---- */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .step-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #1745cf;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* ---- Fee Table ---- */
+        .fee-table-wrap {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fee-table-wrap.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            min-width: 700px;
+        }
+
+        .fee-table thead {
+            background: #1745cf;
+        }
+
+        .fee-table thead th {
+            padding: 16px 20px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .fee-table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s;
+        }
+
+        .fee-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .fee-table tbody tr:hover {
+            background: #1745cf08;
+        }
+
+        .fee-table td {
+            padding: 16px 20px;
+            font-size: 0.92rem;
+            color: #475569;
+        }
+
+        .fee-table td:first-child {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .fee-table td:last-child {
+            font-weight: 700;
+            color: #1745cf;
+        }
+
+        .fee-note {
+            margin-top: 20px;
+            font-size: 0.88rem;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* ---- Requirements ---- */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            background: #f6f6f8;
+            border-radius: 12px;
+            transition: transform 0.2s, background 0.2s;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .req-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .req-item:hover {
+            background: #1745cf10;
+            transform: translateX(4px);
+        }
+
+        .req-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #22c55e1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .req-check svg {
+            width: 16px;
+            height: 16px;
+            fill: #22c55e;
+        }
+
+        .req-item span {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        /* ---- Enquiry Form ---- */
+        .form-container {
+            max-width: 740px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 48px 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .form-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            color: #0f172a;
+            background: #f6f6f8;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1745cf;
+            box-shadow: 0 0 0 3px #1745cf19;
+            background: #fff;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .form-group .error-msg {
+            font-size: 0.78rem;
+            color: #ef4444;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 40px;
+            background: #1745cf;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #1338a8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(23, 69, 207, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message .success-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #22c55e1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-message .success-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: #22c55e;
+        }
+
+        .success-message h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 64px 24px 32px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+        }
+
+        .footer-brand .brand-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .footer-brand .brand-sub {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 0.88rem;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+        }
+
+        .footer-col p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        /* ---- Mobile Nav Overlay ---- */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 16px 24px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            color: #1745cf;
+            background: #1745cf19;
+        }
+
+        .mobile-nav .btn-enquire {
+            margin-top: 8px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 1024px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav,
+            .header-inner > .btn-enquire {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 56px 16px;
+            }
+
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 32px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner {
+                padding: 0 16px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .fee-table thead th,
+            .fee-table td {
+                padding: 12px 14px;
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand">VIDYASHILP</span>
+                    <span class="sub">International School Haveri</span>
+                </div>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html" class="active">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <a href="#enquiry-form" class="btn-enquire">Enquire Now</a>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="academics.html">Academics</a>
+            <a href="admissions.html" class="active">Admissions</a>
+            <a href="infrastructure.html">Infrastructure</a>
+            <a href="contact.html">Contact</a>
+            <a href="#enquiry-form" class="btn-enquire">Enquire Now</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Admissions</h1>
+            <p>Join the Vidyashilp family and give your child the gift of holistic education in a nurturing environment</p>
+        </div>
+    </section>
+
+    <!-- Admission Process -->
+    <section class="section section-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Admission Process</h2>
+                <p>A simple four-step journey to becoming part of our school community.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3>Online Registration</h3>
+                    <p>Fill out the online application form with student and parent details. Submit required documents digitally.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3>Assessment &amp; Interaction</h3>
+                    <p>Students undergo an age-appropriate assessment. Parents meet with school counselors for an interaction session.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3>Document Verification</h3>
+                    <p>Submit original documents for verification. Our team reviews the application and assessment results.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <h3>Admission Confirmation</h3>
+                    <p>Receive the admission offer. Complete fee payment and collect the welcome kit and school uniform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fee Structure -->
+    <section class="section section-pillars">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fee Structure</h2>
+                <p>Transparent and competitive fee structure for the academic year 2026–27.</p>
+            </div>
+            <div class="fee-table-wrap animate-on-scroll">
+                <table class="fee-table">
+                    <thead>
+                        <tr>
+                            <th>Grade Level</th>
+                            <th>Admission Fee (One-time)</th>
+                            <th>Tuition Fee (Annual)</th>
+                            <th>Development Fee (Annual)</th>
+                            <th>Total (First Year)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pre-Primary (Nursery-UKG)</td>
+                            <td>&#8377;15,000</td>
+                            <td>&#8377;45,000</td>
+                            <td>&#8377;8,000</td>
+                            <td>&#8377;68,000</td>
+                        </tr>
+                        <tr>
+                            <td>Primary (Class 1-5)</td>
+                            <td>&#8377;20,000</td>
+                            <td>&#8377;55,000</td>
+                            <td>&#8377;10,000</td>
+                            <td>&#8377;85,000</td>
+                        </tr>
+                        <tr>
+                            <td>Middle (Class 6-8)</td>
+                            <td>&#8377;25,000</td>
+                            <td>&#8377;65,000</td>
+                            <td>&#8377;12,000</td>
+                            <td>&#8377;1,02,000</td>
+                        </tr>
+                        <tr>
+                            <td>Senior (Class 9-10)</td>
+                            <td>&#8377;30,000</td>
+                            <td>&#8377;75,000</td>
+                            <td>&#8377;15,000</td>
+                            <td>&#8377;1,20,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="fee-note">* Sibling discount of 10% on tuition fee. Transport fee charged separately based on distance.</p>
+        </div>
+    </section>
+
+    <!-- Admission Requirements -->
+    <section class="section section-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Admission Requirements</h2>
+                <p>Please keep the following documents ready during the application process.</p>
+            </div>
+            <div class="requirements-grid">
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Birth Certificate</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Address Proof</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Aadhaar Card (Student)</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Medical Fitness Certificate</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Previous School TC</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Caste Certificate (if applicable)</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Report Card (Last 2 years)</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Community Certificate</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Passport Size Photos (6)</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Migration Certificate (if applicable)</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Parent ID Proof</span>
+                </div>
+                <div class="req-item animate-on-scroll">
+                    <div class="req-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+                    <span>Income Certificate (for scholarship)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enquiry Form -->
+    <section class="section section-pillars" id="enquiry-form">
+        <div class="container">
+            <div class="section-header">
+                <h2>Enquiry Form</h2>
+                <p>Have questions? Fill out the form below and our admissions team will get back to you within 24 hours.</p>
+            </div>
+            <div class="form-container animate-on-scroll">
+                <form id="enquiryForm" novalidate>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Parent Name <span class="required">*</span></label>
+                            <input type="text" name="parentName" placeholder="Enter parent name" required>
+                            <span class="error-msg">Please enter parent name</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" name="email" placeholder="Enter email address" required>
+                            <span class="error-msg">Please enter a valid email</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" name="phone" placeholder="Enter phone number" required>
+                            <span class="error-msg">Please enter a valid phone number</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Student Name <span class="required">*</span></label>
+                            <input type="text" name="studentName" placeholder="Enter student name" required>
+                            <span class="error-msg">Please enter student name</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade Applying For <span class="required">*</span></label>
+                            <select name="grade" required>
+                                <option value="">Select Grade</option>
+                                <option value="nursery">Nursery</option>
+                                <option value="lkg">LKG</option>
+                                <option value="ukg">UKG</option>
+                                <option value="1">Class 1</option>
+                                <option value="2">Class 2</option>
+                                <option value="3">Class 3</option>
+                                <option value="4">Class 4</option>
+                                <option value="5">Class 5</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                            </select>
+                            <span class="error-msg">Please select a grade</span>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Any specific questions or information you'd like to share..."></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn-submit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                                Submit Enquiry
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <h3>Thank You!</h3>
+                    <p>Your enquiry has been submitted successfully. Our admissions team will contact you within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-name">VIDYASHILP</div>
+                <div class="brand-sub">International School Haveri</div>
+                <p>Empowering young minds with quality education, strong values, and a nurturing environment to build the leaders of tomorrow.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+            </div>
+            <div class="footer-col">
+                <h4>Portals</h4>
+                <a href="parent-login.html">Parent Login</a>
+                <a href="staff-login.html">Staff Login</a>
+                <a href="admin-dashboard.html">Admin Portal</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p>Vidyashilp International School, Haveri, Karnataka 581110</p>
+                <p>Phone: +91 8362 250123</p>
+                <p>Email: info@vidyashilphaveri.edu.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Vidyashilp International School Haveri. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Sticky header shadow
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger delay for sibling elements
+                    const parent = entry.target.parentElement;
+                    const siblings = parent.querySelectorAll('.animate-on-scroll');
+                    let delay = 0;
+                    siblings.forEach((sib, i) => {
+                        if (sib === entry.target) delay = i * 100;
+                    });
+
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        animateElements.forEach(el => observer.observe(el));
+
+        // Form validation & submission
+        const form = document.getElementById('enquiryForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            // Reset errors
+            form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+            form.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+
+            // Validate required fields
+            const parentName = form.querySelector('[name="parentName"]');
+            if (!parentName.value.trim()) {
+                showError(parentName);
+                isValid = false;
+            }
+
+            const email = form.querySelector('[name="email"]');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                showError(email);
+                isValid = false;
+            }
+
+            const phone = form.querySelector('[name="phone"]');
+            const phoneRegex = /^[+]?[\d\s-]{8,15}$/;
+            if (!phoneRegex.test(phone.value.trim())) {
+                showError(phone);
+                isValid = false;
+            }
+
+            const studentName = form.querySelector('[name="studentName"]');
+            if (!studentName.value.trim()) {
+                showError(studentName);
+                isValid = false;
+            }
+
+            const grade = form.querySelector('[name="grade"]');
+            if (!grade.value) {
+                showError(grade);
+                isValid = false;
+            }
+
+            if (isValid) {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            }
+        });
+
+        function showError(input) {
+            input.classList.add('error');
+            const errorMsg = input.parentElement.querySelector('.error-msg');
+            if (errorMsg) errorMsg.style.display = 'block';
+        }
+
+        // Remove error on input
+        form.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('error');
+                const errorMsg = input.parentElement.querySelector('.error-msg');
+                if (errorMsg) errorMsg.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

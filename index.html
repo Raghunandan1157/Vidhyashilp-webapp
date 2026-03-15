@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidhyashilp Academy - School Management System</title>
+    <title>Vidyashilp International School Haveri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -16,1287 +19,1158 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            color: #1a1a2e;
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
             line-height: 1.6;
             overflow-x: hidden;
-            background: #f8f9fc;
+            background: #fff;
         }
 
-        /* ---- Navbar ---- */
-        .navbar {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 48px;
-            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+            padding: 12px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .navbar.scrolled {
-            background: rgba(27, 77, 142, 0.97);
-            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .navbar__logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .navbar__right {
+        .header-brand {
             display: flex;
             align-items: center;
-            gap: 28px;
-        }
-
-        .navbar__links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
-
-        .navbar__links a {
-            color: rgba(255,255,255,0.9);
+            gap: 12px;
             text-decoration: none;
-            font-size: 0.95rem;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .header-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1745cf;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .header-brand-sub {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header-nav a {
+            font-size: 15px;
+            color: #475569;
+            text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
+            position: relative;
         }
 
-        .navbar__links a:hover {
+        .header-nav a:hover,
+        .header-nav a.active {
+            color: #1745cf;
+        }
+
+        .header-nav a.active {
+            font-weight: 700;
+        }
+
+        .header-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #1745cf;
+            border-radius: 2px;
+        }
+
+        .btn-enquire {
+            background: #1745cf;
             color: #fff;
-        }
-
-        .navbar__cta {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
-            display: inline-block;
+            border: none;
             padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
             text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 2px 8px rgba(23, 69, 207, 0.25);
+            transition: background 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
         }
 
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        .btn-enquire:hover {
+            background: #1335a8;
+            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.35);
         }
 
-        .btn--outline {
-            color: #fff;
-            border: 2px solid #fff;
-            background: transparent;
-        }
-
-        .btn--outline:hover {
-            background: rgba(255,255,255,0.12);
-        }
-
-        .btn--orange {
-            background: #FF8400;
-            color: #fff;
-        }
-
-        .btn--orange:hover {
-            background: #e67700;
-        }
-
-        .btn--primary {
-            background: #fff;
-            color: #1B4D8E;
-        }
-
-        .btn--primary:hover {
-            background: #f0f4fa;
-        }
-
-        .btn--primary-alt {
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border: 2px solid rgba(255,255,255,0.5);
-        }
-
-        .btn--primary-alt:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .btn--blue {
-            background: #1B4D8E;
-            color: #fff;
-        }
-
-        .btn--blue:hover {
-            background: #15407a;
-        }
-
-        .btn--orange-solid {
-            background: #FF8400;
-            color: #fff;
-            padding: 14px 32px;
-            font-size: 1rem;
-        }
-
-        .btn--orange-solid:hover {
-            background: #e67700;
-        }
-
-        /* Mobile menu toggle */
-        .navbar__toggle {
+        /* Hamburger */
+        .hamburger {
             display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
             flex-direction: column;
             gap: 5px;
-            z-index: 1001;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+            z-index: 1100;
         }
 
-        .navbar__toggle span {
+        .hamburger span {
             display: block;
-            width: 26px;
-            height: 3px;
-            background: #fff;
+            width: 24px;
+            height: 2px;
+            background: #0f172a;
             border-radius: 2px;
             transition: transform 0.3s, opacity 0.3s;
         }
 
-        .navbar__toggle.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        .navbar__toggle.active span:nth-child(2) {
+        .hamburger.open span:nth-child(2) {
             opacity: 0;
         }
 
-        .navbar__toggle.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* Overlay for mobile menu */
-        .navbar__overlay {
+        /* Mobile overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.show {
+            opacity: 1;
+        }
+
+        .mobile-menu {
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 998;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: #fff;
+            z-index: 1050;
+            padding: 80px 24px 32px;
+            flex-direction: column;
+            gap: 8px;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar__overlay.active {
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 16px;
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            background: #1745cf19;
+            color: #1745cf;
+        }
+
+        .mobile-menu a.active {
+            font-weight: 700;
+        }
+
+        .mobile-menu .btn-enquire {
+            margin-top: 16px;
+            text-align: center;
             display: block;
         }
 
-        /* ---- Hero ---- */
+        /* ===== HERO ===== */
         .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1B4D8E 0%, #2D7DD2 50%, #1B4D8E 100%);
+            padding-top: 96px;
+            padding-bottom: 0;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 520px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-overlay {
             position: absolute;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255,132,0,0.08) 0%, transparent 70%);
-            top: -150px;
-            right: -200px;
-            border-radius: 50%;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            bottom: -100px;
-            left: -150px;
-            border-radius: 50%;
-        }
-
-        .hero__content {
-            position: relative;
+            inset: 0;
+            background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 70%);
             z-index: 1;
-            max-width: 760px;
         }
 
-        .hero__badge {
-            display: inline-block;
-            background: rgba(255,132,0,0.2);
-            color: #FFB347;
-            font-size: 0.85rem;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            padding: 64px 56px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1745cf19;
+            color: #1745cf;
+            border: 1px solid #1745cf33;
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-size: 14px;
             font-weight: 600;
-            padding: 6px 18px;
-            border-radius: 20px;
             margin-bottom: 24px;
-            letter-spacing: 0.5px;
         }
 
-        .hero__title {
-            font-size: 3.4rem;
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1745cf;
+        }
+
+        .hero-headline {
+            font-size: 52px;
             font-weight: 800;
-            color: #fff;
+            line-height: 1.15;
             margin-bottom: 20px;
-            line-height: 1.12;
+            color: #0f172a;
         }
 
-        .hero__title span {
-            color: #FF8400;
+        .hero-headline span {
+            color: #1745cf;
         }
 
-        .hero__sub {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 40px;
-            max-width: 580px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero-subtitle {
+            font-size: 17px;
+            color: #475569;
             line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 560px;
         }
 
-        .hero__buttons {
+        .hero-buttons {
             display: flex;
             gap: 16px;
-            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .hero__buttons .btn {
+        .btn-primary {
+            background: #1745cf;
+            color: #fff;
+            border: none;
             padding: 14px 32px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
         }
 
-        .hero__stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin-top: 56px;
-            flex-wrap: wrap;
+        .btn-primary:hover {
+            background: #1335a8;
         }
 
-        .hero__stat {
-            text-align: center;
-        }
-
-        .hero__stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .hero__stat-label {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.7);
-            margin-top: 4px;
-        }
-
-        /* ---- Section Common ---- */
-        .section {
-            padding: 100px 24px;
-        }
-
-        .section--white {
+        .btn-outline {
             background: #fff;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .section--gray {
-            background: #f8f9fc;
+        .btn-outline:hover {
+            border-color: #1745cf;
+            box-shadow: 0 2px 8px rgba(23, 69, 207, 0.1);
         }
 
-        .section--blue {
-            background: linear-gradient(135deg, #1B4D8E 0%, #2D7DD2 100%);
-            color: #fff;
+        /* ===== ABOUT ===== */
+        .about {
+            background: #f6f6f8;
+            padding: 96px 0;
         }
 
-        .section__inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1B4D8E;
-            margin-bottom: 12px;
-        }
-
-        .section-title--white {
-            color: #fff;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 1.05rem;
-            margin-bottom: 56px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-subtitle--white {
-            color: rgba(255,255,255,0.8);
-        }
-
-        /* ---- About Section ---- */
-        .about__grid {
+        .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 56px;
+            grid-template-columns: 3fr 2fr;
+            gap: 64px;
             align-items: center;
         }
 
-        .about__text h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1B4D8E;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .about__text p {
-            color: #555;
-            font-size: 1.02rem;
+        .about-heading {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
             margin-bottom: 16px;
-            line-height: 1.75;
         }
 
-        .about__highlights {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .about-heading span {
+            color: #1745cf;
         }
 
-        .about__highlight {
-            background: #fff;
-            border-radius: 12px;
-            padding: 28px 24px;
-            text-align: center;
-            border: 1px solid #e8eef6;
-            box-shadow: 0 2px 12px rgba(27,77,142,0.06);
-        }
-
-        .about__highlight-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #1B4D8E;
-            margin-bottom: 4px;
-        }
-
-        .about__highlight-number--orange {
-            color: #FF8400;
-        }
-
-        .about__highlight-label {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
-        }
-
-        /* ---- Feature Cards Grid ---- */
-        .features__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .features__grid--two {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .feature-card {
-            background: #f8fafd;
-            border-radius: 14px;
-            padding: 36px 30px;
-            border: 1px solid #e8eef6;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(27,77,142,0.1);
-        }
-
-        .feature-card--white {
-            background: #fff;
-        }
-
-        .feature-card__header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+        .about-accent {
+            width: 48px;
+            height: 4px;
+            background: #1745cf;
+            border-radius: 2px;
             margin-bottom: 28px;
         }
 
-        .feature-card__icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
+        .about-text p {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            gap: 0;
+            margin-top: 36px;
         }
 
-        .feature-card__icon--parent {
-            background: #e3f0ff;
-            color: #2D7DD2;
-        }
-
-        .feature-card__icon--staff {
-            background: #fff1e0;
-            color: #FF8400;
-        }
-
-        .feature-card__header h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #1B4D8E;
-        }
-
-        .feature-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .feature-list__icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            background: #f0f5fc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .feature-list__icon--orange {
-            background: #fff5e6;
-        }
-
-        .feature-list__text strong {
-            display: block;
-            font-size: 0.95rem;
-            color: #222;
-            margin-bottom: 2px;
-        }
-
-        .feature-list__text span {
-            font-size: 0.85rem;
-            color: #777;
-        }
-
-        /* ---- Mini Feature Cards ---- */
-        .mini-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .mini-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 28px 24px;
+        .about-stat {
             text-align: center;
-            border: 1px solid #e8eef6;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 0 28px;
+            position: relative;
         }
 
-        .mini-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(27,77,142,0.08);
+        .about-stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 48px;
+            background: #e2e8f0;
         }
 
-        .mini-card__icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin: 0 auto 16px;
+        .about-stat:first-child {
+            padding-left: 0;
         }
 
-        .mini-card__icon--blue {
-            background: #e3f0ff;
+        .about-stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1745cf;
+            line-height: 1;
         }
 
-        .mini-card__icon--orange {
-            background: #fff1e0;
+        .about-stat-label {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 4px;
         }
 
-        .mini-card h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 6px;
+        .about-image {
+            position: relative;
+            height: 400px;
         }
 
-        .mini-card p {
-            font-size: 0.85rem;
-            color: #777;
-            line-height: 1.5;
-        }
-
-        /* ---- Why Choose Us ---- */
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .why-card {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 14px;
-            padding: 36px 24px;
-            text-align: center;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .why-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .why-card__icon {
-            width: 60px;
-            height: 60px;
+        .about-image-deco {
+            position: absolute;
             border-radius: 16px;
-            background: rgba(255,255,255,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin: 0 auto 20px;
         }
 
-        .why-card h4 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
+        .about-image-deco-1 {
+            width: 280px;
+            height: 320px;
+            background: #1745cf19;
+            top: 0;
+            right: 0;
         }
 
-        .why-card p {
-            font-size: 0.88rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.55;
+        .about-image-deco-2 {
+            width: 280px;
+            height: 320px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: 40px;
+            right: 40px;
+            z-index: 1;
         }
 
-        /* ---- Contact Section ---- */
-        .contact__grid {
+        .about-image-deco-3 {
+            width: 100px;
+            height: 100px;
+            background: #1745cf;
+            bottom: 0;
+            right: 0;
+            border-radius: 12px;
+            z-index: 2;
+            opacity: 0.15;
+        }
+
+        /* ===== PILLARS ===== */
+        .pillars {
+            background: #EEF0F8;
+            padding: 96px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 28px;
         }
 
-        .contact-card {
+        .pillar-card {
             background: #fff;
-            border-radius: 14px;
-            padding: 32px 28px;
-            border: 1px solid #e8eef6;
-            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            padding: 32px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .contact-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(27,77,142,0.08);
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
-        .contact-card__icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: #e3f0ff;
+        .pillar-card.featured {
+            border-top: 4px solid #1745cf;
+        }
+
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            background: #1745cf19;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin: 0 auto 16px;
+            margin-bottom: 20px;
         }
 
-        .contact-card h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1B4D8E;
+        .pillar-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #1745cf;
+        }
+
+        .pillar-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .pillar-card p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* ===== PORTAL ===== */
+        .portal-section {
+            padding: 96px 0;
+            background: #fff;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .portal-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            padding: 40px 32px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-card-icon {
+            width: 64px;
+            height: 64px;
+            background: #1745cf19;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .portal-card-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #1745cf;
+        }
+
+        .portal-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
             margin-bottom: 8px;
         }
 
-        .contact-card p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.6;
+        .portal-card p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 20px;
         }
 
-        .contact-card a {
-            color: #1B4D8E;
+        .portal-card .portal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1745cf;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .portal-card .portal-link svg {
+            width: 18px;
+            height: 18px;
+            fill: #1745cf;
+            transition: transform 0.2s;
+        }
+
+        .portal-card:hover .portal-link svg {
+            transform: translateX(4px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 64px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 48px;
+            padding-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: #1745cf;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .footer-brand-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .footer-brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #94a3b8;
+        }
+
+        .footer h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
             text-decoration: none;
-            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
         }
 
-        .contact-card a:hover {
-            text-decoration: underline;
+        .footer-links a:hover {
+            color: #fff;
         }
 
-        /* ---- Animations ---- */
-        .animate-on-scroll {
+        .footer-contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: #94a3b8;
+            align-items: flex-start;
+        }
+
+        .footer-contact-item svg {
+            width: 18px;
+            height: 18px;
+            fill: #64748b;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .footer-contact-item a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-contact-item a:hover {
+            color: #fff;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(32px);
             transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
-        .animate-on-scroll.visible {
+        .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
-        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
-        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
-        .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+        .fade-up-delay-1 { transition-delay: 0.1s; }
+        .fade-up-delay-2 { transition-delay: 0.2s; }
+        .fade-up-delay-3 { transition-delay: 0.3s; }
 
-        /* ---- Footer ---- */
-        .footer {
-            background: #0f2b4d;
-            color: rgba(255,255,255,0.75);
-            padding: 60px 24px 32px;
-        }
-
-        .footer__inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer__brand h4 {
-            font-size: 1.25rem;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        .footer__brand p {
-            font-size: 0.9rem;
-            line-height: 1.65;
-            max-width: 300px;
-        }
-
-        .footer__links h5 {
-            color: #fff;
-            margin-bottom: 16px;
-            font-size: 1rem;
-        }
-
-        .footer__links ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer__links a {
-            color: rgba(255,255,255,0.65);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .footer__links a:hover {
-            color: #fff;
-        }
-
-        .footer__bottom {
-            max-width: 1100px;
-            margin: 40px auto 0;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        /* ---- Responsive ---- */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .why-grid {
-                grid-template-columns: 1fr 1fr;
+            .header-nav {
+                display: none;
             }
 
-            .about__grid {
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu,
+            .mobile-overlay {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-headline {
+                font-size: 40px;
+            }
+
+            .hero-content {
+                padding: 48px 40px;
+            }
+
+            .about-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .footer__inner {
-                grid-template-columns: 1fr 1fr;
+            .about-image {
+                height: 300px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .portal-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
             }
         }
 
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 14px 20px;
+        @media (max-width: 640px) {
+            .hero-banner {
+                min-height: 440px;
+                border-radius: 16px;
             }
 
-            .navbar__toggle {
-                display: flex;
+            .hero-headline {
+                font-size: 32px;
             }
 
-            .navbar__right {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 280px;
-                height: 100vh;
-                background: #1B4D8E;
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+            .hero-content {
+                padding: 36px 28px;
+            }
+
+            .hero-overlay {
+                background: linear-gradient(to right, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0.3) 100%);
+            }
+
+            .hero-buttons {
                 flex-direction: column;
-                align-items: flex-start;
-                padding: 80px 32px 32px;
-                gap: 32px;
-                transition: right 0.35s ease;
-                box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-                z-index: 999;
             }
 
-            .navbar__right.open {
-                right: 0;
-            }
-
-            .navbar__links {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .navbar__links a {
-                font-size: 1.1rem;
-            }
-
-            .navbar__cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .navbar__cta .btn {
+            .hero-buttons a {
                 text-align: center;
             }
 
-            .hero {
-                padding: 100px 20px 60px;
-                min-height: auto;
+            .about-heading,
+            .section-header h2 {
+                font-size: 28px;
             }
 
-            .hero__title {
-                font-size: 2.2rem;
-            }
-
-            .hero__sub {
-                font-size: 1.05rem;
-            }
-
-            .hero__stats {
-                gap: 24px;
-                margin-top: 40px;
-            }
-
-            .hero__stat-number {
-                font-size: 1.6rem;
-            }
-
-            .section {
-                padding: 64px 20px;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .features__grid,
-            .features__grid--two {
-                grid-template-columns: 1fr;
+            .about-stats {
+                flex-wrap: wrap;
                 gap: 20px;
             }
 
-            .feature-card {
-                padding: 28px 24px;
+            .about-stat {
+                padding: 0 20px;
             }
 
-            .why-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .about-stat:not(:last-child)::after {
+                display: none;
             }
 
-            .about__highlights {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+            .header-inner {
+                padding: 10px 16px;
             }
 
-            .contact__grid {
-                grid-template-columns: 1fr;
+            .hero-container {
+                padding: 0 16px;
             }
 
-            .footer__inner {
-                grid-template-columns: 1fr;
-                gap: 28px;
+            .container {
+                padding: 0 16px;
             }
 
-            .mini-cards {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+            .about,
+            .pillars,
+            .portal-section {
+                padding: 64px 0;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero__title {
-                font-size: 1.8rem;
+        @media (max-width: 380px) {
+            .header-brand-name {
+                font-size: 15px;
             }
 
-            .hero__buttons .btn {
-                padding: 12px 24px;
-                font-size: 0.9rem;
+            .header-brand-sub {
+                font-size: 10px;
             }
 
-            .hero__stats {
-                gap: 16px;
-            }
-
-            .about__highlights {
-                grid-template-columns: 1fr;
-            }
-
-            .mini-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.95rem;
+            .hero-headline {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <a href="#home" class="navbar__logo">Vidhyashilp Academy</a>
-        <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="navbar__right" id="navMenu">
-            <ul class="navbar__links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#parents">For Parents</a></li>
-                <li><a href="#staff">For Staff</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="navbar__cta">
-                <a href="parent-login.html" class="btn btn--outline">Parent Login</a>
-                <a href="staff-login.html" class="btn btn--orange">Staff Login</a>
-            </div>
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="header-brand">
+                <div class="header-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                </div>
+                <div class="header-brand-text">
+                    <span class="header-brand-name">VIDYASHILP</span>
+                    <span class="header-brand-sub">International School Haveri</span>
+                </div>
+            </a>
+            <nav class="header-nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="academics.html">Academics</a>
+                <a href="admissions.html">Admissions</a>
+                <a href="infrastructure.html">Infrastructure</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="contact.html" class="btn-enquire desktop-only">Enquire Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <div class="navbar__overlay" id="navOverlay"></div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-enquire">Enquire Now</a>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="hero__content animate-on-scroll">
-            <div class="hero__badge">Trusted by 1200+ Families</div>
-            <h1 class="hero__title">Welcome to <span>Vidhyashilp</span> Academy</h1>
-            <p class="hero__sub">A modern school management platform that keeps parents informed and empowers staff with powerful tools for seamless administration.</p>
-            <div class="hero__buttons">
-                <a href="parent-login.html" class="btn btn--primary">Parent Portal</a>
-                <a href="staff-login.html" class="btn btn--primary-alt">Staff Portal</a>
-            </div>
-            <div class="hero__stats">
-                <div class="hero__stat">
-                    <div class="hero__stat-number">1200+</div>
-                    <div class="hero__stat-label">Students</div>
-                </div>
-                <div class="hero__stat">
-                    <div class="hero__stat-number">80+</div>
-                    <div class="hero__stat-label">Faculty Members</div>
-                </div>
-                <div class="hero__stat">
-                    <div class="hero__stat-number">25+</div>
-                    <div class="hero__stat-label">Years of Excellence</div>
-                </div>
-                <div class="hero__stat">
-                    <div class="hero__stat-number">100%</div>
-                    <div class="hero__stat-label">Digital Campus</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us -->
-    <section class="section section--white" id="about">
-        <div class="section__inner">
-            <div class="about__grid">
-                <div class="about__text animate-on-scroll">
-                    <h2>About Vidhyashilp Academy</h2>
-                    <p>Vidhyashilp Academy is a premier educational institution located in Bengaluru, Karnataka, committed to nurturing young minds through a blend of academic excellence and holistic development. With a strong foundation built over 25 years, we offer CBSE and ICSE curricula designed to prepare students for a globally competitive future.</p>
-                    <p>Our modern infrastructure, state-of-the-art laboratories, expansive sports facilities, and dedicated faculty of over 80 professionals create an environment where every student thrives. We believe in leveraging technology to bridge the gap between school and home, ensuring parents stay connected with their child's academic journey every step of the way.</p>
-                </div>
-                <div class="about__highlights animate-on-scroll delay-2">
-                    <div class="about__highlight">
-                        <div class="about__highlight-number">1200+</div>
-                        <div class="about__highlight-label">Students Enrolled</div>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-banner">
+                <div class="hero-overlay"></div>
+                <div class="hero-content fade-up">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Now Enrolling for 2024-25
                     </div>
-                    <div class="about__highlight">
-                        <div class="about__highlight-number about__highlight-number--orange">80+</div>
-                        <div class="about__highlight-label">Qualified Faculty</div>
-                    </div>
-                    <div class="about__highlight">
-                        <div class="about__highlight-number">CBSE &amp; ICSE</div>
-                        <div class="about__highlight-label">Curriculum Offered</div>
-                    </div>
-                    <div class="about__highlight">
-                        <div class="about__highlight-number about__highlight-number--orange">25+</div>
-                        <div class="about__highlight-label">Years Established</div>
+                    <h1 class="hero-headline">Welcome to<br><span>Vidyashilp</span></h1>
+                    <p class="hero-subtitle">Nurturing global citizens through excellence in education, innovation, and holistic development. Empowering students to lead with knowledge, creativity, and compassion.</p>
+                    <div class="hero-buttons">
+                        <a href="about.html" class="btn-primary">Explore More</a>
+                        <a href="#" class="btn-outline">Virtual Tour</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- For Parents -->
-    <section class="section section--gray" id="parents">
-        <div class="section__inner">
-            <h2 class="section-title animate-on-scroll">For Parents</h2>
-            <p class="section-subtitle animate-on-scroll">Stay connected with your child's academic life through our comprehensive parent portal</p>
-
-            <div class="mini-cards">
-                <div class="mini-card animate-on-scroll delay-1">
-                    <div class="mini-card__icon mini-card__icon--blue">&#x1F4C5;</div>
-                    <h4>Timetable</h4>
-                    <p>View your child's daily and weekly class schedule at a glance</p>
+    <!-- ===== ABOUT ===== -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <h2 class="about-heading">Pioneering the Future of<br><span>Education</span></h2>
+                    <div class="about-accent"></div>
+                    <p>In 2024, Vidyashilp Academy evolved into Vidyashilp International School &mdash; a bold step reflecting our renewed vision for world-class education. This rebrand marks not just a change in name, but a deepened commitment to preparing students for an interconnected, rapidly changing world.</p>
+                    <p>Rooted in over 15 years of academic excellence, we blend traditional Indian values with modern pedagogical innovation. Our approach nurtures curious minds, fosters critical thinking, and empowers every student to become a confident global citizen.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat-number">15+</div>
+                            <div class="about-stat-label">Years Excellence</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">100%</div>
+                            <div class="about-stat-label">CBSE Results</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">25+</div>
+                            <div class="about-stat-label">Activities</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mini-card animate-on-scroll delay-1">
-                    <div class="mini-card__icon mini-card__icon--orange">&#x1F4CA;</div>
-                    <h4>Results &amp; Marks</h4>
-                    <p>Access exam results, grades, and detailed performance reports</p>
+                <div class="about-image fade-up fade-up-delay-2">
+                    <div class="about-image-deco about-image-deco-1"></div>
+                    <div class="about-image-deco about-image-deco-2"></div>
+                    <div class="about-image-deco about-image-deco-3"></div>
                 </div>
-                <div class="mini-card animate-on-scroll delay-2">
-                    <div class="mini-card__icon mini-card__icon--blue">&#x2705;</div>
-                    <h4>Attendance</h4>
-                    <p>Track your child's daily attendance records in real time</p>
-                </div>
-                <div class="mini-card animate-on-scroll delay-2">
-                    <div class="mini-card__icon mini-card__icon--orange">&#x1F4E2;</div>
-                    <h4>Circulars</h4>
-                    <p>Receive school announcements, notices, and important updates</p>
-                </div>
-                <div class="mini-card animate-on-scroll delay-3">
-                    <div class="mini-card__icon mini-card__icon--blue">&#x1F4DA;</div>
-                    <h4>Academic Updates</h4>
-                    <p>Follow curriculum progress, homework, and teacher remarks</p>
-                </div>
-                <div class="mini-card animate-on-scroll delay-3">
-                    <div class="mini-card__icon mini-card__icon--orange">&#x1F4F7;</div>
-                    <h4>Photos</h4>
-                    <p>Browse galleries from school events, activities, and celebrations</p>
-                </div>
-                <div class="mini-card animate-on-scroll delay-4">
-                    <div class="mini-card__icon mini-card__icon--blue">&#x1F3AC;</div>
-                    <h4>Videos</h4>
-                    <p>Watch recordings of performances, events, and campus life</p>
-                </div>
-            </div>
-
-            <div style="text-align:center; margin-top:40px;" class="animate-on-scroll delay-4">
-                <a href="parent-login.html" class="btn btn--blue">Access Parent Portal</a>
             </div>
         </div>
     </section>
 
-    <!-- For Staff -->
-    <section class="section section--white" id="staff">
-        <div class="section__inner">
-            <h2 class="section-title animate-on-scroll">For School Staff</h2>
-            <p class="section-subtitle animate-on-scroll">Powerful administrative tools to streamline school operations and management</p>
-
-            <div class="features__grid" style="max-width:900px; margin: 0 auto;">
-                <div class="feature-card feature-card--white animate-on-scroll delay-1">
-                    <div class="feature-card__header">
-                        <div class="feature-card__icon feature-card__icon--staff">&#x1F4B0;</div>
-                        <h3>Accounting System</h3>
+    <!-- ===== CORE PILLARS ===== -->
+    <section class="pillars">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Our Core Pillars</h2>
+                <p>The foundation of our educational philosophy is built upon these three essential pillars.</p>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card fade-up fade-up-delay-1">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                     </div>
-                    <ul class="feature-list">
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4B3;</div>
-                            <div class="feature-list__text">
-                                <strong>Fee Management</strong>
-                                <span>Track fee collection, pending payments, and generate receipts</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4C8;</div>
-                            <div class="feature-list__text">
-                                <strong>Financial Reports</strong>
-                                <span>Generate income, expense, and balance reports with one click</span>
-                            </div>
-                        </li>
+                    <h3>Global Standards</h3>
+                    <p>World-class infrastructure combined with international pedagogical approaches, preparing students for a globally connected future.</p>
+                </div>
+                <div class="pillar-card featured fade-up fade-up-delay-2">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                    </div>
+                    <h3>CBSE Curriculum</h3>
+                    <p>A rigorous academic framework enhanced with cutting-edge digital learning tools, fostering critical thinking and academic excellence.</p>
+                </div>
+                <div class="pillar-card fade-up fade-up-delay-3">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <h3>Holistic Development</h3>
+                    <p>Nurturing physical, emotional, and social growth through diverse programs that develop well-rounded individuals ready to thrive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PARENT & STAFF PORTAL ===== -->
+    <section class="portal-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Parent &amp; Staff Portal</h2>
+                <p>Access your dedicated portal for academic updates, schedules, and communication.</p>
+            </div>
+            <div class="portal-grid">
+                <a href="parent-login.html" class="portal-card fade-up fade-up-delay-1">
+                    <div class="portal-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <h3>Parent Portal</h3>
+                    <p>Stay connected with your child's academic progress, attendance, and school updates.</p>
+                    <span class="portal-link">
+                        Login as Parent
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </span>
+                </a>
+                <a href="staff-login.html" class="portal-card fade-up fade-up-delay-2">
+                    <div class="portal-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    </div>
+                    <h3>Staff Portal</h3>
+                    <p>Access teaching resources, schedules, and administrative tools for staff members.</p>
+                    <span class="portal-link">
+                        Login as Staff
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-brand-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        </div>
+                        <span class="footer-brand-name">VIDYASHILP</span>
+                    </div>
+                    <p class="footer-desc">Leading international school in Haveri committed to academic excellence and the holistic development of every child in a technologically advanced environment.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="infrastructure.html">Infrastructure</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
-
-                <div class="feature-card feature-card--white animate-on-scroll delay-2">
-                    <div class="feature-card__header">
-                        <div class="feature-card__icon feature-card__icon--staff">&#x1F465;</div>
-                        <h3>HR Management</h3>
+                <div>
+                    <h4>Contact Us</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka, India</span>
                     </div>
-                    <ul class="feature-list">
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4C4;</div>
-                            <div class="feature-list__text">
-                                <strong>Payroll Processing</strong>
-                                <span>Automate salary calculations, deductions, and disbursements</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4C5;</div>
-                            <div class="feature-list__text">
-                                <strong>Leave Management</strong>
-                                <span>Track leave requests, approvals, and staff attendance records</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card feature-card--white animate-on-scroll delay-3" style="grid-column: 1 / -1; max-width: 440px; margin: 0 auto;">
-                    <div class="feature-card__header">
-                        <div class="feature-card__icon feature-card__icon--staff">&#x1F9D1;&#x200D;&#x1F393;</div>
-                        <h3>Student Data Management</h3>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <a href="tel:+919876543210">+91 98765 43210</a>
                     </div>
-                    <ul class="feature-list">
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4CB;</div>
-                            <div class="feature-list__text">
-                                <strong>Admissions &amp; Enrollment</strong>
-                                <span>Manage the entire student lifecycle from inquiry to graduation</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="feature-list__icon feature-list__icon--orange">&#x1F4C2;</div>
-                            <div class="feature-list__text">
-                                <strong>Comprehensive Records</strong>
-                                <span>Maintain academic history, health records, and parent details</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+                        <a href="https://vidyashilphaveri.in" target="_blank">vidyashilphaveri.in</a>
+                    </div>
                 </div>
             </div>
-
-            <div style="text-align:center; margin-top:40px;" class="animate-on-scroll delay-4">
-                <a href="staff-login.html" class="btn btn--orange-solid">Access Staff Portal</a>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                &copy; 2024 Vidyashilp International School Haveri. All rights reserved. | Managed by Navachetana Foundation
             </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us -->
-    <section class="section section--blue" id="why">
-        <div class="section__inner">
-            <h2 class="section-title section-title--white animate-on-scroll">Why Choose Us</h2>
-            <p class="section-subtitle section-subtitle--white animate-on-scroll">Built with modern technology to deliver the best experience for schools, staff, and parents</p>
-
-            <div class="why-grid">
-                <div class="why-card animate-on-scroll delay-1">
-                    <div class="why-card__icon">&#x1F4BB;</div>
-                    <h4>Digital-First Approach</h4>
-                    <p>Everything from attendance to report cards is available online, reducing paperwork and saving time for everyone.</p>
-                </div>
-                <div class="why-card animate-on-scroll delay-2">
-                    <div class="why-card__icon">&#x26A1;</div>
-                    <h4>Real-Time Updates</h4>
-                    <p>Instant notifications for attendance, results, circulars, and more. Parents are always in the loop.</p>
-                </div>
-                <div class="why-card animate-on-scroll delay-3">
-                    <div class="why-card__icon">&#x1F512;</div>
-                    <h4>Secure Platform</h4>
-                    <p>Enterprise-grade security ensures that student data, financial records, and personal information stay protected.</p>
-                </div>
-                <div class="why-card animate-on-scroll delay-4">
-                    <div class="why-card__icon">&#x2728;</div>
-                    <h4>Easy to Use</h4>
-                    <p>Intuitive design that requires no training. Parents and staff can navigate effortlessly from any device.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="section section--gray" id="contact">
-        <div class="section__inner">
-            <h2 class="section-title animate-on-scroll">Contact Us</h2>
-            <p class="section-subtitle animate-on-scroll">Have questions? We are here to help. Reach out to us anytime.</p>
-
-            <div class="contact__grid">
-                <div class="contact-card animate-on-scroll delay-1">
-                    <div class="contact-card__icon">&#x1F4CD;</div>
-                    <h4>Our Address</h4>
-                    <p>Vidhyashilp Academy<br>Bengaluru, Karnataka<br>India</p>
-                </div>
-                <div class="contact-card animate-on-scroll delay-2">
-                    <div class="contact-card__icon">&#x1F4DE;</div>
-                    <h4>Phone</h4>
-                    <p><a href="tel:+918012345678">+91 80 1234 5678</a></p>
-                    <p style="margin-top:4px;"><a href="tel:+918012345679">+91 80 1234 5679</a></p>
-                </div>
-                <div class="contact-card animate-on-scroll delay-3">
-                    <div class="contact-card__icon">&#x2709;</div>
-                    <h4>Email</h4>
-                    <p><a href="mailto:info@vidhyashilp.edu">info@vidhyashilp.edu</a></p>
-                    <p style="margin-top:4px;"><a href="mailto:admissions@vidhyashilp.edu">admissions@vidhyashilp.edu</a></p>
-                </div>
-                <div class="contact-card animate-on-scroll delay-4">
-                    <div class="contact-card__icon">&#x1F552;</div>
-                    <h4>Working Hours</h4>
-                    <p>Monday - Friday: 8:00 AM - 4:00 PM<br>Saturday: 8:00 AM - 12:30 PM<br>Sunday: Closed</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <h4>Vidhyashilp Academy</h4>
-                <p>Empowering education through technology. A modern school management platform built for parents and administrators to stay connected and in control.</p>
-            </div>
-            <div class="footer__links">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#parents">For Parents</a></li>
-                    <li><a href="#staff">For Staff</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer__links">
-                <h5>Portals</h5>
-                <ul>
-                    <li><a href="parent-login.html">Parent Login</a></li>
-                    <li><a href="staff-login.html">Staff Login</a></li>
-                </ul>
-            </div>
-            <div class="footer__links">
-                <h5>Contact</h5>
-                <ul>
-                    <li><a href="mailto:info@vidhyashilp.edu">info@vidhyashilp.edu</a></li>
-                    <li><a href="tel:+918012345678">+91 80 1234 5678</a></li>
-                    <li><a href="#contact">Bengaluru, Karnataka</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            &copy; 2026 Vidhyashilp Academy. All rights reserved.
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
+        // Sticky header
+        const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
+            header.classList.toggle('scrolled', window.scrollY > 20);
         });
-        // Trigger on load in case page is already scrolled
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
 
-        // Mobile menu toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        const navOverlay = document.getElementById('navOverlay');
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
 
-        function openMenu() {
-            navMenu.classList.add('open');
-            navToggle.classList.add('active');
-            navOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        function toggleMenu() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            mobileOverlay.classList.toggle('show');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
         }
 
-        function closeMenu() {
-            navMenu.classList.remove('open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+        hamburger.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', toggleMenu);
 
-        navToggle.addEventListener('click', () => {
-            if (navMenu.classList.contains('open')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-
-        navOverlay.addEventListener('click', closeMenu);
-
-        // Close menu when a link is clicked
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // Close menu on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeMenu();
-        });
-
-        // Scroll animations via IntersectionObserver
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) toggleMenu();
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
         });
+
+        // IntersectionObserver scroll animations
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

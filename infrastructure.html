@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure - Vidyashilp International School Haveri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #0f172a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* ---- Navbar ---- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 48px;
+            background: transparent;
+            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(23, 69, 207, 0.97);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .navbar__logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar__right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .navbar__links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .navbar__links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .navbar__links a:hover,
+        .navbar__links a.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar__cta {
+            background: #fff;
+            color: #1745cf;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .navbar__cta:hover {
+            background: #f0f4ff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(23, 69, 207, 0.3);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1100;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Mobile nav overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(23, 69, 207, 0.98);
+            z-index: 1050;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1745cf 0%, #0f2e8a 50%, #0a1f5e 100%);
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 480"><rect fill="%231745cf" width="1440" height="480"/><circle cx="200" cy="100" r="300" fill="%23ffffff08"/><circle cx="1200" cy="400" r="350" fill="%23ffffff06"/><circle cx="700" cy="250" r="200" fill="%23ffffff05"/></svg>') center/cover no-repeat;
+            opacity: 0.5;
+        }
+
+        .hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(15, 46, 138, 0.4) 0%, rgba(23, 69, 207, 0.2) 100%);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            padding: 120px 24px 80px;
+            max-width: 800px;
+        }
+
+        .hero__title {
+            font-size: 48px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero__subtitle {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        /* ---- Section Common ---- */
+        .section {
+            padding: 80px 24px;
+        }
+
+        .section--pillars {
+            background: #EEF0F8;
+        }
+
+        .section__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section__title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .section__subtitle {
+            font-size: 1.05rem;
+            color: #475569;
+            font-weight: 400;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ---- Facility Cards ---- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .facility-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 28px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .facility-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s, background 0.3s;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-card__icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .facility-card__icon--blue {
+            background: #1745cf19;
+            color: #1745cf;
+        }
+
+        .facility-card__icon--green {
+            background: #10b98119;
+            color: #10b981;
+        }
+
+        .facility-card__icon--purple {
+            background: #8b5cf619;
+            color: #8b5cf6;
+        }
+
+        .facility-card__icon--orange {
+            background: #f5920019;
+            color: #f59200;
+        }
+
+        .facility-card__icon--red {
+            background: #ef444419;
+            color: #ef4444;
+        }
+
+        .facility-card__icon--teal {
+            background: #14b8a619;
+            color: #14b8a6;
+        }
+
+        .facility-card__title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .facility-card__desc {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.65;
+        }
+
+        /* ---- Stats ---- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 36px 24px;
+            text-align: center;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card__number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1745cf;
+            margin-bottom: 6px;
+        }
+
+        .stat-card__label {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* ---- Security Cards ---- */
+        .security-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .security-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+
+        .security-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .security-card__icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 12px;
+            background: #1745cf19;
+            color: #1745cf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .security-card__content {
+            flex: 1;
+        }
+
+        .security-card__title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .security-card__desc {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: #0f172a;
+            padding: 64px 24px 32px;
+        }
+
+        .footer__container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer__brand-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .footer__brand-desc {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        .footer__col-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer__links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer__links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer__links a:hover {
+            color: #fff;
+        }
+
+        .footer__divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .footer__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer__copy {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer__social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .footer__social a:hover {
+            background: #1745cf;
+            color: #fff;
+        }
+
+        /* ---- Animations ---- */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 14px 20px;
+            }
+
+            .navbar__right {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero__title {
+                font-size: 34px;
+            }
+
+            .hero__subtitle {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 56px 16px;
+            }
+
+            .section__title {
+                font-size: 1.6rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 380px;
+            }
+
+            .hero__title {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 24px 16px;
+            }
+
+            .stat-card__number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar__logo">Vidyashilp International</a>
+        <div class="navbar__right">
+            <ul class="navbar__links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                <li><a href="infrastructure.html" class="active">Infrastructure</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="contact.html" class="navbar__cta">Enquire Now</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="infrastructure.html" class="active">Infrastructure</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="navbar__cta" style="margin-top: 16px;">Enquire Now</a>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">Our Infrastructure</h1>
+            <p class="hero__subtitle">World-class facilities designed to inspire learning, creativity, and holistic development</p>
+        </div>
+    </section>
+
+    <!-- Campus Facilities -->
+    <section class="section" id="facilities">
+        <div class="section__container">
+            <div class="section__header">
+                <h2 class="section__title">Campus Facilities</h2>
+                <p class="section__subtitle">Everything your child needs for a complete education experience</p>
+            </div>
+            <div class="cards-grid">
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Smart Classrooms</h3>
+                    <p class="facility-card__desc">Digital boards, projectors, and modern furniture in every classroom for an interactive learning experience.</p>
+                </div>
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--green">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M4 4v14a2 2 0 002 2h14"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Science Laboratories</h3>
+                    <p class="facility-card__desc">Well-equipped Physics, Chemistry, and Biology labs with the latest instruments for practical learning.</p>
+                </div>
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--purple">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 8h4"/><path d="M7 12h10"/><path d="M7 16h6"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Computer Lab</h3>
+                    <p class="facility-card__desc">State-of-the-art computer lab with high-speed internet, coding tools, and robotics kits.</p>
+                </div>
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--orange">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Library</h3>
+                    <p class="facility-card__desc">Extensive collection of 10,000+ books, digital resources, and a dedicated reading zone for students.</p>
+                </div>
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--red">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Sports Complex</h3>
+                    <p class="facility-card__desc">Multi-sport facility including cricket ground, basketball court, badminton, and indoor games area.</p>
+                </div>
+                <div class="facility-card" data-animate>
+                    <div class="facility-card__icon facility-card__icon--teal">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3 class="facility-card__title">Auditorium</h3>
+                    <p class="facility-card__desc">500-seat auditorium with professional sound and lighting for events, performances, and assemblies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Highlights -->
+    <section class="section section--pillars" id="highlights">
+        <div class="section__container">
+            <div class="section__header">
+                <h2 class="section__title">Campus Highlights</h2>
+                <p class="section__subtitle">Numbers that reflect our commitment to excellence</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card" data-animate>
+                    <div class="stat-card__number">3 Acres</div>
+                    <div class="stat-card__label">Campus Area</div>
+                </div>
+                <div class="stat-card" data-animate>
+                    <div class="stat-card__number">40+</div>
+                    <div class="stat-card__label">Smart Classrooms</div>
+                </div>
+                <div class="stat-card" data-animate>
+                    <div class="stat-card__number">500</div>
+                    <div class="stat-card__label">Auditorium Seats</div>
+                </div>
+                <div class="stat-card" data-animate>
+                    <div class="stat-card__number">10,000+</div>
+                    <div class="stat-card__label">Library Books</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety & Security -->
+    <section class="section" id="safety">
+        <div class="section__container">
+            <div class="section__header">
+                <h2 class="section__title">Safety & Security</h2>
+                <p class="section__subtitle">Your child's safety is our top priority</p>
+            </div>
+            <div class="cards-grid">
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">CCTV Surveillance</h3>
+                        <p class="security-card__desc">24/7 CCTV coverage across campus with monitoring room</p>
+                    </div>
+                </div>
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">Trained Security</h3>
+                        <p class="security-card__desc">Professional security staff at all entry/exit points</p>
+                    </div>
+                </div>
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">GPS-Enabled Transport</h3>
+                        <p class="security-card__desc">Real-time tracking of school buses with parent app</p>
+                    </div>
+                </div>
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.07-2.14 0-5.5 3-7.5 1 1.5 2 3.5 2 5.5 0 2.68-1.34 3.5-2 4.5-.64 1-.5 2 .5 3"/><path d="M12 22c-4.97 0-7-2.69-7-5a5 5 0 014-4.9"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">Fire Safety</h3>
+                        <p class="security-card__desc">Fire extinguishers, alarms, and regular safety drills</p>
+                    </div>
+                </div>
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">Health Centre</h3>
+                        <p class="security-card__desc">On-campus nurse and first aid facility with ambulance access</p>
+                    </div>
+                </div>
+                <div class="security-card" data-animate>
+                    <div class="security-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    </div>
+                    <div class="security-card__content">
+                        <h3 class="security-card__title">Visitor Management</h3>
+                        <p class="security-card__desc">Digital visitor tracking system for secure campus access</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__brand-name">Vidyashilp International School</div>
+                    <p class="footer__brand-desc">Nurturing young minds with world-class education, holistic development, and values that last a lifetime. Located in the heart of Haveri, Karnataka.</p>
+                </div>
+                <div>
+                    <div class="footer__col-title">Quick Links</div>
+                    <ul class="footer__links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer__col-title">Campus</div>
+                    <ul class="footer__links">
+                        <li><a href="infrastructure.html">Infrastructure</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer__col-title">Contact</div>
+                    <ul class="footer__links">
+                        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                        <li><a href="mailto:info@vidyashilphaveri.edu">info@vidyashilphaveri.edu</a></li>
+                        <li><a href="#">Haveri, Karnataka</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer__divider">
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2026 Vidyashilp International School Haveri. All rights reserved.</span>
+                <div class="footer__social">
+                    <a href="#" aria-label="Facebook">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.56 31.56 0 000 12a31.56 31.56 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.56 31.56 0 0024 12a31.56 31.56 0 00-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky navbar
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        });
+
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Scroll animations using IntersectionObserver
+        const animateElements = document.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger the animation based on sibling position
+                    const parent = entry.target.parentElement;
+                    const siblings = Array.from(parent.querySelectorAll('[data-animate]'));
+                    const i = siblings.indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        animateElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

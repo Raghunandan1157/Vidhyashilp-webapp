@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us – Vidyashilp International School Haveri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #0f172a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* ---- Navbar ---- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 48px;
+            background: transparent;
+            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(23, 69, 207, 0.97);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .navbar__logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .navbar__right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .navbar__links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        .navbar__links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 4px 0;
+        }
+
+        .navbar__links a:hover,
+        .navbar__links a.active {
+            color: #fff;
+        }
+
+        .navbar__links a.active {
+            border-bottom: 2px solid #fff;
+        }
+
+        .navbar__cta {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn--primary {
+            background: #1745cf;
+            color: #fff;
+        }
+
+        .btn--primary:hover {
+            background: #1339b0;
+        }
+
+        .btn--outline-nav {
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background: transparent;
+        }
+
+        .btn--outline-nav:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn--outline {
+            color: #1745cf;
+            border: 2px solid #1745cf;
+            background: transparent;
+        }
+
+        .btn--outline:hover {
+            background: #1745cf19;
+        }
+
+        .btn--white {
+            background: #fff;
+            color: #1745cf;
+        }
+
+        .btn--white:hover {
+            background: #f0f4fa;
+        }
+
+        /* Mobile menu toggle */
+        .navbar__toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .navbar__toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .navbar__toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .navbar__toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar__toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .navbar__overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 998;
+        }
+
+        .navbar__overlay.active {
+            display: block;
+        }
+
+        /* ---- Hero Banner ---- */
+        .hero {
+            min-height: 420px;
+            background: linear-gradient(135deg, #1745cf 0%, #2b5fd9 50%, #1745cf 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+        }
+
+        .hero__title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+
+        .hero__sub {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- Section Commons ---- */
+        .section {
+            padding: 80px 24px;
+        }
+
+        .section--white {
+            background: #fff;
+        }
+
+        .section--pillars {
+            background: #EEF0F8;
+        }
+
+        .section--light {
+            background: #f6f6f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: #475569;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+
+        /* ---- Contact Cards ---- */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card__icon {
+            width: 56px;
+            height: 56px;
+            background: #1745cf19;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .contact-card__icon svg {
+            width: 24px;
+            height: 24px;
+            color: #1745cf;
+        }
+
+        .contact-card__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .contact-card__text {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .contact-card__text a {
+            color: #1745cf;
+            text-decoration: none;
+        }
+
+        .contact-card__text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Form & Map Section ---- */
+        .form-map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .form-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-card__title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .form-card__subtitle {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1745cf;
+            box-shadow: 0 0 0 3px #1745cf19;
+            background: #fff;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .form-group .error-message {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-group .error-message.visible {
+            display: block;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .btn--submit {
+            width: 100%;
+            padding: 14px 24px;
+            font-size: 1rem;
+        }
+
+        /* Success message */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 24px;
+        }
+
+        .form-success.visible {
+            display: block;
+        }
+
+        .form-success__icon {
+            width: 64px;
+            height: 64px;
+            background: #22c55e19;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .form-success__icon svg {
+            width: 32px;
+            height: 32px;
+            color: #22c55e;
+        }
+
+        .form-success__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .form-success__text {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Map */
+        .map-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            min-height: 560px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-card iframe {
+            width: 100%;
+            flex: 1;
+            min-height: 400px;
+            border: none;
+        }
+
+        .map-card__info {
+            padding: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .map-card__info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .map-card__info p {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* ---- CTA Banner ---- */
+        .cta-banner {
+            background: #1745cf19;
+            border-radius: 20px;
+            padding: 56px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-banner__title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .cta-banner__subtitle {
+            font-size: 1.05rem;
+            color: #475569;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .cta-banner__buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-banner__buttons .btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: #0f172a;
+            padding: 60px 24px 24px;
+        }
+
+        .footer__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__brand h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer__brand p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer__links h5 {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .footer__links ul {
+            list-style: none;
+        }
+
+        .footer__links li {
+            margin-bottom: 8px;
+        }
+
+        .footer__links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer__links a:hover {
+            color: #fff;
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        /* ---- Animations ---- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 1024px) {
+            .contact-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-map-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-card {
+                min-height: 400px;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 14px 20px;
+            }
+
+            .navbar__toggle {
+                display: flex;
+            }
+
+            .navbar__right {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 280px;
+                height: 100vh;
+                background: #1745cf;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 24px 24px;
+                gap: 24px;
+                transition: right 0.3s ease;
+                z-index: 999;
+                overflow-y: auto;
+            }
+
+            .navbar__right.open {
+                right: 0;
+            }
+
+            .navbar__links {
+                flex-direction: column;
+                gap: 4px;
+                width: 100%;
+            }
+
+            .navbar__links a {
+                display: block;
+                padding: 10px 0;
+                font-size: 1.05rem;
+            }
+
+            .navbar__cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .navbar__cta .btn {
+                text-align: center;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+                min-height: 340px;
+            }
+
+            .hero__title {
+                font-size: 2.2rem;
+            }
+
+            .hero__sub {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 56px 20px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 28px 20px;
+            }
+
+            .cta-banner {
+                padding: 40px 24px;
+            }
+
+            .cta-banner__title {
+                font-size: 1.4rem;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar__logo">Vidyashilp International School</a>
+        <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="navbar__right" id="navMenu">
+            <ul class="navbar__links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#parents">For Parents</a></li>
+                <li><a href="index.html#staff">For Staff</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="navbar__cta">
+                <a href="parent-login.html" class="btn btn--outline-nav">Parent Login</a>
+                <a href="staff-login.html" class="btn btn--white">Staff Login</a>
+            </div>
+        </div>
+        <div class="navbar__overlay" id="navOverlay"></div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero__content animate-on-scroll">
+            <h1 class="hero__title">Contact Us</h1>
+            <p class="hero__sub">We'd love to hear from you. Reach out for admissions, enquiries, or any questions about our school.</p>
+        </div>
+    </section>
+
+    <!-- Get In Touch -->
+    <section class="section section--white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Get In Touch</h2>
+            <p class="section-subtitle animate-on-scroll">Visit us, call us, or send us a message. We're here to help.</p>
+            <div class="contact-cards">
+                <!-- Visit Us -->
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <h3 class="contact-card__title">Visit Us</h3>
+                    <p class="contact-card__text">Shrikantappa Extension, Hanagal Road, Haveri, Karnataka 581110</p>
+                </div>
+                <!-- Call Us -->
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </div>
+                    <h3 class="contact-card__title">Call Us</h3>
+                    <p class="contact-card__text">
+                        <a href="tel:+919876543210">+91 98765 43210</a><br>
+                        <a href="tel:+918310012345">+91 83100 12345</a>
+                    </p>
+                </div>
+                <!-- Email Us -->
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <h3 class="contact-card__title">Email Us</h3>
+                    <p class="contact-card__text">
+                        <a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a><br>
+                        <a href="mailto:admissions@vidyashilphaveri.edu.in">admissions@vidyashilphaveri.edu.in</a>
+                    </p>
+                </div>
+                <!-- Office Hours -->
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 class="contact-card__title">Office Hours</h3>
+                    <p class="contact-card__text">
+                        Monday &ndash; Friday: 8:00 AM &ndash; 4:00 PM<br>
+                        Saturday: 9:00 AM &ndash; 1:00 PM
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form & Map Section -->
+    <section class="section section--pillars">
+        <div class="container">
+            <div class="form-map-grid">
+                <!-- Form -->
+                <div class="form-card animate-on-scroll">
+                    <div id="formContent">
+                        <h3 class="form-card__title">Send Us a Message</h3>
+                        <p class="form-card__subtitle">Have a question about admissions or want to schedule a visit? Fill out the form below.</p>
+                        <form id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="fullName">Full Name <span class="required">*</span></label>
+                                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                                <div class="error-message" id="fullNameError">Please enter your full name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                                <div class="error-message" id="emailError">Please enter a valid email address.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                                <div class="error-message" id="phoneError">Please enter a valid phone number.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject <span class="required">*</span></label>
+                                <select id="subject" name="subject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="General Enquiry">General Enquiry</option>
+                                    <option value="Admissions">Admissions</option>
+                                    <option value="Academics">Academics</option>
+                                    <option value="Fee Related">Fee Related</option>
+                                    <option value="Campus Visit">Campus Visit</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-message" id="subjectError">Please select a subject.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+                                <div class="error-message" id="messageError">Please enter your message.</div>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--submit">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="form-success" id="formSuccess">
+                        <div class="form-success__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                        <h3 class="form-success__title">Message Sent Successfully!</h3>
+                        <p class="form-success__text">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                    </div>
+                </div>
+                <!-- Map -->
+                <div class="map-card animate-on-scroll">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30732.775927372183!2d75.38!3d14.79!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bba4590b8e42d9d%3A0x3f0e8c8e8e8e8e8e!2sHaveri%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Vidyashilp International School Haveri Location">
+                    </iframe>
+                    <div class="map-card__info">
+                        <h4>Vidyashilp International School Haveri</h4>
+                        <p>Shrikantappa Extension, Hanagal Road, Haveri, Karnataka 581110</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="section section--white">
+        <div class="container">
+            <div class="cta-banner animate-on-scroll">
+                <h2 class="cta-banner__title">Ready to Join the Vidyashilp Family?</h2>
+                <p class="cta-banner__subtitle">Schedule a campus visit or speak with our admissions team today.</p>
+                <div class="cta-banner__buttons">
+                    <a href="#contactForm" class="btn btn--primary" onclick="document.getElementById('subject').value='Campus Visit'; document.getElementById('subject').dispatchEvent(new Event('change'));">Schedule a Visit</a>
+                    <a href="admissions.html" class="btn btn--outline">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <h4>Vidyashilp International School Haveri</h4>
+                <p>Nurturing young minds with excellence in education, values, and holistic development. Shaping future leaders in the heart of Haveri.</p>
+            </div>
+            <div class="footer__links">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#parents">For Parents</a></li>
+                    <li><a href="index.html#staff">For Staff</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer__links">
+                <h5>Portals</h5>
+                <ul>
+                    <li><a href="parent-login.html">Parent Login</a></li>
+                    <li><a href="staff-login.html">Staff Login</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                </ul>
+            </div>
+            <div class="footer__links">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="mailto:info@vidyashilphaveri.edu.in">info@vidyashilphaveri.edu.in</a></li>
+                    <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                    <li><a href="#">Haveri, Karnataka</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            &copy; 2026 Vidyashilp International School Haveri. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // ---- Navbar scroll effect ----
+        const navbar = document.getElementById('navbar');
+        function checkScroll() {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        }
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+
+        // ---- Mobile menu toggle ----
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function openMenu() {
+            navMenu.classList.add('open');
+            navToggle.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            navMenu.classList.remove('open');
+            navToggle.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        navToggle.addEventListener('click', function() {
+            if (navMenu.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        navOverlay.addEventListener('click', closeMenu);
+
+        navMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // ---- Scroll animations ----
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // ---- Form validation ----
+        const contactForm = document.getElementById('contactForm');
+        const formContent = document.getElementById('formContent');
+        const formSuccess = document.getElementById('formSuccess');
+
+        function showError(inputId, errorId) {
+            var input = document.getElementById(inputId);
+            var error = document.getElementById(errorId);
+            input.classList.add('error');
+            error.classList.add('visible');
+        }
+
+        function clearError(inputId, errorId) {
+            var input = document.getElementById(inputId);
+            var error = document.getElementById(errorId);
+            input.classList.remove('error');
+            error.classList.remove('visible');
+        }
+
+        // Clear errors on input
+        ['fullName', 'email', 'phone', 'subject', 'message'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', function() {
+                    clearError(id, id + 'Error');
+                });
+                el.addEventListener('change', function() {
+                    clearError(id, id + 'Error');
+                });
+            }
+        });
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var isValid = true;
+
+            // Full Name
+            var fullName = document.getElementById('fullName').value.trim();
+            if (!fullName) {
+                showError('fullName', 'fullNameError');
+                isValid = false;
+            } else {
+                clearError('fullName', 'fullNameError');
+            }
+
+            // Email
+            var email = document.getElementById('email').value.trim();
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                showError('email', 'emailError');
+                isValid = false;
+            } else {
+                clearError('email', 'emailError');
+            }
+
+            // Phone (optional, but validate format if provided)
+            var phone = document.getElementById('phone').value.trim();
+            if (phone) {
+                var phoneRegex = /^[\+]?[0-9\s\-\(\)]{7,15}$/;
+                if (!phoneRegex.test(phone)) {
+                    showError('phone', 'phoneError');
+                    isValid = false;
+                } else {
+                    clearError('phone', 'phoneError');
+                }
+            } else {
+                clearError('phone', 'phoneError');
+            }
+
+            // Subject
+            var subject = document.getElementById('subject').value;
+            if (!subject) {
+                showError('subject', 'subjectError');
+                isValid = false;
+            } else {
+                clearError('subject', 'subjectError');
+            }
+
+            // Message
+            var message = document.getElementById('message').value.trim();
+            if (!message) {
+                showError('message', 'messageError');
+                isValid = false;
+            } else {
+                clearError('message', 'messageError');
+            }
+
+            if (isValid) {
+                // Simulate form submission
+                var btn = contactForm.querySelector('.btn--submit');
+                btn.textContent = 'Sending...';
+                btn.disabled = true;
+
+                setTimeout(function() {
+                    formContent.style.display = 'none';
+                    formSuccess.classList.add('visible');
+                }, 1200);
+            }
+        });
+    </script>
+
+</body>
+</html>
