@@ -32,7 +32,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 60px;
+            align-items: center;
+            padding: 60px 48px;
             position: relative;
             overflow: hidden;
             animation: slideInLeft 0.8s ease-out;
@@ -43,8 +44,8 @@
             position: absolute;
             top: -120px;
             right: -120px;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
         }
@@ -54,24 +55,44 @@
             position: absolute;
             bottom: -80px;
             left: -80px;
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.04);
         }
 
-        .brand-panel h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+        .brand-content {
+            position: relative;
+            z-index: 1;
+            max-width: 420px;
         }
 
-        .brand-panel .tagline {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            margin-bottom: 48px;
-            font-weight: 300;
+        .school-logo {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .school-name {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .school-tagline {
+            font-size: 16px;
+            opacity: 0.75;
+            font-weight: 400;
+            margin-bottom: 52px;
         }
 
         .features {
@@ -81,38 +102,52 @@
             gap: 24px;
         }
 
-        .features li {
+        .feature-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            font-size: 1.05rem;
+            gap: 18px;
             opacity: 0;
-            animation: fadeInUp 0.5s ease-out forwards;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
 
-        .features li:nth-child(1) { animation-delay: 0.3s; }
-        .features li:nth-child(2) { animation-delay: 0.45s; }
-        .features li:nth-child(3) { animation-delay: 0.6s; }
-        .features li:nth-child(4) { animation-delay: 0.75s; }
+        .feature-item:nth-child(1) { animation-delay: 0.4s; }
+        .feature-item:nth-child(2) { animation-delay: 0.55s; }
+        .feature-item:nth-child(3) { animation-delay: 0.7s; }
+        .feature-item:nth-child(4) { animation-delay: 0.85s; }
 
         .feature-icon {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
             flex-shrink: 0;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .feature-text span {
-            display: block;
-            font-size: 0.85rem;
-            opacity: 0.7;
-            margin-top: 2px;
-            font-weight: 300;
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-text h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .feature-text p {
+            font-size: 13px;
+            opacity: 0.6;
+            font-weight: 400;
         }
 
         /* ── Right Login Panel ── */
@@ -121,82 +156,114 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 48px 40px;
+            background: #fff;
             animation: slideInRight 0.8s ease-out;
         }
 
-        .login-card {
+        .login-form-wrapper {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
         }
 
-        .login-card h2 {
-            font-size: 1.9rem;
+        .login-heading {
+            font-size: 28px;
             font-weight: 700;
             color: #1a1a2e;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
         }
 
-        .login-card .subtitle {
+        .login-subheading {
+            font-size: 15px;
             color: #6b7280;
-            font-size: 0.95rem;
             margin-bottom: 36px;
         }
 
         .form-group {
             margin-bottom: 22px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
         }
+
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
 
         .form-group label {
             display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
             color: #374151;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         .input-wrapper {
             position: relative;
         }
 
-        .input-wrapper .icon {
+        .input-wrapper svg.input-icon {
             position: absolute;
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.1rem;
-            color: #9ca3af;
+            width: 18px;
+            height: 18px;
+            stroke: #9ca3af;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             pointer-events: none;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
+        .form-input {
             width: 100%;
-            padding: 14px 14px 14px 46px;
+            padding: 12px 14px 12px 42px;
             border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 0.95rem;
+            border-radius: 10px;
+            font-size: 14px;
             font-family: inherit;
-            color: #1f2937;
-            background: #fff;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #1a1a2e;
+            background: #fafbfc;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
             outline: none;
         }
 
-        .form-group input:focus {
+        .form-input:focus {
             border-color: #2D7DD2;
             box-shadow: 0 0 0 3px rgba(45, 125, 210, 0.12);
+            background: #fff;
         }
 
-        .form-group input::placeholder {
+        .form-input::placeholder {
             color: #b0b7c3;
         }
 
-        .form-options {
+        .form-input.input-error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .error-message {
+            display: none;
+            font-size: 12px;
+            color: #ef4444;
+            margin-top: 6px;
+            padding-left: 2px;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .form-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: 0.5s;
         }
 
         .remember-me {
@@ -204,21 +271,21 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            font-size: 0.875rem;
-            color: #4b5563;
+            font-size: 13px;
+            color: #6b7280;
             user-select: none;
         }
 
         .remember-me input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: #2D7DD2;
-            border-radius: 4px;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .forgot-link {
-            font-size: 0.875rem;
+            font-size: 13px;
             color: #2D7DD2;
             text-decoration: none;
             font-weight: 500;
@@ -232,73 +299,78 @@
 
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: #FF8400;
             color: #fff;
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 15px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
             transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
             box-shadow: 0 4px 14px rgba(255, 132, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: 0.6s;
         }
 
-        .login-btn:hover {
+        .login-btn:hover:not(:disabled) {
             background: #e67700;
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(255, 132, 0, 0.4);
         }
 
-        .login-btn:active {
+        .login-btn:active:not(:disabled) {
             transform: translateY(0);
         }
 
-        .divider {
-            text-align: center;
-            margin: 32px 0 24px;
-            position: relative;
+        .login-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
         }
 
-        .divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            background: #e5e7eb;
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
         }
 
-        .divider span {
-            background: #f5f7fa;
-            padding: 0 14px;
-            position: relative;
-            color: #9ca3af;
-            font-size: 0.85rem;
-        }
-
-        .staff-link {
+        .login-btn.loading .spinner {
             display: block;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #6b7280;
         }
 
-        .staff-link a {
+        .switch-link-wrapper {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 14px;
+            color: #9ca3af;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: 0.7s;
+        }
+
+        .switch-link-wrapper a {
             color: #2D7DD2;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
             transition: color 0.2s;
         }
 
-        .staff-link a:hover {
+        .switch-link-wrapper a:hover {
             color: #1B4D8E;
             text-decoration: underline;
         }
 
-        /* ── Password toggle ── */
+        /* ── Password Toggle ── */
         .toggle-password {
             position: absolute;
             right: 14px;
@@ -306,63 +378,80 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #9ca3af;
             cursor: pointer;
-            font-size: 1.1rem;
-            padding: 4px;
-            transition: color 0.2s;
+            padding: 2px;
+            display: flex;
+            align-items: center;
         }
 
-        .toggle-password:hover {
-            color: #4b5563;
+        .toggle-password svg {
+            width: 18px;
+            height: 18px;
+            stroke: #9ca3af;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.2s;
+        }
+
+        .toggle-password:hover svg {
+            stroke: #6b7280;
         }
 
         /* ── Animations ── */
         @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to   { opacity: 1; transform: translateX(0); }
+            from { transform: translateX(-40px); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
         }
 
         @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to   { opacity: 1; transform: translateX(0); }
+            from { transform: translateX(40px); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from { transform: translateY(16px); opacity: 0; }
+            to   { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* ── Responsive ── */
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
 
             .brand-panel {
-                padding: 40px 30px;
+                padding: 40px 32px;
+                min-height: auto;
                 animation: fadeInUp 0.6s ease-out;
             }
 
-            .brand-panel h1 {
-                font-size: 1.8rem;
+            .school-name {
+                font-size: 26px;
             }
 
-            .brand-panel .tagline {
-                margin-bottom: 28px;
-            }
-
-            .features {
-                gap: 16px;
+            .school-tagline {
+                margin-bottom: 32px;
             }
 
             .login-panel {
-                padding: 32px 24px 48px;
+                padding: 40px 24px 60px;
                 animation: fadeInUp 0.6s ease-out 0.2s both;
             }
 
-            .login-card h2 {
-                font-size: 1.6rem;
+            .login-heading {
+                font-size: 24px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
             }
         }
 
@@ -371,20 +460,22 @@
                 padding: 32px 24px;
             }
 
-            .brand-panel h1 {
-                font-size: 1.5rem;
+            .school-name {
+                font-size: 22px;
+            }
+
+            .feature-item {
+                gap: 12px;
             }
 
             .feature-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 1.1rem;
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
             }
 
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .login-panel {
+                padding: 32px 20px 48px;
             }
         }
     </style>
@@ -393,97 +484,191 @@
     <div class="container">
         <!-- Left Brand Panel -->
         <div class="brand-panel">
-            <h1>Vidhyashilp Academy</h1>
-            <p class="tagline">Empowering Education, Enriching Lives</p>
-            <ul class="features">
-                <li>
-                    <div class="feature-icon">&#128197;</div>
-                    <div class="feature-text">
-                        View Timetable
-                        <span>Check your child's daily schedule</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="feature-icon">&#128200;</div>
-                    <div class="feature-text">
-                        Exam Results
-                        <span>Track academic performance and grades</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="feature-icon">&#9989;</div>
-                    <div class="feature-text">
-                        Attendance Records
-                        <span>Monitor daily attendance status</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="feature-icon">&#128227;</div>
-                    <div class="feature-text">
-                        Announcements
-                        <span>Stay updated with school news and events</span>
-                    </div>
-                </li>
-            </ul>
+            <div class="brand-content">
+                <div class="school-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/>
+                    </svg>
+                </div>
+                <h1 class="school-name">Vidhyashilp Academy</h1>
+                <p class="school-tagline">Empowering Education, Enriching Lives</p>
+
+                <ul class="features">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                <line x1="8" y1="14" x2="8" y2="14"/>
+                                <line x1="12" y1="14" x2="12" y2="14"/>
+                                <line x1="16" y1="14" x2="16" y2="14"/>
+                                <line x1="8" y1="18" x2="8" y2="18"/>
+                                <line x1="12" y1="18" x2="12" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>View Timetable</h4>
+                            <p>Check your child's daily schedule</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Exam Results</h4>
+                            <p>Track academic performance and grades</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Attendance Records</h4>
+                            <p>Monitor daily attendance status</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Announcements</h4>
+                            <p>Stay updated with school news and events</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- Right Login Panel -->
         <div class="login-panel">
-            <div class="login-card">
-                <h2>Parent Login</h2>
-                <p class="subtitle">Sign in to access your child's portal</p>
+            <div class="login-form-wrapper">
+                <h2 class="login-heading">Parent Login</h2>
+                <p class="login-subheading">Sign in to access your child's portal</p>
 
-                <form id="loginForm" onsubmit="handleLogin(event)">
+                <form id="loginForm" novalidate>
                     <div class="form-group">
-                        <label for="studentId">Student ID</label>
+                        <label for="admissionNumber">Student Admission Number</label>
                         <div class="input-wrapper">
-                            <span class="icon">&#128100;</span>
-                            <input type="text" id="studentId" name="studentId" placeholder="Enter Student ID" required autocomplete="username">
+                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                                <line x1="2" y1="10" x2="22" y2="10"/>
+                            </svg>
+                            <input type="text" id="admissionNumber" class="form-input" placeholder="Enter Admission Number" autocomplete="username">
                         </div>
+                        <p class="error-message" id="admissionError">Please enter the student admission number</p>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-wrapper">
-                            <span class="icon">&#128274;</span>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
-                            <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Toggle password visibility">&#128065;</button>
+                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <input type="password" id="password" class="form-input" placeholder="Enter Password" autocomplete="current-password">
+                            <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Toggle password visibility">
+                                <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
                         </div>
+                        <p class="error-message" id="passwordError">Please enter your password</p>
                     </div>
 
-                    <div class="form-options">
+                    <div class="form-row">
                         <label class="remember-me">
-                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <input type="checkbox" id="rememberMe">
                             Remember me
                         </label>
                         <a href="#" class="forgot-link">Forgot Password?</a>
                     </div>
 
-                    <button type="submit" class="login-btn">Login</button>
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span class="btn-text">Login</span>
+                        <span class="spinner"></span>
+                    </button>
                 </form>
 
-                <div class="divider"><span>or</span></div>
-
-                <p class="staff-link">School Staff? <a href="staff-login.html">Login here</a></p>
+                <div class="switch-link-wrapper">
+                    School Staff? <a href="staff-login.html">Login here</a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            window.location.href = 'parent-dashboard.html';
-        }
+        const form = document.getElementById('loginForm');
+        const admissionInput = document.getElementById('admissionNumber');
+        const passwordInput = document.getElementById('password');
+        const admissionError = document.getElementById('admissionError');
+        const passwordError = document.getElementById('passwordError');
+        const loginBtn = document.getElementById('loginBtn');
+
+        // Clear error on input
+        admissionInput.addEventListener('input', function() {
+            this.classList.remove('input-error');
+            admissionError.classList.remove('visible');
+        });
+
+        passwordInput.addEventListener('input', function() {
+            this.classList.remove('input-error');
+            passwordError.classList.remove('visible');
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let hasError = false;
+
+            if (!admissionInput.value.trim()) {
+                admissionInput.classList.add('input-error');
+                admissionError.classList.add('visible');
+                hasError = true;
+            }
+
+            if (!passwordInput.value.trim()) {
+                passwordInput.classList.add('input-error');
+                passwordError.classList.add('visible');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // Show loading state
+            loginBtn.classList.add('loading');
+            loginBtn.querySelector('.btn-text').textContent = 'Logging in...';
+            loginBtn.disabled = true;
+
+            setTimeout(function() {
+                window.location.href = 'parent-dashboard.html';
+            }, 1500);
+        });
 
         function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleBtn = document.querySelector('.toggle-password');
+            const icon = document.getElementById('eyeIcon');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleBtn.innerHTML = '&#128064;';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
             } else {
                 passwordInput.type = 'password';
-                toggleBtn.innerHTML = '&#128065;';
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
             }
         }
     </script>
