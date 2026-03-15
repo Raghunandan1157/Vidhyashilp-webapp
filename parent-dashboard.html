@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="images/logo.jpeg" as="image">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -363,7 +364,7 @@
             content: '';
             position: absolute;
             bottom: -60px; right: 60px;
-            width: 120px; height: 120px;
+            width: 120px; height: 56px;
             background: rgba(255,255,255,0.04);
             border-radius: 50%;
         }
@@ -1182,8 +1183,8 @@
         }
 
         img { max-width: 100%; height: auto; }
-        @media(max-width:768px) { .logo-img { height: 80px !important; } }
-        @media(max-width:480px) { .logo-img { height: 60px !important; } }
+        @media(max-width:768px) { .logo-img { height: 44px !important; } }
+        @media(max-width:480px) { .logo-img { height: 36px !important; } }
 
         /* ---- Weekly Timetable Tab Buttons ---- */
         .day-tabs {
@@ -1286,12 +1287,12 @@
         <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
             <span></span><span></span><span></span>
         </button>
-        <a href="index.html" style="display:flex;align-items:center;text-decoration:none">
-            <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:120px;width:auto" class="logo-img">
+        <a href="app.html" style="display:flex;align-items:center;text-decoration:none">
+            <img src="images/logo.jpeg" alt="Vidyashilp International School" style="height:56px;width:auto" class="logo-img" loading="eager">
         </a>
     </div>
     <div class="navbar-right">
-        <a href="index.html" class="back-to-website" title="Back to Website">
+        <a href="app.html" class="back-to-website" title="Back to Website">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Back to Website</span>
         </a>
@@ -1303,7 +1304,7 @@
             <div class="user-avatar">P</div>
             <div class="user-name">Welcome, Parent<small>Aarav's Guardian</small></div>
         </div>
-        <a href="index.html" class="logout-btn" title="Logout">
+        <a href="app.html" class="logout-btn" title="Logout">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             <span class="logout-text">Logout</span>
         </a>
