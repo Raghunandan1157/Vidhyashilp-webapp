@@ -337,12 +337,29 @@
         .media-panel { display: none; }
         .media-panel.active { display: block; }
 
-        /* ===== Charts placeholder ===== */
-        .chart-placeholder {
-            height: 200px; background: linear-gradient(135deg, #EFF6FF, #F0FDF4);
-            border-radius: 8px; display: flex; align-items: center; justify-content: center;
-            color: var(--text-light); font-size: .85rem;
-        }
+        /* ===== Bar Charts ===== */
+        .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 200px; padding: 10px 0; }
+        .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+        .bar { width: 100%; max-width: 48px; border-radius: 6px 6px 0 0; transition: height .6s ease; position: relative; min-height: 4px; }
+        .bar:hover { opacity: .85; }
+        .bar-label { font-size: .7rem; color: var(--text-light); white-space: nowrap; }
+        .bar-value { font-size: .65rem; font-weight: 600; color: var(--text-dark); position: absolute; top: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+        .bar.blue { background: var(--primary); }
+        .bar.green { background: #22C55E; }
+        .bar.orange { background: #F59E0B; }
+        .bar.red { background: #EF4444; }
+        .bar.purple { background: #8B5CF6; }
+        .dual-bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+        .dual-bars { display: flex; gap: 4px; align-items: flex-end; height: 100%; }
+        .chart-legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--text-light); }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+        /* Donut chart */
+        .donut-chart { width: 160px; height: 160px; border-radius: 50%; position: relative; margin: 0 auto; }
+        .donut-center { position: absolute; inset: 30px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .donut-center .val { font-size: 1.4rem; font-weight: 700; color: var(--text-dark); }
+        .donut-center .lbl { font-size: .7rem; color: var(--text-light); }
+        .donut-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
 
         /* ===== Overlay for mobile ===== */
         .sidebar-overlay {
@@ -574,7 +591,20 @@
                     <button class="btn btn-outline">This Year</button>
                 </div>
                 <div class="card-body">
-                    <div class="chart-placeholder">Revenue chart visualization</div>
+                    <div class="bar-chart">
+                        <div class="bar-group"><div class="bar blue" style="height:45%"><span class="bar-value">₹8.2L</span></div><div class="bar-label">Apr</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:52%"><span class="bar-value">₹9.5L</span></div><div class="bar-label">May</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:65%"><span class="bar-value">₹11.8L</span></div><div class="bar-label">Jun</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:58%"><span class="bar-value">₹10.6L</span></div><div class="bar-label">Jul</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:72%"><span class="bar-value">₹13.1L</span></div><div class="bar-label">Aug</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:60%"><span class="bar-value">₹10.9L</span></div><div class="bar-label">Sep</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:80%"><span class="bar-value">₹14.6L</span></div><div class="bar-label">Oct</div></div>
+                        <div class="bar-group"><div class="bar blue" style="height:55%"><span class="bar-value">₹10.0L</span></div><div class="bar-label">Nov</div></div>
+                        <div class="bar-group"><div class="bar green" style="height:90%"><span class="bar-value">₹16.3L</span></div><div class="bar-label">Dec</div></div>
+                        <div class="bar-group"><div class="bar green" style="height:85%"><span class="bar-value">₹15.5L</span></div><div class="bar-label">Jan</div></div>
+                        <div class="bar-group"><div class="bar green" style="height:70%"><span class="bar-value">₹12.7L</span></div><div class="bar-label">Feb</div></div>
+                        <div class="bar-group"><div class="bar orange" style="height:48%"><span class="bar-value">₹8.8L</span></div><div class="bar-label">Mar</div></div>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -583,7 +613,16 @@
                     <button class="btn btn-outline">This Month</button>
                 </div>
                 <div class="card-body">
-                    <div class="chart-placeholder">Attendance chart visualization</div>
+                    <div class="bar-chart">
+                        <div class="bar-group"><div class="bar green" style="height:92%"><span class="bar-value">92%</span></div><div class="bar-label">Week 1</div></div>
+                        <div class="bar-group"><div class="bar green" style="height:88%"><span class="bar-value">88%</span></div><div class="bar-label">Week 2</div></div>
+                        <div class="bar-group"><div class="bar green" style="height:95%"><span class="bar-value">95%</span></div><div class="bar-label">Week 3</div></div>
+                        <div class="bar-group"><div class="bar orange" style="height:85%"><span class="bar-value">85%</span></div><div class="bar-label">Week 4</div></div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div>Above 90%</div>
+                        <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>Below 90%</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -711,7 +750,20 @@
         </div>
         <div class="card">
             <div class="card-header"><span class="card-title">Today's Attendance by Class</span></div>
-            <div class="card-body"><div class="chart-placeholder">Attendance bar chart by class</div></div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-group"><div class="bar green" style="height:96%"><span class="bar-value">96%</span></div><div class="bar-label">Class 1</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:94%"><span class="bar-value">94%</span></div><div class="bar-label">Class 2</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:92%"><span class="bar-value">92%</span></div><div class="bar-label">Class 3</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:95%"><span class="bar-value">95%</span></div><div class="bar-label">Class 4</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:91%"><span class="bar-value">91%</span></div><div class="bar-label">Class 5</div></div>
+                    <div class="bar-group"><div class="bar orange" style="height:88%"><span class="bar-value">88%</span></div><div class="bar-label">Class 6</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:93%"><span class="bar-value">93%</span></div><div class="bar-label">Class 7</div></div>
+                    <div class="bar-group"><div class="bar orange" style="height:87%"><span class="bar-value">87%</span></div><div class="bar-label">Class 8</div></div>
+                    <div class="bar-group"><div class="bar green" style="height:90%"><span class="bar-value">90%</span></div><div class="bar-label">Class 9</div></div>
+                    <div class="bar-group"><div class="bar orange" style="height:85%"><span class="bar-value">85%</span></div><div class="bar-label">Class 10</div></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -844,8 +896,27 @@
             <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="22" height="18" rx="2"/><line x1="1" y1="9" x2="23" y2="9"/></svg></div><div><div class="stat-value">36.4L</div><div class="stat-label">Net Surplus</div></div></div>
         </div>
         <div class="grid-2">
-            <div class="card"><div class="card-header"><span class="card-title">Monthly Revenue vs Expenses</span></div><div class="card-body"><div class="chart-placeholder">Revenue vs Expenses chart</div></div></div>
-            <div class="card"><div class="card-header"><span class="card-title">Fee Collection Rate</span></div><div class="card-body"><div class="chart-placeholder">Collection rate pie chart</div></div></div>
+            <div class="card"><div class="card-header"><span class="card-title">Monthly Revenue vs Expenses</span></div><div class="card-body">
+                <div class="bar-chart">
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:60%;width:20px"><span class="bar-value">₹10L</span></div><div class="bar red" style="height:40%;width:20px"></div></div><div class="bar-label">Apr</div></div>
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:65%;width:20px"><span class="bar-value">₹11L</span></div><div class="bar red" style="height:45%;width:20px"></div></div><div class="bar-label">Jun</div></div>
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:75%;width:20px"><span class="bar-value">₹13L</span></div><div class="bar red" style="height:42%;width:20px"></div></div><div class="bar-label">Aug</div></div>
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:80%;width:20px"><span class="bar-value">₹14L</span></div><div class="bar red" style="height:50%;width:20px"></div></div><div class="bar-label">Oct</div></div>
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:90%;width:20px"><span class="bar-value">₹16L</span></div><div class="bar red" style="height:48%;width:20px"></div></div><div class="bar-label">Dec</div></div>
+                    <div class="dual-bar-group"><div class="dual-bars"><div class="bar blue" style="height:70%;width:20px"><span class="bar-value">₹12L</span></div><div class="bar red" style="height:44%;width:20px"></div></div><div class="bar-label">Feb</div></div>
+                </div>
+                <div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--primary)"></div>Revenue</div><div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Expenses</div></div>
+            </div></div>
+            <div class="card"><div class="card-header"><span class="card-title">Fee Collection Rate</span></div><div class="card-body">
+                <div class="donut-chart" style="background:conic-gradient(#22C55E 0% 78%, #F59E0B 78% 92%, #EF4444 92% 100%)">
+                    <div class="donut-center"><span class="val">78%</span><span class="lbl">Collected</span></div>
+                </div>
+                <div class="donut-legend" style="display:flex;gap:16px;justify-content:center;margin-top:12px">
+                    <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div>Collected (78%)</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>Pending (14%)</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Overdue (8%)</div>
+                </div>
+            </div></div>
         </div>
     </div>
 
